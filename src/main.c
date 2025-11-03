@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/10/31 15:19:08 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/03 18:53:10 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,34 @@ int	lstrncmp(char *str, char *str2, int c)
 	return (0);
 }
 
+void	init_scene(t_scene *scene)
+{
+	scene->amb_light.ratio = -1;
+	scene->amb_light.color = (t_rgb){-1, -1, -1};
+	scene->camera.position = (t_vec){NAN, NAN, NAN};
+	scene->camera.orientation_vector = (t_vec){-2, -2, -2};
+	scene->camera.horizontal_field = -1;
+	scene->light.position = (t_vec){NAN, NAN, NAN};
+	scene->light.bright_ratio = -1;
+	scene->light.color = (t_rgb){-1, -1, -1};
+}
+
 int	main(int ac, char **av)
 {
+	t_scene	*scene;
+	// mlx_t	mlx;
+
+	scene = malloc(sizeof(t_scene));
+	if (!scene)
+		erro_msg("ERROR", 1);
+	if (ac != 2)
+		return (1);
+	if (lstrncmp(av[1], ".rt", 3)) //custom strncmp to check if the last 3 characters are .rt
+		return (1);
+	init_scene(scene);
+	// init_mlx(); ?? 
+	read_from_fd(av[1], scene);
+}
 	// first we would if we have 2 argumenst 
 	// the name of the program and file.rt 
 
@@ -47,10 +73,3 @@ int	main(int ac, char **av)
 	// this is the basci parsing^
 	
 	// basci math functions 
-
-	if (ac != 2)
-		return (1);
-	if (lstrncmp(av[1], ".rt", 3)) //custom strncmp to check if the last 3 characters are .rt
-		return (1);
-	read_from_fd(av[1]);
-}
