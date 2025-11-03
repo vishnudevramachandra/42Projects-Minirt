@@ -39,23 +39,28 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) $(LINKER) -o $(NAME)
+	@echo "$(GREEN)[miniRT]: $(NAME) compiled successfully!$(NC)"
 
 $(LIBFT):
 	@printf "$(YELLOW)Building libft library...$(NC)\n"
 	@make -C $(LIBFT_DIR)
 
 clean:
+	@make -C $(LIBFT_DIR) clean
 	rm -rf $(OBJS)
+	@echo "$(RED)[miniRT]: objects cleaned successfully!$(NC)"
 
 fclean: clean
+	@make -C $(LIBFT_DIR) fclean
 	rm -rf $(NAME)
+	@echo "$(RED)[miniRT]: $(NAME) cleaned successfully!$(NC)"
 
 re: fclean all
 
-build: 
+build_mlx: 
 	git clone git@github.com:codam-coding-college/MLX42.git MLX42
 
-clean_lib: 
+clean_mlx: 
 	rm -rf MLX42
 
-.PHONY: all clean fclean re build
+.PHONY: all clean fclean re build_mlx clean_mlx
