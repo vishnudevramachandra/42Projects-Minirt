@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../Includes/minirt.h"
 #include "../libft/libft.h"
 
@@ -69,6 +70,7 @@ double	atod(char *s)
 	ret += atofrac(s, &i);
 	return (ret * sign);
 }
+
 // #include <stdio.h>
 
 // int main()

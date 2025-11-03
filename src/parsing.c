@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../Includes/minirt.h"
 
 int	is_numeric(char c)
