@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/01 21:11:07 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:19:23 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	amb_light(char *line)
 			i++;
 		j++;
 	}
-	// printf("ratio value: %g\n", ratio);
-	// printf("color: R=%d, G=%d, B=%d\n", color[0], color[1], color[2]);
 }
 
 void	camera(char *line)
@@ -87,10 +85,6 @@ void	camera(char *line)
 	while (ft_isspace(line[i])) //idk if isspace here is not kinda redundant
 		i++;
 	horizontal_view = atod(&line[i]);
-// line[i] && line[i] != '\n'
-	// printf("view point: %g,%g,%g\n", view_point[0], view_point[1], view_point[2]);
-	// printf("orient vector %g,%g,%g\n", orient_vec[0], orient_vec[1], orient_vec[2]);
-	// printf("horiz: %g\n", horizontal_view);
 }
 
 void	light(char *line)
@@ -121,6 +115,8 @@ void	light(char *line)
 	while ((line[i] >= '0' && line[i] <= '9') || line[i] == '.')
 		i++;
 	j = 0;
+	while (ft_isspace(line[i])) //idk if isspace here is not kinda redundant
+		i++;
 	while (j < 3 && line[i])
 	{
 		colors[j] = ft_atoi(&line[i]);
@@ -130,9 +126,6 @@ void	light(char *line)
 			i++;
 		j++;
 	}
-	// printf("light coordinates %g,%g,%g\n", light_cords[0], light_cords[1], light_cords[2]);
-	// printf("brightness ratio: %g\n", brig_ratio);
-	// printf("color: R=%d, G=%d, B=%d\n", colors[0], colors[1], colors[2]);
 }
 
 void	read_from_fd(char *file_name)
@@ -150,7 +143,6 @@ void	read_from_fd(char *file_name)
 		i = 0;
 		while (line[i])
 		{
-			// printf("lines: %s\n", line);
 			if (line[i] == 'A')
 			{	
 				i++;
