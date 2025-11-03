@@ -12,10 +12,27 @@
 
 #include "../Includes/minirt.h"
 
+int	lstrncmp(char *str, char *str2, int c)
+{
+	int	len;
+	int	point;
+	int	i;
+
+	i = 0;
+	len = ft_strlen(str);
+	point = len - c;
+	while (i < c)
+	{
+		if (str[point] != str2[i])
+			return (1);
+		i++;
+		point++;
+	}
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
 	// first we would if we have 2 argumenst 
 	// the name of the program and file.rt 
 
@@ -31,7 +48,9 @@ int	main(int ac, char **av)
 	
 	// basci math functions 
 
-	printf("%lf\n", atod("       0.2"));
-	printf("%lf\n", atod("225.225,225"));
-	printf("%lf\n", atod("0.0,0.0,20.6"));
+	if (ac != 2)
+		return (1);
+	if (lstrncmp(av[1], ".rt", 3)) //custom strncmp to check if the last 3 characters are .rt
+		return (1);
+	read_from_fd(av[1]);
 }

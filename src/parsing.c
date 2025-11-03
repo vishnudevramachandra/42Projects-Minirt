@@ -19,43 +19,62 @@ int	is_numeric(char c)
 		return (1);
 	return (0);
 }
+
+void	set_vector(t_vec *v, int j, double value)
+{
+	if (j < 1)
+		v->x = value;
+	else if (j < 2)
+		v->y = value;
+	else
+		v->z = value;
+}
+
+void	set_color(t_rgb *c, int j, int value)
+{
+	if (j < 1)
+		c->r = value;
+	else if (j < 2)
+		c->g = value;
+	else
+		c->b = value;
+}
+
 //separete for ratio and color add valuse to the struct (first make the 
 //struct ofc and add check if the values are in the range)
 
-void	amb_light(char *line)
+t_amb_light	amb_light(char *line)
 {
 	int		i;
-	double	ratio;
-	int		color[3];
 	int		j;
+	t_amb_light	a;
 
 	j = 0;
 	i = 0;
 	while (line[i] != '\n' && ft_isspace(line[i]))
 		i++;
-	ratio = atod(&line[i]);
+	a.ratio = atod(&line[i]);
 	while ((line[i] >= '0' && line[i] <= '9') || line[i] == '.')
 		i++;
 	while (ft_isspace(line[i]))
 		i++;
 	while (j < 3 && line[i])
 	{
-		color[j] = ft_atoi(&line[i]);
+		set_color(&a.color, j, ft_atoi(&line[i]));
 		while (line[i] >= '0' && line[i] <= '9')
 			i++;
 		if (line[i] == ',')
 			i++;
 		j++;
 	}
+	return (a);
 }
 
-void	camera(char *line)
+t_camera	camera(char *line)
 {
-	double	view_point[3];
-	double	orient_vec[3];
-	double	horizontal_view;
-	int		i;
-	int		j;
+	int			i;
+	int			j;
+	t_camera	c;
 
 	j = 0;
 	i = 0;
@@ -63,7 +82,7 @@ void	camera(char *line)
 		i++;
 	while (j < 3 && line[i] && line[i] != '\n')
 	{
-		view_point[j] = atod(&line[i]);
+		set_vector(&c.position, j, atod(&line[i]));
 		while ((line[i] >= '0' && line[i] <= '9') || line[i] == '.'
 			|| line[i] == '-' || line[i] == '+')
 			i++;
@@ -76,7 +95,7 @@ void	camera(char *line)
 		i++;
 	while (j < 3 && line[i] && line[i] != '\n')
 	{
-		orient_vec[j] = atod(&line[i]);
+		set_vector(&c.orientation_vector, j, atod(&line[i]));
 		while ((line[i] >= '0' && line[i] <= '9') || line[i] == '.')
 			i++;
 		if (line[i] == ',')
@@ -85,14 +104,13 @@ void	camera(char *line)
 	}
 	while (ft_isspace(line[i])) //idk if isspace here is not kinda redundant
 		i++;
-	horizontal_view = atod(&line[i]);
+	c.horizontal_field = atod(&line[i]);
+	return (c);
 }
 
-void	light(char *line)
+t_light	light(char *line)
 {
-	double	light_cords[3];
-	double	brig_ratio;
-	int		colors[3];
+	t_light	l;
 	int		j;
 	int		i;
 
@@ -102,7 +120,7 @@ void	light(char *line)
 		i++;
 	while (j < 3 && line[i] && line[i] != '\n')
 	{
-		light_cords[j] = atod(&line[i]);
+		set_vector(&l.position, j, atod(&line[i]));
 		while ((line[i] >= '0' && line[i] <= '9') || line[i] == '.'
 			|| line[i] == '-' || line[i] == '+')
 			i++;
@@ -112,7 +130,7 @@ void	light(char *line)
 	}
 	while (ft_isspace(line[i])) //idk if isspace here is not kinda redundant
 		i++;
-	brig_ratio = atod(&line[i]);
+	l.bright_ratio = atod(&line[i]);
 	while ((line[i] >= '0' && line[i] <= '9') || line[i] == '.')
 		i++;
 	j = 0;
@@ -120,13 +138,14 @@ void	light(char *line)
 		i++;
 	while (j < 3 && line[i])
 	{
-		colors[j] = ft_atoi(&line[i]);
+		set_color(&l.color, j, ft_atoi(&line[i]));
 		while (line[i] >= '0' && line[i] <= '9')
 			i++;
 		if (line[i] == ',')
 			i++;
 		j++;
 	}
+	return (l);
 }
 
 void	read_from_fd(char *file_name)
@@ -134,6 +153,7 @@ void	read_from_fd(char *file_name)
 	int		fd;
 	int		i;
 	char	*line;
+	t_amb_light	*a = malloc(sizeof(t_amb_light));
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
@@ -147,7 +167,8 @@ void	read_from_fd(char *file_name)
 			if (line[i] == 'A')
 			{	
 				i++;
-				amb_light(line + i);
+				*a = amb_light(line + i);
+				printf("%i,%i,%i\n", a->color.b, a->color.g, a->color.b);
 			}
 			else if (line[i] == 'C')
 			{

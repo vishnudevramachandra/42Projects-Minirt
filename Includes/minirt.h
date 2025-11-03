@@ -26,32 +26,40 @@ double	atod(char *s);
 
 
 //scene struct
+
+typedef struct s_rgb
+{
+    int r;
+    int g;
+    int b;
+}   t_rgb;
+
 typedef struct s_amb_light
 {
 	double	ratio;
-	int		colors[3];
-}			t_amb_light;
+	t_rgb   color;
+}   t_amb_light;
 
 typedef struct s_vec
 {
 	double	x;
 	double	z;
 	double	y;
-}			t_vec;
+}   t_vec;
 
 typedef struct s_camera
 {
-	t_vec	orintation_vector;
 	t_vec	position;
+	t_vec	orientation_vector;
 	double	horizontal_field;
-}				t_camera;
+}   t_camera;
 
 typedef	struct s_light
 {
-	t_vec	cord_light; //coordinates of the lightning point
+	t_vec	position; //coordinates of the lightning point
 	double	bright_ratio;
-	int		colors[3];
-}				t_light;
+	t_rgb   color;
+}   t_light;
 
 typedef	struct s_scene_data
 {
