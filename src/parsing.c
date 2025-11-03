@@ -6,12 +6,48 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/03 21:48:41 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/03 22:50:34 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../Includes/minirt.h"
+
+//TO DO OF PARSING THE SCENE
+// norm.... ❌ TODO
+//
+//FILE:
+//1)correct type file (.rt)? ✅
+//
+//2)empty file? ✅ 
+//^(u might want to check i mean for now at the begginig i am 
+//assigning in the init scene that if the value will be asign inncorectlly 
+//therefore if there is no value its out of range so i guess it should work??)
+//
+//3)incorrect file? (idk i guess its done but just idk what do they mean)
+//
+//SCENE:
+//1)Verify that the id(first word) is correct: A, C, L, pl, sp or cy ONLY ❌ TODO 
+//2)Verift that each element has the correct number of params 50/50 ❌ TODO
+//-mandatory = A: 3, C: 4, L: 3, sp: 4, pl: 4, cy: 6
+//------so for now we just make sure that it has at least the numbers of the elements
+//------that it should but there is no max 
+//
+//ELEMENTS: (analyze the line of each element and put it in a structure)
+//1) CAMERA ✅
+//
+//2)OBJECTS
+//-plane ❌ TODO
+//-sphere ❌ TODO
+//-cylinder ❌ TODO
+//
+// 3)Lights
+// -ambience ✅
+// -point of light ✅
+
+// There is a MAXIMUM of one camera, one diffused light and one ambient light (there can be 0 or one, but no more!)
+// ok so with that my solution in the init_scene with assigning it first with inncorect values my not be the besttt 
+// but idk something to think abt bc i think its good for some solutionsss 
 
 int	is_numeric(char c)
 {
@@ -40,9 +76,7 @@ void	set_color(t_rgb *c, int j, int value)
 		c->b = value;
 }
 
-//separete for ratio and color add valuse to the struct (first make the 
-//struct ofc and add check if the values are in the range)
-
+//if A exists it should have 3 parametes no more no less 
 t_amb_light	amb_light(char *line, t_amb_light a)
 {
 	int		i;
@@ -71,6 +105,7 @@ t_amb_light	amb_light(char *line, t_amb_light a)
 	return (a);
 }
 
+//if C exists it should have 4 parametes no more no less 
 t_camera	camera(char *line, t_camera c)
 {
 	int			i;
@@ -111,6 +146,7 @@ t_camera	camera(char *line, t_camera c)
 	return (c);
 }
 
+//if L exists it should have 3 parametes no more no less 
 t_light	light(char *line, t_light l)
 {
 	int		j;
@@ -118,7 +154,6 @@ t_light	light(char *line, t_light l)
 
 	j = 0;
 	i = 0;
-	printf("");
 	while (ft_isspace(line[i]))
 		i++;
 	while (j < 3 && line[i] && line[i] != '\n')
@@ -180,6 +215,14 @@ bool	scene_range(t_amb_light a, t_camera c, t_light l)
 		return (true);
 }
 
+// verify that the id(first worf is correct A, C, L, pl, sp, cy NOTHING ELSE)
+// bool	verify_if(char *line, int i)
+// {
+// 	if (i > 0)
+// 		return (true);
+// 	while ()
+// }
+
 void	read_from_fd(char *file_name, t_scene *scene)
 {
 	int		fd;
@@ -195,6 +238,8 @@ void	read_from_fd(char *file_name, t_scene *scene)
 		i = 0;
 		while (line[i])
 		{
+			// if (verify_id(line + i, i) == false) //verify that the id(first worf is correct A, C, L, pl, sp, cy NOTHING ELSE)
+			// 	erro_msg("ERROR", STDERR_FILENO); //clean and return 
 			if (line[i] == 'A')
 			{	
 				i++;
@@ -218,5 +263,5 @@ void	read_from_fd(char *file_name, t_scene *scene)
 	if (scene_range(scene->amb_light, scene->camera, scene->light) == false)
 		erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
 	//if everything is correct with that part procceed to parse the figures
-	printf("great success\n");
+	// printf("great success\n");
 }

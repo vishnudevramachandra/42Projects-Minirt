@@ -6,7 +6,7 @@
 #    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/10/31 15:07:51 by majkijew         ###   ########.fr        #
+#    Updated: 2025/11/03 20:21:48 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NC := \033[0m # No Color
 
 CC 			= 	cc
 CFLAGS		= 	-Wall -Wextra -Werror
-NAME		= 	my_program
+NAME		= 	my_program 
 INCD		=	Includes
 LIBFT_DIR 	= 	libft
 LIBFT 		= 	$(LIBFT_DIR)/libft.a

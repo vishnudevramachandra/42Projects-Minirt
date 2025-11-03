@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/03 18:53:10 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/03 22:50:07 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (1);
 	if (lstrncmp(av[1], ".rt", 3)) //custom strncmp to check if the last 3 characters are .rt
-		return (1);
+		erro_msg("ERROR", 1);
 	init_scene(scene);
 	// init_mlx(); ?? 
 	read_from_fd(av[1], scene);
