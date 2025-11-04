@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/04 13:43:36 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:05:38 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ bool	scene_range(t_amb_light a, t_camera c, t_light l)
 }
 
 // verify that the id(first worf is correct A, C, L, pl, sp, cy NOTHING ELSE)
-// bool	verify_if(char *line, int i)
-// {
-// 	if (i > 0)
-// 		return (true);
-// 	while ()
-// }
+bool	verify_if(char *line, int i)
+{
+	if (i > 0)
+		return (true);
+	if((ft_strncmp(line, "A ") 1)|| )
+}
 
 void	read_from_fd(char *file_name, t_scene *scene)
 {
@@ -124,6 +124,7 @@ void	read_from_fd(char *file_name, t_scene *scene)
 	}
 	if (scene_range(scene->amb_light, scene->camera, scene->light) == false)
 		erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
+	parse_obj(line, scene);
 	//if everything is correct with that part procceed to parse the figures
 	// printf("great success\n");
 }

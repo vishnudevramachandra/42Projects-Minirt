@@ -6,7 +6,7 @@
 #    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/11/04 13:42:00 by majkijew         ###   ########.fr        #
+#    Updated: 2025/11/04 15:08:08 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCFILES	=	main.c \
 PARSINGFILES =	parsing.c \
 				parsing_utils.c \
 				parse_scene.c \
+				parse_figures.c \
 				atod.c
 
 GNLFILES	=	get_next_line.c \
