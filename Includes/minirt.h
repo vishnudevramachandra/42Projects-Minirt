@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/04 13:49:44 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/04 18:12:43 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,47 @@ typedef	struct s_scene
 	t_light		light;
 }				t_scene;
 
+typedef struct s_sphere
+{
+	t_vec	pos;
+	double	dia;
+	t_rgb	color;
+}	t_sphere;
+
+typedef struct s_cylinder
+{
+	t_vec	pos;
+	t_vec	axis;
+	double	dia;
+	double	height;
+	t_rgb	color;
+}	t_cylinder;
+
+typedef struct s_plane
+{
+	t_vec	point;
+	t_vec	norm_vec;
+	t_rgb	color;
+}	t_plane;
+
+typedef	enum	e_obj_type
+{
+	SPHERE,
+	CYLINDER,
+	PLANE,
+}	t_obj_type;
+
+typedef	struct s_obj
+{
+	t_obj_type	typ;
+	union minirt
+	{
+		t_cylinder	cl;
+		t_plane		pl;
+		t_sphere	sp;
+	};
+	
+}	t_obj;
 
 void		erro_msg(char *str, int v);
 void		read_from_fd(char *file_name, t_scene *scene);
