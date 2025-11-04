@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/03 21:04:37 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:49:44 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,16 @@ typedef	struct s_scene
 }				t_scene;
 
 
-void	erro_msg(char *str, int v);
-void	read_from_fd(char *file_name, t_scene *scene);
-int		ft_isspace(char c);
-double	atod(char *s);
+void		erro_msg(char *str, int v);
+void		read_from_fd(char *file_name, t_scene *scene);
+int			ft_isspace(char c);
+double		atod(char *s);
+int			is_numeric(char c);
+void		set_vector(t_vec *v, int j, double value);
+void		set_color(t_rgb *c, int j, int value);
+t_amb_light	amb_light(char *line, t_amb_light a);
+t_camera	camera(char *line, t_camera c);
+t_light		light(char *line, t_light l);
 
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/03 22:50:07 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:43:47 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/minirt.h"
+#include "minirt.h"
 
 int	lstrncmp(char *str, char *str2, int c)
 {

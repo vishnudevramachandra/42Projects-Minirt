@@ -6,7 +6,7 @@
 #    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/11/03 20:21:48 by majkijew         ###   ########.fr        #
+#    Updated: 2025/11/04 13:42:00 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,23 +17,30 @@ RED := \033[0;31m
 NC := \033[0m # No Color
 
 CC 			= 	cc
-CFLAGS		= 	-Wall -Wextra -Werror
+CFLAGS		= 	-Wall -Wextra -Werror -IIncludes -Ilibft
 NAME		= 	my_program 
 INCD		=	Includes
 LIBFT_DIR 	= 	libft
 LIBFT 		= 	$(LIBFT_DIR)/libft.a
 LINKER		= 	-lft -lm
 
-SRCFILES	= 	utils_error.c \
-				parsing.c \
-				main.c
+SRCFILES	=	main.c \
+				utils_error.c
+
+PARSINGFILES =	parsing.c \
+				parsing_utils.c \
+				parse_scene.c \
+				atod.c
+
 GNLFILES	=	get_next_line.c \
 				get_next_line_utils.c
 
 SRCS	=	$(addprefix src/,$(SRCFILES)) \
+			$(addprefix src/parsing/,$(PARSINGFILES)) \
 			$(addprefix get_next_line/,$(GNLFILES))
 
-OBJS 	= 	$(SRCS:%.c=%.o)
+OBJDIR	=	obj
+OBJS	=	$(SRCS:%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
@@ -45,8 +52,16 @@ $(LIBFT):
 	@printf "$(YELLOW)Building libft library...$(NC)\n"
 	@make -C $(LIBFT_DIR)
 
+$(OBJDIR)/%.o: %.c | $(OBJDIR)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -I$(INCD) -I$(LIBFT_DIR) -c $< -o $@
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
+	
 clean:
 	@make -C $(LIBFT_DIR) clean
+	rm -rf $(OBJDIR)
 	rm -rf $(OBJS)
 	@echo "$(RED)[miniRT]: objects cleaned successfully!$(NC)"
 

@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_error.c                                      :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/31 18:27:32 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/04 13:43:53 by majkijew         ###   ########.fr       */
+/*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
+/*   Updated: 2025/11/04 13:43:29 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	erro_msg(char *str, int v)
+void	set_vector(t_vec *v, int j, double value)
 {
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd("\n", 2);
-	exit (v);
+	if (j < 1)
+		v->x = value;
+	else if (j < 2)
+		v->y = value;
+	else
+		v->z = value;
 }
 
-int	ft_isspace(char c)
+void	set_color(t_rgb *c, int j, int value)
 {
-	return (c == ' ' || c == '\t');
-}
-
-int	is_numeric(char c)
-{
-	if ((c >= '0' && c <= '9') || c == '.')
-		return (1);
-	return (0);
+	if (j < 1)
+		c->r = value;
+	else if (j < 2)
+		c->g = value;
+	else
+		c->b = value;
 }
