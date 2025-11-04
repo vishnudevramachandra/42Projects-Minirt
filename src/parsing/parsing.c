@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/04 15:05:38 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/04 20:00:05 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 //3)incorrect file? (idk i guess its done but just idk what do they mean)
 //
 //SCENE:
-//1)Verify that the id(first word) is correct: A, C, L, pl, sp or cy ONLY ❌ TODO 
-//2)Verift that each element has the correct number of params 50/50 ❌ TODO
+//1)Verify that the id(first word) is correct: A, C, L, pl, sp or cy ONLY ✅ 
+//2)Verift that each element has the correct number of params 50/50 ✅ TODO
 //-mandatory = A: 3, C: 4, L: 3, sp: 4, pl: 4, cy: 6
 //------so for now we just make sure that it has at least the numbers of the elements
 //------that it should but there is no max 
@@ -77,12 +77,50 @@ bool	scene_range(t_amb_light a, t_camera c, t_light l)
 		return (true);
 }
 
-// verify that the id(first worf is correct A, C, L, pl, sp, cy NOTHING ELSE)
-bool	verify_if(char *line, int i)
+static char	*get_identifier(char *line)
 {
-	if (i > 0)
-		return (true);
-	if((ft_strncmp(line, "A ") 1)|| )
+	int		i;
+	int		start;
+	int		len;
+	char	*id;
+
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (line[i] && ft_isspace(line[i]))
+		i++;
+	if (line[i] == '\n' || line[i] == '\0')
+		return (NULL);
+	start = i;
+	while (line[i] && !ft_isspace(line[i]))
+		i++;
+	len = i - start;
+	id = malloc(len + 1);
+	if (!id)
+		return (NULL);
+	ft_strlcpy(id, line + start, len + 1);
+	id[len] = '\0';
+	return (id);
+}
+
+bool	verify_id(char *line)
+{
+	char	*id;
+	bool	valid;
+
+	valid = false;
+	id = get_identifier(line);
+	if (!id)
+		return (false);
+	if (ft_strcmp(id, "A") == 0
+		|| ft_strcmp(id, "C") == 0
+		|| ft_strcmp(id, "L") == 0
+		|| ft_strcmp(id, "sp") == 0
+		|| ft_strcmp(id, "pl") == 0
+		|| ft_strcmp(id, "cy") == 0)
+		valid = true;
+	free(id);
+	return (valid);
 }
 
 void	read_from_fd(char *file_name, t_scene *scene)
@@ -100,8 +138,11 @@ void	read_from_fd(char *file_name, t_scene *scene)
 		i = 0;
 		while (line[i])
 		{
-			// if (verify_id(line + i, i) == false) //verify that the id(first worf is correct A, C, L, pl, sp, cy NOTHING ELSE)
-			// 	erro_msg("ERROR", STDERR_FILENO); //clean and return 
+			if (verify_id(line) == false)
+			{
+				// free(line);
+				erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
+			}
 			if (line[i] == 'A')
 			{	
 				i++;
@@ -124,7 +165,7 @@ void	read_from_fd(char *file_name, t_scene *scene)
 	}
 	if (scene_range(scene->amb_light, scene->camera, scene->light) == false)
 		erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
-	parse_obj(line, scene);
+	// parse_obj(line, scene);
 	//if everything is correct with that part procceed to parse the figures
-	// printf("great success\n");
+	printf("great success\n");
 }
