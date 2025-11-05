@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/05 17:52:44 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:06:54 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ static int	strspn(const char *s, t_dataype dtype)
 	int		tmp;
 	const char	charset[] = "0123456789";
 
-	i = 0;
 	if (dtype == INT)
 	{
+		i = 0;
+		if (s[i] && s[i + 1])
 		while (s[i])
 		{
 			if (!ft_strchr(charset, s[i]))
@@ -31,7 +32,7 @@ static int	strspn(const char *s, t_dataype dtype)
 	}
 	else
 	{
-		i = strspn(s + i, INT);
+		i = strspn(s, INT);
 		if (!i || (s[i] != '.'))
 			return (0);
 		tmp = strspn(s + i + 1, INT);
@@ -46,9 +47,18 @@ int	set_double(double *d, const char *s)
 {
 	int	len;
 
-	len = strspn(s, DOUBLE);
-	if (len < 1)
-		return (len);
+	if (s[0] == '-')
+	{
+		len = 1 + strspn(s + 1, DOUBLE);
+		if (len < 2)
+			return (0);
+	}
+	else
+	{
+		len = strspn(s, DOUBLE);
+		if (len < 1)
+			return (0);
+	}
 	*d = atod(s);
 	return (len);
 }
@@ -82,9 +92,18 @@ int	set_int(int *i, const char *s)
 {
 	int	len;
 
-	len = strspn(s, INT);
-	if (len < 1)
-		return (len);
+	if (s[0] == '-')
+	{
+		len = 1 + strspn(s + 1, INT);
+		if (len < 2)
+			return (0);
+	}
+	else
+	{
+		len = strspn(s, INT);
+		if (len < 1)
+			return (0);
+	}
 	*i = ft_atoi(s);
 	return (len);
 }

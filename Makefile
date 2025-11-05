@@ -6,7 +6,7 @@
 #    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/11/05 16:18:47 by vramacha         ###   ########.fr        #
+#    Updated: 2025/11/05 22:48:31 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,8 +63,8 @@ $(OBJDIR):
 	
 clean:
 	@make -C $(LIBFT_DIR) clean
-	rm -rf $(OBJDIR)
 	rm -rf $(OBJS)
+	rm -rf $(OBJDIR)
 	@echo "$(RED)[miniRT]: objects cleaned successfully!$(NC)"
 
 fclean: clean

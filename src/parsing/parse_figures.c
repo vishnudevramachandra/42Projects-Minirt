@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2025/11/05 18:04:30 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:32:22 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,60 @@ t_obj	*parse_sphere(char *line)
 
 t_obj	*parse_cylinder(char *line)
 {
-	(void)(line);
-	return (NULL);
+	int		i;
+	int		len;
+	t_obj	*obj;
+
+	obj = malloc(sizeof(t_obj));
+	if (!obj)
+		return (NULL);
+	obj->typ = CYLINDER;
+	i = 0 + len_spaces(line);
+	len = set_vector(&obj->cy.pos, line + i);
+	if (!len)
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	len = set_vector(&obj->cy.axis, line + i);
+	if (!len)
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	len = set_double(&obj->cy.dia, line + i);
+	if (!len)
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	len = set_double(&obj->cy.height, line + i);
+	if (!len)
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	len = set_color(&obj->cy.color, line + i);
+	if (!len)
+		return (free(obj), NULL);
+	return (obj);
 }
 
 t_obj	*parse_plane(char *line)
 {
-	(void)(line);
-	return (NULL);
+	int		i;
+	int		len;
+	t_obj	*obj;
+
+	obj = malloc(sizeof(t_obj));
+	if (!obj)
+		return (NULL);
+	obj->typ = PLANE;
+	i = 0 + len_spaces(line);
+	len = set_vector(&obj->pl.point, line + i);
+	if (!len)
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	len = set_vector(&obj->pl.norm_vec, line + i);
+	if (!len)
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	len = set_color(&obj->pl.color, line + i);
+	if (!len)
+		return (free(obj), NULL);
+	return (obj);
 }
 
 int	create_node_and_add_to_list(void *content, t_list **lst)
@@ -72,8 +118,9 @@ t_list	*parse_obj(char *line, t_list **objs)
 		obj = parse_cylinder(line + 2);
 	else
 		obj = parse_plane(line + 2);
-	if (!obj || !create_node_and_add_to_list(obj, objs))
+	if (!obj)
 		return (ft_lstclear(objs, free), NULL);
-	print_obj(*objs);
+	if (!create_node_and_add_to_list(obj, objs))
+		return (free(obj), ft_lstclear(objs, free), NULL);
 	return (*objs);
 }

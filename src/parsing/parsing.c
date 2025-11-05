@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/05 18:11:59 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:45:45 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@
 //1) CAMERA ✅
 //
 //2)OBJECTS
-//-plane ❌ TODO
+//-plane ✅ TODO
 //-sphere ✅ TODO
-//-cylinder ❌ TODO
+//-cylinder ✅ TODO
 //
 // 3)Lights
 // -ambience ✅
@@ -147,6 +147,7 @@ void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 		free(line);
 		line = get_next_line(fd);
 	}
+	print_obj(*objs);
 	close(fd);
 	if (scene_range(scene->amb_light, scene->camera, scene->light) == false)
 		erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
