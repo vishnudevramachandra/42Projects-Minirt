@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: vishnudevramachandra <vishnudevramachan    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/04 18:12:43 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/04 19:43:46 by vishnudevra      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef	struct s_obj
 	t_obj_type	typ;
 	union minirt
 	{
-		t_cylinder	cl;
+		t_cylinder	cy;
 		t_plane		pl;
 		t_sphere	sp;
 	};
