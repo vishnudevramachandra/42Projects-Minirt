@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
+#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/11/04 15:08:08 by majkijew         ###   ########.fr        #
+#    Updated: 2025/11/05 16:18:47 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ PARSINGFILES =	parsing.c \
 				parsing_utils.c \
 				parse_scene.c \
 				parse_figures.c \
+				parsing_print.c \
 				atod.c
 
 GNLFILES	=	get_next_line.c \

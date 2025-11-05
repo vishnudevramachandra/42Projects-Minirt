@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   atod.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:16:17 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/04 13:44:10 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/05 15:47:45 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static double	atofrac(char *str, int *i)
+static double	atofrac(const char *str, int *i)
 {
 	double	dev;
 	double	result;
@@ -31,7 +31,7 @@ static double	atofrac(char *str, int *i)
 }
 
 //asci to double
-double	atod(char *s)
+double	atod(const char *s)
 {
 	int		i;
 	double	ret;

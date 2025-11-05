@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vishnudevramachandra <vishnudevramachan    +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/04 19:00:51 by vishnudevra      ###   ########.fr       */
+/*   Updated: 2025/11/05 18:11:59 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <unistd.h>
 #include "minirt.h"
 
 //TO DO OF PARSING THE SCENE
@@ -37,7 +39,7 @@
 //
 //2)OBJECTS
 //-plane ❌ TODO
-//-sphere ❌ TODO
+//-sphere ✅ TODO
 //-cylinder ❌ TODO
 //
 // 3)Lights
@@ -77,54 +79,77 @@ bool	scene_range(t_amb_light a, t_camera c, t_light l)
 		return (true);
 }
 
-// verify that the id(first worf is correct A, C, L, pl, sp, cy NOTHING ELSE)
-bool	verify_if(char *line, int i)
+// // verify that the id(first worf is correct A, C, L, pl, sp, cy NOTHING ELSE)
+// bool	verify_if(char *line, int i)
+// {
+// 	if (i > 0)
+// 		return (true);
+// 	if((ft_strncmp(line, "A ") 1)|| )
+// }
+
+int	is_scene(char *line)
 {
-	if (i > 0)
-		return (true);
-	if((ft_strncmp(line, "A ") 1)|| )
+	if ((line[0] == 'A' && line[1] == ' ')
+		|| (line[0] == 'C' && line[1] == ' ')
+		|| (line[0] == 'L' && line[1] == ' '))
+		return (1);
+	return (0);
 }
 
-void	read_from_fd(char *file_name, t_scene *scene)
+int	is_object(char *line)
+{
+	if ((line[0] == 's' && line[1] == 'p' && line[2] == ' ')
+		|| (line[0] == 'c' && line[1] == 'y' && line[2] == ' ')
+		|| (line[0] == 'p' && line[1] == 'l' && line[2] == ' '))
+		return (1);
+	return (0);
+}
+
+void	fill_scene(t_scene *scene, char *line)
+{
+	if (line[0] == 'A')
+		scene->amb_light = amb_light(line + 1, scene->amb_light);
+	else if (line[0] == 'C')
+		scene->camera = camera(line + 1, scene->camera);
+	else if (line[0] == 'L')
+		scene->light = light(line + 1, scene->light);
+}
+
+void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 {
 	int		fd;
-	int		i;
 	char	*line;
+	int		i;
 
+	*objs = NULL;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		erro_msg("ERROR", 1);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		i = 0;
-		while (line[i])
+		// if (verify_id(line + i, i) == false) //verify that the id(first worf is correct A, C, L, pl, sp, cy NOTHING ELSE)
+		// 	erro_msg("ERROR", STDERR_FILENO); //clean and return
+		i = 0 + len_spaces(line);
+		if (line[i] == '\n')
 		{
-			// if (verify_id(line + i, i) == false) //verify that the id(first worf is correct A, C, L, pl, sp, cy NOTHING ELSE)
-			// 	erro_msg("ERROR", STDERR_FILENO); //clean and return 
-			if (line[i] == 'A')
-			{	
-				i++;
-				scene->amb_light = amb_light(line + i, scene->amb_light);
-			}
-			else if (line[i] == 'C')
-			{
-				i++;
-				scene->camera = camera(line + i, scene->camera);
-			}
-			else if (line[i] == 'L')
-			{
-				i++;
-				scene->light = light(line + i, scene->light);
-			}
-			i++;
+			free(line);
+			line = get_next_line(fd);
+			continue ;
+		}
+		if (is_scene(line + i))
+			fill_scene(scene, line + i);
+		else if (!is_object(line + i) || !parse_obj(line + i, objs))
+		{
+			free(line);
+			erro_msg("ERROR", STDERR_FILENO);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	close(fd);
 	if (scene_range(scene->amb_light, scene->camera, scene->light) == false)
 		erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
-	parse_obj(line, scene);
 	//if everything is correct with that part procceed to parse the figures
 	// printf("great success\n");
 }

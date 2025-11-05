@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 09:20:31 by vishnudevra       #+#    #+#             */
-/*   Updated: 2025/11/05 09:26:39 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/05 11:11:17 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef enum e_datatype
 {
-	FLOAT,
+	DOUBLE,
 	INT,
 }	t_dataype;
 
