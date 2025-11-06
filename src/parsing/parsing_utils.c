@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/06 16:29:32 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:01:45 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	set_double(double *d, const char *s, int *len)
 	i = 0;
 	if (s[0] == '-')
 	{
-		while (0 < *(s + 1 + i) && *(s + 1 + i) < 9)
+		while ('0' <= *(s + 1 + i) && *(s + 1 + i) <= '9')
 			i++;
 		if (*(s + 1 + i) == '.')
 			*len = 1 + ft_strspn(s + 1, DOUBLE);
@@ -61,7 +61,7 @@ int	set_double(double *d, const char *s, int *len)
 	}
 	else
 	{
-		while (0 < *(s + i) && *(s + i) < 9)
+		while ('0' <= *(s + i) && *(s + i) <= '9')
 			i++;
 		if (*(s + i) == '.')
 			*len = ft_strspn(s, DOUBLE);
