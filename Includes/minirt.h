@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/05 17:30:10 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/06 09:55:12 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,8 @@ int			ft_isspace(char c);
 int			len_spaces(char *str);
 double		atod(const char *s);
 int			is_numeric(char c);
-int			set_vector(t_vec *v, const char *s);
-int			set_color(t_rgb *c, const char *s);
-int			set_double(double *d, const char *s);
-int			set_int(int *i, const char *s);
 t_amb_light	amb_light(char *line, t_amb_light a);
 t_camera	camera(char *line, t_camera c);
 t_light		light(char *line, t_light l);
-t_list		*parse_obj(char *line, t_list **objs);
-void		print_obj(t_list *objs);
 
 #endif

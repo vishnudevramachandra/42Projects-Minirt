@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/05 22:06:54 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/06 10:29:19 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,28 @@ static int	strspn(const char *s, t_dataype dtype)
 	return (i);
 }
 
-int	set_double(double *d, const char *s)
+int	set_double(double *d, const char *s, int *len)
 {
-	int	len;
-
 	if (s[0] == '-')
 	{
-		len = 1 + strspn(s + 1, DOUBLE);
-		if (len < 2)
+		*len = 1 + strspn(s + 1, DOUBLE);
+		if (*len < 2)
 			return (0);
 	}
 	else
 	{
-		len = strspn(s, DOUBLE);
-		if (len < 1)
+		*len = strspn(s, DOUBLE);
+		if (*len < 1)
 			return (0);
 	}
 	*d = atod(s);
-	return (len);
+	return (*len);
 }
 
-int	set_vector(t_vec *v, const char *s)
+int	set_vector(t_vec *v, const char *s, int *len)
 {
 	int		i;
 	int		j;
-	int		len;
 	double	*ptrs[3];
 
 	ptrs[0] = &v->x;
@@ -77,42 +74,40 @@ int	set_vector(t_vec *v, const char *s)
 	j = 0;
 	while (j < 3 && s[i] && s[i] != '\n')
 	{
-		len = set_double(ptrs[j], s + i);
-		if (!len || (j < 2 && s[i + len] != ','))
+		set_double(ptrs[j], s + i, len);
+		if (!*len || (j < 2 && s[i + *len] != ','))
 			return (0);
-		i += len + 1;
+		i += *len + 1;
 		j++;
 	}
 	if (j != 3)
 		return (0);
-	return (i - 1);
+	*len = i - 1;
+	return (*len);
 }
 
-int	set_int(int *i, const char *s)
+int	set_int(int *i, const char *s, int *len)
 {
-	int	len;
-
 	if (s[0] == '-')
 	{
-		len = 1 + strspn(s + 1, INT);
-		if (len < 2)
+		*len = 1 + strspn(s + 1, INT);
+		if (*len < 2)
 			return (0);
 	}
 	else
 	{
-		len = strspn(s, INT);
-		if (len < 1)
+		*len = strspn(s, INT);
+		if (*len < 1)
 			return (0);
 	}
 	*i = ft_atoi(s);
-	return (len);
+	return (*len);
 }
 
-int	set_color(t_rgb *c, const char *s)
+int	set_color(t_rgb *c, const char *s, int *len)
 {
 	int	i;
 	int	j;
-	int	len;
 	int	*ptrs[3];
 
 	ptrs[0] = &c->r;
@@ -122,13 +117,14 @@ int	set_color(t_rgb *c, const char *s)
 	j = 0;
 	while (j < 3 && s[i] && s[i] != '\n')
 	{
-		len = set_int(ptrs[j], s + i);
-		if (!len || (j < 2 && s[i + len] != ','))
+		set_int(ptrs[j], s + i, len);
+		if (!*len || (j < 2 && s[i + *len] != ','))
 			return (0);
-		i += len + 1;
+		i += *len + 1;
 		j++;
 	}
 	if (j != 3)
 		return (0);
-	return (i - 1);
+	*len = i - 1;
+	return (*len);
 }

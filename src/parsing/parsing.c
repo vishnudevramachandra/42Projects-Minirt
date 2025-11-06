@@ -6,13 +6,14 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/05 22:45:45 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/06 09:57:31 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "minirt.h"
+#include "parse.h"
 
 //TO DO OF PARSING THE SCENE
 // norm.... ❌ TODO

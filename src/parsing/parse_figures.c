@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2025/11/05 22:32:22 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/06 10:01:17 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ t_obj	*parse_sphere(char *line)
 		return (NULL);
 	obj->typ = SPHERE;
 	i = 0 + len_spaces(line);
-	len = set_vector(&obj->sp.pos, line + i);
-	if (!len)
+	if (!set_vector(&obj->sp.pos, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	len = set_double(&obj->sp.dia, line + i);
-	if (!len)
+	if (!set_double(&obj->sp.dia, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	len = set_color(&obj->sp.color, line + i);
-	if (!len)
+	if (!set_color(&obj->sp.color, line + i, &len))
 		return (free(obj), NULL);
 	return (obj);
 }
@@ -50,24 +47,19 @@ t_obj	*parse_cylinder(char *line)
 		return (NULL);
 	obj->typ = CYLINDER;
 	i = 0 + len_spaces(line);
-	len = set_vector(&obj->cy.pos, line + i);
-	if (!len)
+	if (!set_vector(&obj->cy.pos, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	len = set_vector(&obj->cy.axis, line + i);
-	if (!len)
+	if (!set_vector(&obj->cy.axis, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	len = set_double(&obj->cy.dia, line + i);
-	if (!len)
+	if (!set_double(&obj->cy.dia, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	len = set_double(&obj->cy.height, line + i);
-	if (!len)
+	if (!set_double(&obj->cy.height, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	len = set_color(&obj->cy.color, line + i);
-	if (!len)
+	if (!set_color(&obj->cy.color, line + i, &len))
 		return (free(obj), NULL);
 	return (obj);
 }
@@ -83,16 +75,13 @@ t_obj	*parse_plane(char *line)
 		return (NULL);
 	obj->typ = PLANE;
 	i = 0 + len_spaces(line);
-	len = set_vector(&obj->pl.point, line + i);
-	if (!len)
+	if (!set_vector(&obj->pl.point, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	len = set_vector(&obj->pl.norm_vec, line + i);
-	if (!len)
+	if (!set_vector(&obj->pl.norm_vec, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	len = set_color(&obj->pl.color, line + i);
-	if (!len)
+	if (!set_color(&obj->pl.color, line + i, &len))
 		return (free(obj), NULL);
 	return (obj);
 }
