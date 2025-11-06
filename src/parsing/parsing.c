@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/06 16:43:09 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:05:21 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,17 +167,17 @@ void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (verify_id(line) == false)
-		{
-			// free(line);
-			erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
-		}
 		i = 0 + len_spaces(line);
 		if (line[i] == '\n')
 		{
 			free(line);
 			line = get_next_line(fd);
 			continue ;
+		}
+		if (verify_id(line) == false)
+		{
+			// free(line);
+			erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
 		}
 		if (is_scene(line + i))
 			fill_scene(scene, line + i);

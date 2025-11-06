@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/06 16:32:24 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:05:59 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_amb_light	amb_light(char *line, t_amb_light a)
 	i = 0;
 	while (line[i] != '\n' && ft_isspace(line[i]))
 		i++;
-	printf("%s\n", line + i);
 	a.ratio = atod(&line[i]);
 	while ((line[i] >= '0' && line[i] <= '9') || line[i] == '.')
 		i++;
