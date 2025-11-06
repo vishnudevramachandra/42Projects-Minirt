@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/04 19:17:26 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/06 15:56:00 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,53 @@ typedef	struct s_scene
 	t_light		light;
 }				t_scene;
 
+typedef struct s_sphere
+{
+	t_vec	pos;
+	double	dia;
+	t_rgb	color;
+}	t_sphere;
+
+typedef struct s_cylinder
+{
+	t_vec	pos;
+	t_vec	axis;
+	double	dia;
+	double	height;
+	t_rgb	color;
+}	t_cylinder;
+
+typedef struct s_plane
+{
+	t_vec	point;
+	t_vec	norm_vec;
+	t_rgb	color;
+}	t_plane;
+
+typedef	enum	e_obj_type
+{
+	SPHERE,
+	CYLINDER,
+	PLANE,
+}	t_obj_type;
+
+typedef	struct s_obj
+{
+	t_obj_type	typ;
+	union
+	{
+		t_cylinder	cy;
+		t_plane		pl;
+		t_sphere	sp;
+	};
+}	t_obj;
+
 void		erro_msg(char *str, int v);
-void		read_from_fd(char *file_name, t_scene *scene);
+void		read_from_fd(char *file_name, t_scene *scene, t_list **objs);
 int			ft_isspace(char c);
-double		atod(char *s);
+int			len_spaces(char *str);
+double		atod(const char *s);
 int			is_numeric(char c);
-void		set_vector(t_vec *v, int j, double value);
-void		set_color(t_rgb *c, int j, int value);
 t_amb_light	amb_light(char *line, t_amb_light a);
 t_camera	camera(char *line, t_camera c);
 t_light		light(char *line, t_light l);

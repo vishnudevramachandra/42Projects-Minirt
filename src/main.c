@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/04 13:43:47 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:29:49 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "minirt.h"
 
 int	lstrncmp(char *str, char *str2, int c)
@@ -46,6 +47,7 @@ void	init_scene(t_scene *scene)
 int	main(int ac, char **av)
 {
 	t_scene	*scene;
+	t_list	*objs;
 	// mlx_t	mlx;
 
 	scene = malloc(sizeof(t_scene));
@@ -57,7 +59,7 @@ int	main(int ac, char **av)
 		erro_msg("ERROR", 1);
 	init_scene(scene);
 	// init_mlx(); ?? 
-	read_from_fd(av[1], scene);
+	read_from_fd(av[1], scene, &objs);
 }
 	// first we would if we have 2 argumenst 
 	// the name of the program and file.rt 
