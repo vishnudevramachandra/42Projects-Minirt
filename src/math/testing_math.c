@@ -6,13 +6,13 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:51:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/05 21:24:17 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:09:45 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
-#include "minirt.h"
+#include "../../Includes/minirt.h"
 
 // punk to na przyklad pozycja kamery
 // vector bylby naprzyklad o pokazania w ktorym kierunku swieci swiatlo jak pada
@@ -79,6 +79,7 @@ void	multi_tuples(t_vec a1, double val)
 	temp.y = a1.y * val;
 	temp.z = a1.z * val;
 	temp.w = a1.w * val;
+	a1 = temp; 
 }
 
 void	div_tuples(t_vec a1, double val)
@@ -89,10 +90,47 @@ void	div_tuples(t_vec a1, double val)
 	temp.y = a1.y / val;
 	temp.z = a1.z / val;
 	temp.w = a1.w / val;
+	a1 = temp; 
 }
+#include <math.h>
 
 // magnitude
-void mag_tuplets()
+//the distance represented by a vector is called its magnitude or lenght, its 
+//how far u would travel in straight line if u were to walk from one end of vector to the other
+double mag_tuplets(t_vec tup)
 {
-	
+	double mag;
+
+	// mag += tup.x * tup.x;
+	// mag += tup.z * tup.z;
+	// mag += tup.y * tup.y;
+	mag += pow(tup.x, 2);
+	mag += pow(tup.z, 2);
+	mag += pow(tup.y, 2);
+	return (sqrt(mag));
 }
+
+t_vec	normalize(t_vec tup)
+{
+	t_vec	norm_tup;
+
+	norm_tup.x = tup.x / mag_tuplets(tup);
+	norm_tup.y = tup.y / mag_tuplets(tup);
+	norm_tup.z = tup.z / mag_tuplets(tup);
+	norm_tup.w = tup.w / mag_tuplets(tup);
+	return (norm_tup);
+}
+// vectors with magnitude of 1 are called a unit vectors and u will use them when computing
+// the MATRIX when determinin the direction prepend
+// int main()
+// {
+// 	t_vec tup;
+// 	double mag;
+	
+// 	tup.x = 0;
+// 	tup.y = 1;
+// 	tup.z = 0;
+
+// 	mag = mag_tuplets(tup);
+// 	printf("%g\n", mag);
+// }
