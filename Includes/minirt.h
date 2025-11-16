@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/06 15:56:00 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/16 14:14:54 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 # define MINIRT_H
 # include <math.h>
 # include <stdio.h>
+# include <stdint.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include "../libft/libft.h"
 # include "../get_next_line/get_next_line.h"
-
-
-//scene struct
-
+# include "mlx.h"
 typedef struct s_rgb
 {
 	int	r;
@@ -41,6 +39,7 @@ typedef struct s_vec
 	double	x;
 	double	z;
 	double	y;
+	double	w;
 }	t_vec;
 
 typedef struct s_camera
@@ -89,14 +88,14 @@ typedef struct s_plane
 	t_rgb	color;
 }	t_plane;
 
-typedef	enum	e_obj_type
+typedef enum	e_obj_type
 {
 	SPHERE,
 	CYLINDER,
 	PLANE,
 }	t_obj_type;
 
-typedef	struct s_obj
+typedef struct s_obj
 {
 	t_obj_type	typ;
 	union
