@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/16 14:09:52 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:04:51 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,31 @@ void	init_scene(t_scene *scene)
 	scene->light.color = (t_rgb){-1, -1, -1};
 }
 
+// void	free_mem(t_scene *scene, t_list *objs, t_mlx *mlx)
+// {
+// 	(void)scene;
+// 	(void)objs;
+// 	mlx_terminate(mlx->mlx);
+// }
+
 int32_t	main(int ac, char **av)
 {
 	t_scene	*scene;
 	t_list	*objs;
 	t_mlx	*mlx;
 
-	mlx = malloc(sizeof(t_mlx));
-	if (!mlx)
+	if (ac != 2)
 		erro_msg("ERROR", 1);
-	init_mlx(mlx);
-	(void)ac;
-	(void)av;
+	if (lstrncmp(av[1], ".rt", 3))
+		erro_msg("ERROR", 1);
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
 		erro_msg("ERROR", 1);
-	if (ac != 2)
-		return (1);
-	if (lstrncmp(av[1], ".rt", 3)) //custom strncmp to check if the last 3 characters are .rt
-		erro_msg("ERROR", 1);
 	init_scene(scene);
+	mlx = malloc(sizeof(t_mlx));
+	if (!mlx)
+		erro_msg("ERROR", 1);
 	read_from_fd(av[1], scene, &objs);
+	init_mlx(mlx, scene);
+	// free_mem();
 }

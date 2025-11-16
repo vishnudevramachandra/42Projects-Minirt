@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/11/05 22:48:31 by vramacha         ###   ########.fr        #
+#    Updated: 2025/11/16 17:15:21 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,15 +17,26 @@ RED := \033[0;31m
 NC := \033[0m # No Color
 
 CC 			= 	cc
-CFLAGS		= 	-Wall -Wextra -Werror -IIncludes -Ilibft
+CFLAGS		= 	-Wall -Wextra -Werror -IIncludes -Ilibft -IMLX42/include
+
 NAME		= 	my_program 
 INCD		=	Includes
+
 LIBFT_DIR 	= 	libft
 LIBFT 		= 	$(LIBFT_DIR)/libft.a
-LINKER		= 	-lft -lm
+
+MLX_DIR		=	MLX42
+MLX_BUILD	= 	$(MLX_DIR)/build
+MLX_LIB		= 	$(MLX_BUILD)/libmlx42.a
+
+LINKER		= 	-L$(LIBFT_DIR) -lft \
+				-L$(MLX_BUILD) -lmlx42 \
+				-lglfw -ldl -lm -pthread
 
 SRCFILES	=	main.c \
-				utils_error.c
+				utils_error.c \
+				window/init_mlx.c \
+				window/colors.c 
 
 PARSINGFILES =	parsing.c \
 				parsing_utils.c \
@@ -46,13 +57,22 @@ OBJS	=	$(SRCS:%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
 	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) $(LINKER) -o $(NAME)
 	@echo "$(GREEN)[miniRT]: $(NAME) compiled successfully!$(NC)"
 
 $(LIBFT):
 	@printf "$(YELLOW)Building libft library...$(NC)\n"
 	@make -C $(LIBFT_DIR)
+
+$(MLX_LIB):
+	@if [ ! -d "$(MLX_DIR)" ]; then \
+		echo "Cloning MLX42..."; \
+		git clone https://github.com/codam-coding-college/MLX42 $(MLX_DIR); \
+	fi
+	@mkdir -p $(MLX_BUILD)
+	@cd $(MLX_BUILD) && cmake .. && make -j4
+	@echo "MLX42 built successfully!"
 
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
 	@mkdir -p $(dir $@)

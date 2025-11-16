@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/16 14:14:54 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:03:52 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 # define MINIRT_H
 # include <math.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <stdint.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include "../libft/libft.h"
+# include "MLX42/MLX42.h"
 # include "../get_next_line/get_next_line.h"
 # include "mlx.h"
+
 typedef struct s_rgb
 {
 	int	r;
@@ -106,6 +109,24 @@ typedef struct s_obj
 	};
 }	t_obj;
 
+typedef struct s_mlx {
+	mlx_t*			mlx;
+	mlx_image_t*	image;
+	t_scene			*a;
+	// void			*mlx_ptr;
+	// void			*win_ptr;
+}	t_mlx;
+
+//everything struct
+
+// typedef struct s_rt
+// {
+// 	t_mlx	*m;
+	
+// }	t_rt;
+
+
+
 void		erro_msg(char *str, int v);
 void		read_from_fd(char *file_name, t_scene *scene, t_list **objs);
 int			ft_isspace(char c);
@@ -116,5 +137,7 @@ t_amb_light	amb_light(char *line, t_amb_light a);
 t_camera	camera(char *line, t_camera c);
 t_light		light(char *line, t_light l);
 int			ft_strcmp(char *s1, char *s2);
+int			get_rgba(t_rgb *c, double a);
+void		init_mlx(t_mlx *m, t_scene	*s);
 
 #endif

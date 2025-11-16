@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 15:01:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/15 15:26:44 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/15 17:26:12 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,4 @@ t_vec	cross_prod(t_vec a, t_vec b)
 	cp.z = a.x * b.y - a.y * b.x;
 	return (cp);
 }
+// trick function to be implemented most of them need testing but idk

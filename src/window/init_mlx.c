@@ -6,12 +6,16 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:08:17 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/16 14:20:17 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:38:28 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "minirt.h"
+
+// void	canvas(void *param)
+// {
+	
+// }
 
 void	ft_somefunc(void *param)
 {
@@ -21,12 +25,13 @@ void	ft_somefunc(void *param)
 
 	m = (t_mlx *)param;
 	i = 0;
+	// printf("color? %x\n", get_rgba(&m->a->amb_light.color, m->a->amb_light.ratio));
 	while (i < m->image->width)
 	{
 		y = 0;
 		while (y < m->image->height)
 		{
-			mlx_put_pixel(m->image, i, y, 0xFFB469FF);
+			mlx_put_pixel(m->image, i, y, get_rgba(&m->a->amb_light.color, m->a->amb_light.ratio));
 			y++;
 		}
 		i++;
@@ -40,18 +45,20 @@ void	ft_hook(void *param)
 
 	m = (t_mlx *)param;
 	if (mlx_is_key_down(m->mlx, MLX_KEY_ESCAPE))
+	{
 		mlx_close_window(m->mlx);
+	}
 	if (mlx_is_key_down(m->mlx, MLX_KEY_UP))
-		m->image->instances[0].y += 5;
-	if (mlx_is_key_down(m->mlx, MLX_KEY_DOWN))
 		m->image->instances[0].y -= 5;
+	if (mlx_is_key_down(m->mlx, MLX_KEY_DOWN))
+		m->image->instances[0].y += 5;
 	if (mlx_is_key_down(m->mlx, MLX_KEY_RIGHT))
-		m->image->instances[0].x -= 5;
-	if (mlx_is_key_down(m->mlx, MLX_KEY_LEFT))
 		m->image->instances[0].x += 5;
+	if (mlx_is_key_down(m->mlx, MLX_KEY_LEFT))
+		m->image->instances[0].x -= 5;
 }
 
-void	init_mlx(t_mlx *m)
+void	init_mlx(t_mlx *m, t_scene	*s)
 {
 	m->mlx = mlx_init(WIDTH, HEIGHT, "minirt", true);
 	if (!m->mlx)
@@ -67,6 +74,7 @@ void	init_mlx(t_mlx *m)
 		mlx_close_window(m->mlx);
 		erro_msg("ERROR", 2);
 	}
+	m->a = s;
 	mlx_loop_hook(m->mlx, ft_somefunc, m);
 	mlx_loop_hook(m->mlx, ft_hook, m);
 	mlx_loop(m->mlx);
