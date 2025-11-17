@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/15 17:14:37 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:37:37 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	set_double(double *d, const char *s, int *len)
 	return (*len);
 }
 
-int	set_vector(t_vec *v, const char *s, int *len)
+int	set_vector(t_tup *v, const char *s, int *len)
 {
 	int		i;
 	int		j;

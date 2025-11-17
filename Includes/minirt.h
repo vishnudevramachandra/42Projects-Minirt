@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/16 21:03:52 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:57:38 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include "../libft/libft.h"
-# include "MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include "../get_next_line/get_next_line.h"
 # include "mlx.h"
 
@@ -37,24 +37,24 @@ typedef struct s_amb_light
 	t_rgb	color;
 }	t_amb_light;
 
-typedef struct s_vec
+typedef struct s_tup
 {
 	double	x;
 	double	z;
 	double	y;
 	double	w;
-}	t_vec;
+}	t_tup;
 
 typedef struct s_camera
 {
-	t_vec	position;
-	t_vec	orientation_vector;
+	t_tup	position;
+	t_tup	orientation_vector;
 	double	horizontal_field;
 }	t_camera;
 
 typedef	struct s_light
 {
-	t_vec	position; //coordinates of the lightning point
+	t_tup	position; //coordinates of the lightning point
 	double	bright_ratio;
 	t_rgb  	color;
 }	t_light;
@@ -70,15 +70,15 @@ typedef	struct s_scene
 
 typedef struct s_sphere
 {
-	t_vec	pos;
+	t_tup	pos;
 	double	dia;
 	t_rgb	color;
 }	t_sphere;
 
 typedef struct s_cylinder
 {
-	t_vec	pos;
-	t_vec	axis;
+	t_tup	pos;
+	t_tup	axis;
 	double	dia;
 	double	height;
 	t_rgb	color;
@@ -86,8 +86,8 @@ typedef struct s_cylinder
 
 typedef struct s_plane
 {
-	t_vec	point;
-	t_vec	norm_vec;
+	t_tup	point;
+	t_tup	norm_vec;
 	t_rgb	color;
 }	t_plane;
 
@@ -109,13 +109,14 @@ typedef struct s_obj
 	};
 }	t_obj;
 
-typedef struct s_mlx {
-	mlx_t*			mlx;
-	mlx_image_t*	image;
-	t_scene			*a;
+typedef struct s_mrt {
+	mlx_t		*mlx;
+	mlx_image_t	*image;
+	t_scene		*scene;
+	t_list		*objs;
 	// void			*mlx_ptr;
 	// void			*win_ptr;
-}	t_mlx;
+}	t_mrt;
 
 //everything struct
 
@@ -138,6 +139,6 @@ t_camera	camera(char *line, t_camera c);
 t_light		light(char *line, t_light l);
 int			ft_strcmp(char *s1, char *s2);
 int			get_rgba(t_rgb *c, double a);
-void		init_mlx(t_mlx *m, t_scene	*s);
+void		init_mrt(t_mrt *m);
 
 #endif

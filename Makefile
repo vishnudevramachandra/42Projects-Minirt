@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
+#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/11/16 17:15:21 by majkijew         ###   ########.fr        #
+#    Updated: 2025/11/17 17:47:36 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LINKER		= 	-L$(LIBFT_DIR) -lft \
 
 SRCFILES	=	main.c \
 				utils_error.c \
-				window/init_mlx.c \
+				window/init_mrt.c \
 				window/colors.c 
 
 PARSINGFILES =	parsing.c \

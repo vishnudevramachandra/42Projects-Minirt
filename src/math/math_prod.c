@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   match_prod.c                                       :+:      :+:    :+:   */
+/*   math_prod.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 15:01:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/15 17:26:12 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:34:43 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "../../Includes/minirt.h"
 
-double	dot_prod(t_vec a, t_vec b)
+double	dot_prod(t_tup a, t_tup b)
 {
 	return (a.x * b.x
 		+ a.y * b.y
@@ -22,9 +22,9 @@ double	dot_prod(t_vec a, t_vec b)
 		+ a.w * b.w);
 }
 
-t_vec	cross_prod(t_vec a, t_vec b)
+t_tup	cross_prod(t_tup a, t_tup b)
 {
-	t_vec	cp;
+	t_tup	cp;
 
 	cp.x = a.y * b.z - a.z * b.y;
 	cp.y = a.z * b.x - a.x * b.z;
