@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:51:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/18 15:18:26 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:20:11 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,15 @@ t_tup	normalize(t_tup *a);
 // the MATRIX when determinin the direction prepend
 int main()
 {
-	t_tup tup = {1, 2, 2};
+	t_tup tup = {1, 2, 2, 0};
 
 	printf("Magnitude: (%g,%g,%g,%g) is %g\n", tup.x, tup.y, tup.z, tup.w, magnitude(&tup));
 	t_tup tmp = add_tuples(&tup, &tup);
 	printf("Addition: (%g,%g,%g,%g)\n", tmp.x, tmp.y, tmp.z, tmp.w);
 	tmp = div_tuple(&tup, 2);
 	printf("Division: (%g,%g,%g,%g)\n", tmp.x, tmp.y, tmp.z, tmp.w);
-	tmp = normalize(&tup);
-	printf("Normalize: (%g,%g,%g,%g)\n", tmp.x, tmp.y, tmp.z, tmp.w);
+	tup = normalize(&tup);
+	printf("Normalize: (%g,%g,%g,%g)\n", tup.x, tup.y, tup.z, tup.w);
+	tup = cross_prod(&tup, &tup);
+	printf("Cross-product: (%g,%g,%g,%g)\n", tup.x, tup.y, tup.z, tup.w);
 }

@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/18 15:02:27 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/18 18:29:29 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,7 @@ typedef struct s_amb_light
 	t_rgb	color;
 }	t_amb_light;
 
-typedef struct s_tup
-{
-	double	x;
-	double	z;
-	double	y;
-	double	w;
-}	t_tup;
+typedef double t_tup[4];
 
 typedef struct s_camera
 {
@@ -140,13 +134,13 @@ t_light		light(char *line, t_light l);
 int			ft_strcmp(char *s1, char *s2);
 int			get_rgba(t_rgb *c, double a);
 void		init_mrt(t_mrt *m);
-t_tup		add_tuples(t_tup *a, t_tup *b);
-t_tup		sub_tuples(t_tup *a, t_tup *b);
-t_tup		multi_tuple(t_tup *a, double val);
-t_tup		div_tuple(t_tup *a, double val);
-double		dot_prod(t_tup *a, t_tup *b);
-t_tup		cross_prod(t_tup *a, t_tup *b);
-double		magnitude(t_tup *a);
-t_tup		normalize(t_tup *a);
+void		add_tuples(t_tup res, t_tup a, t_tup b);
+void		sub_tuples(t_tup res, t_tup a, t_tup b);
+void		multi_tuple(t_tup res, t_tup a, double val);
+void		div_tuple(t_tup res, t_tup a, double val);
+double		dot_prod(t_tup a, t_tup b);
+double		magnitude(t_tup a);
+void		cross_prod(t_tup res, t_tup a, t_tup b);
+void		normalize(t_tup res, t_tup a);
 
 #endif
