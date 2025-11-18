@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/17 17:57:38 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:02:27 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,13 @@ t_light		light(char *line, t_light l);
 int			ft_strcmp(char *s1, char *s2);
 int			get_rgba(t_rgb *c, double a);
 void		init_mrt(t_mrt *m);
+t_tup		add_tuples(t_tup *a, t_tup *b);
+t_tup		sub_tuples(t_tup *a, t_tup *b);
+t_tup		multi_tuple(t_tup *a, double val);
+t_tup		div_tuple(t_tup *a, double val);
+double		dot_prod(t_tup *a, t_tup *b);
+t_tup		cross_prod(t_tup *a, t_tup *b);
+double		magnitude(t_tup *a);
+t_tup		normalize(t_tup *a);
 
 #endif

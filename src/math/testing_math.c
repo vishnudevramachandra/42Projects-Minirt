@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:51:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/17 17:42:41 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:18:26 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,85 +52,36 @@ double	ft_abs(double num)
 // addint two tuples
 //imagin that u have a point (3,-2,5,1) and a vector (-2, 3,1,0) and u want to know ehre you woult be if 
 //u followed thr vector from that point the answear comes via adding - adding the two tuples toghether
-void	add_tuples(t_tup new, t_tup a1, t_tup a2)
-{
-	new.x = a1.x + a2.x;
-	new.y = a1.y + a2.y;
-	new.z = a1.z + a2.z;
-	new.w = a1.w + a2.w;
-}
+t_tup	add_tuples(t_tup *a, t_tup *b);
 
 // substracting tuplets is usefull when it comes to light and shading, when you need to find 
 // the vector that points to your light source
-void	sub_tuples(t_tup new, t_tup a1, t_tup a2)
-{
-	new.x = a1.x - a2.x;
-	new.y = a1.y - a2.y;
-	new.z = a1.z - a2.z;
-	new.w = a1.w - a2.w;
-}
+t_tup	sub_tuples(t_tup *a, t_tup *b);
 
 // imagine u want to see what point lays 3.5 times farther in that direction
-void	multi_tuples(t_tup a1, double val)
-{
-	t_tup	temp;
+t_tup	multi_tuple(t_tup *a, double val);
 
-	temp.x = a1.x * val;
-	temp.y = a1.y * val;
-	temp.z = a1.z * val;
-	temp.w = a1.w * val;
-	a1 = temp; 
-}
+t_tup	div_tuple(t_tup *a, double val);
 
-void	div_tuples(t_tup a1, double val)
-{
-	t_tup	temp;
-
-	temp.x = a1.x / val;
-	temp.y = a1.y / val;
-	temp.z = a1.z / val;
-	temp.w = a1.w / val;
-	a1 = temp; 
-}
-#include <math.h>
 
 // magnitude
 //the distance represented by a vector is called its magnitude or lenght, its 
 //how far u would travel in straight line if u were to walk from one end of vector to the other
-double mag_tuplets(t_tup tup)
-{
-	double mag;
+double	magnitude(t_tup *a);
 
-	// mag += tup.x * tup.x;
-	// mag += tup.z * tup.z;
-	// mag += tup.y * tup.y;
-	mag += pow(tup.x, 2);
-	mag += pow(tup.z, 2);
-	mag += pow(tup.y, 2);
-	return (sqrt(mag));
-}
+t_tup	normalize(t_tup *a);
 
-t_tup	normalize(t_tup tup)
-{
-	t_tup	norm_tup;
-
-	norm_tup.x = tup.x / mag_tuplets(tup);
-	norm_tup.y = tup.y / mag_tuplets(tup);
-	norm_tup.z = tup.z / mag_tuplets(tup);
-	norm_tup.w = tup.w / mag_tuplets(tup);
-	return (norm_tup);
-}
 // vectors with magnitude of 1 are called a unit vectors and u will use them when computing
 // the MATRIX when determinin the direction prepend
-// int main()
-// {
-// 	t_tup tup;
-// 	double mag;
-	
-// 	tup.x = 0;
-// 	tup.y = 1;
-// 	tup.z = 0;
+int main()
+{
+	t_tup tup = {1, 2, 2};
 
-// 	mag = mag_tuplets(tup);
-// 	printf("%g\n", mag);
-// }
+	printf("Magnitude: (%g,%g,%g,%g) is %g\n", tup.x, tup.y, tup.z, tup.w, magnitude(&tup));
+	t_tup tmp = add_tuples(&tup, &tup);
+	printf("Addition: (%g,%g,%g,%g)\n", tmp.x, tmp.y, tmp.z, tmp.w);
+	tmp = div_tuple(&tup, 2);
+	printf("Division: (%g,%g,%g,%g)\n", tmp.x, tmp.y, tmp.z, tmp.w);
+	tmp = normalize(&tup);
+	printf("Normalize: (%g,%g,%g,%g)\n", tmp.x, tmp.y, tmp.z, tmp.w);
+}
