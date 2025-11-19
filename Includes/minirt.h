@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/19 09:54:25 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:57:06 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,10 @@ void		multi_mat_mat(mat4 res, mat4 a, mat4 b);
 void		multi_mat_tuple(t_tup res, mat4 a, t_tup b);
 void		transpose_mat(mat4 m);
 bool		is_equal_mat(mat4 a, mat4 b);
+mat4		*identity_mat(mat4 m);
+mat4		*translation_mat(mat4 m, double d[3]);
+mat4		*scaling_mat(mat4 m, double d[3]);
+mat4		*rotation_mat(mat4 m, double angles[3]);
+mat4		*shearing_mat(mat4 m, double angles[6]);
 
 #endif

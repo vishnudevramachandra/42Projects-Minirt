@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:51:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/19 10:02:38 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:13:12 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,11 @@ int main()
 	cross_prod(tmp, tup, tup);
 	printf("Cross-product: (%g,%g,%g,%g)\n", tmp[0], tmp[1], tmp[2], tmp[3]);
 	
+	// ---------------matrix operations------------------
 	mat4    a = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 8, 7, 6}, {5, 4, 3, 2}};
 	mat4    b = {{-2, 1, 2, 3}, {3, 2, 1, -1}, {4, 3, 6, 5}, {1, 2, 7, 8}};
     mat4    res = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
-	multi_mat_mat(res, a, b);
+	multi_mat_mat(res, a, b);	// ((20,22,50,48),(44,54,114,108),(40,58,110,102),(16,26,46,42))
 	printf("MMM: ((%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g))\n",
 		res[0][0],res[0][1],res[0][2],res[0][3],
 		res[1][0],res[1][1],res[1][2],res[1][3],
@@ -101,13 +102,56 @@ int main()
 		res[3][0],res[3][1],res[3][2],res[3][3]);
 	mat4	c = {{1, 2, 3, 4}, {2, 4, 4, 2}, {8, 6, 4, 1}, {0, 0, 0, 1}};
 	t_tup	v = {1, 2, 3, 1};
-	multi_mat_tuple(tup, c, v);
+	multi_mat_tuple(tup, c, v);	// (18, 24, 33,1)
 	printf("Matrix-tuple mul: (%g,%g,%g,%g)\n", tup[0], tup[1], tup[2], tup[3]);
-	transpose_mat(res);
+	transpose_mat(res);	// ((20,44,40,16),(22,54,58,26),(50,114,110,46),(48,108,102,42))
 	printf("transpose: ((%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g))\n",
 		res[0][0],res[0][1],res[0][2],res[0][3],
 		res[1][0],res[1][1],res[1][2],res[1][3],
 		res[2][0],res[2][1],res[2][2],res[2][3],
 		res[3][0],res[3][1],res[3][2],res[3][3]);
 	printf("Matrix equality {yes[1]/no[0]}: %i\n", is_equal_mat(res, res));
+	
+	// ---------------Translation, scaling, rotation, shearing------------------
+	mat4	t;
+	mat4	*bla;
+	double	d[3] = {5, -3, 2};
+	bla = translation_mat(t, d);	// ((1,0,0,5),(0,1,0,-3),(0,0,1,2),(0,0,0,1))
+	printf("transpose: ((%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g))\n",
+		t[0][0],t[0][1],t[0][2],t[0][3],
+		t[1][0],t[1][1],t[1][2],t[1][3],
+		t[2][0],t[2][1],t[2][2],t[2][3],
+		t[3][0],t[3][1],t[3][2],t[3][3]);
+	printf("[0][3]: %g\n", (*bla)[0][3]);
+	t_tup	vec = {-3, 4, 5, 0};
+	multi_mat_tuple(tup, *bla, vec); // (-3, 4, 5, 0)
+	printf("Transl of vec: (%g,%g,%g,%g)\n", tup[0], tup[1], tup[2], tup[3]);
+	t_tup	pt = {-3, 4, 5, 1};
+	multi_mat_tuple(tup, *bla, pt);	// (2, 1, 7, 1)
+	printf("Transl of point: (%g,%g,%g,%g)\n", tup[0], tup[1], tup[2], tup[3]);
+	d[0] = 2; d[1] = 3; d[2] = 4;
+	mat4	s;
+	scaling_mat(s, d);
+	pt[0] = -4; pt[1] = 8; pt[2] = 8;
+	multi_mat_tuple(tup, s, pt);	// (-8, 18, 32, 1)
+	printf("Transl of point: (%g,%g,%g,%g)\n", tup[0], tup[1], tup[2], tup[3]);
+	mat4	r;
+	d[0] = 0; d[1] = 0; d[2] = M_PI / 4;
+	rotation_mat(r, d);
+	printf("rot-mat: ((%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g))\n",
+		r[0][0],r[0][1],r[0][2],r[0][3],
+		r[1][0],r[1][1],r[1][2],r[1][3],
+		r[2][0],r[2][1],r[2][2],r[2][3],
+		r[3][0],r[3][1],r[3][2],r[3][3]);
+	pt[0] = 0; pt[1] = 1; pt[2] = 0;
+	multi_mat_tuple(tup, r, pt);	// (0, 0.707107, 0.707107, 1)
+	printf("Rotation of point: (%g,%g,%g,%g)\n", tup[0], tup[1], tup[2], tup[3]);
+	mat4	shr;
+	double	w[6] = {1, -1, 2, -2, 3, -3};
+	shearing_mat(shr, w);
+	printf("rot-mat: ((%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g),(%g,%g,%g,%g))\n",
+		shr[0][0],shr[0][1],shr[0][2],shr[0][3],
+		shr[1][0],shr[1][1],shr[1][2],shr[1][3],
+		shr[2][0],shr[2][1],shr[2][2],shr[2][3],
+		shr[3][0],shr[3][1],shr[3][2],shr[3][3]);
 }
