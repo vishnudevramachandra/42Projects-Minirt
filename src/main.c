@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/17 17:57:46 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:06:21 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	init_scene(t_scene *scene)
 {
 	scene->amb_light.ratio = -1;
 	scene->amb_light.color = (t_rgb){-1, -1, -1};
-	scene->camera.position = (t_tup){NAN, NAN, NAN, NAN};
-	scene->camera.orientation_vector = (t_tup){-2, -2, -2, -2};
+	// scene->camera.position = (t_tup){NAN, NAN, NAN, NAN};
+	// scene->camera.orientation_vector = (t_tup){-2, -2, -2, -2};
 	scene->camera.horizontal_field = -1;
-	scene->light.position = (t_tup){NAN, NAN, NAN, NAN};
+	// scene->light.position = (t_tup){NAN, NAN, NAN, NAN};
 	scene->light.bright_ratio = -1;
 	scene->light.color = (t_rgb){-1, -1, -1};
 }

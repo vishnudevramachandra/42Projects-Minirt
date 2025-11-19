@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/07 11:07:22 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:10:14 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ t_camera	camera(char *line, t_camera c)
 		i++;
 	// if (line[i] != '\n' && line[i] != '\0')
 	// 	c.horizontal_field = -1;
-	printf("position: x=%g y=%g z=%g\n", c.position.x, c.position.y, c.position.z);
-	printf("orientation: x=%g y=%g z=%g\n", c.orientation_vector.x, c.orientation_vector.y, c.orientation_vector.z);
-	printf("horizontal field %g\n", c.horizontal_field);
+	// printf("position: x=%g y=%g z=%g\n", c.position.x, c.position.y, c.position.z);
+	// printf("orientation: x=%g y=%g z=%g\n", c.orientation_vector.x, c.orientation_vector.y, c.orientation_vector.z);
+	// printf("horizontal field %g\n", c.horizontal_field);
 	return (c);
 }
 // printf("position: x=%g y=%g z=%g\n", c.position.x, c.position.y, c.position.z);
@@ -95,8 +95,8 @@ t_light	light(char *line, t_light l)
 		i++;
 	// if (line[i] != '\n' && line[i] != '\0')
 	// 	l.bright_ratio = -1;
-	printf("light pos: x=%g, y=%g, z=%g\n", l.position.x, l.position.y, l.position.z);
-	printf("brightness ratio: %g\n", l.bright_ratio);
-	printf("colors: r=%d g=%d b=%d\n", l.color.r, l.color.g, l.color.b);
-		return (l);
+	// printf("light pos: x=%g, y=%g, z=%g\n", l.position.x, l.position.y, l.position.z);
+	// printf("brightness ratio: %g\n", l.bright_ratio);
+	// printf("colors: r=%d g=%d b=%d\n", l.color.r, l.color.g, l.color.b);
+	return (l);
 }

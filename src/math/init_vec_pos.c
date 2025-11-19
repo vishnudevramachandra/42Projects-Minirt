@@ -1,63 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_tup_arith.c                                   :+:      :+:    :+:   */
+/*   init_vec_pos.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 14:33:35 by vramacha          #+#    #+#             */
-/*   Updated: 2025/11/19 20:19:45 by majkijew         ###   ########.fr       */
+/*   Created: 2025/11/19 20:22:51 by majkijew          #+#    #+#             */
+/*   Updated: 2025/11/19 22:29:46 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt.h"
 
-void	add_tuples(t_tup res, t_tup a, t_tup b)
+void	init_vector(t_tup vec, double x, double y, double z)
 {
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		res[i] = a[i] + b[i];
-		i++;
-	}
+	vec[0] = x;
+	vec[1] = y;
+	vec[2] = z;
+	vec[3] = 0;
 }
 
-void	sub_tuples(t_tup res, t_tup a, t_tup b)
+void	init_point(t_tup vec, double x, double y, double z)
 {
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		res[i] = a[i] - b[i];
-		i++;
-	}
+	vec[0] = x;
+	vec[1] = y;
+	vec[2] = z;
+	vec[3] = 1;
 }
 
-void	multi_tuple(t_tup res, t_tup a, double val)
+void	copy_vector(t_tup new, t_tup old)
 {
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 3)
 	{
-		res[i] = a[i] * val;
+		new[i] = old[i];
 		i++;
 	}
+	old[i] = 0;
 }
 
-void	div_tuple(t_tup res, t_tup a, double val)
+void	copy_point(t_tup new, t_tup old)
 {
 	int	i;
 
-	if (val == 0)
-		return ;
 	i = 0;
-	while (i < 4)
+	while (i < 3)
 	{
-		res[i] = a[i] / val;
+		new[i] = old[i];
 		i++;
 	}
+	old[i] = 1;
 }

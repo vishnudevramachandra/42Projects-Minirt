@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/19 15:57:06 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/19 22:49:59 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,14 @@ typedef struct s_amb_light
 	t_rgb	color;
 }	t_amb_light;
 
-typedef double t_tup[4];
+typedef double t_tup[4]; ///i dont really get it ;//
+
+
+typedef struct s_ray
+{
+	t_tup	*origin;
+	t_tup	*direction;
+}	t_ray;
 
 typedef struct s_camera
 {
@@ -64,8 +71,8 @@ typedef	struct s_scene
 
 typedef struct s_sphere
 {
-	t_tup	pos;
-	double	dia;
+	t_tup	pos; //center
+	double	dia; //radious
 	t_rgb	color;
 }	t_sphere;
 
@@ -112,6 +119,7 @@ typedef struct s_mrt {
 	// void			*win_ptr;
 }	t_mrt;
 
+
 //everything struct
 
 // typedef struct s_rt
@@ -152,5 +160,9 @@ mat4		*translation_mat(mat4 m, double d[3]);
 mat4		*scaling_mat(mat4 m, double d[3]);
 mat4		*rotation_mat(mat4 m, double angles[3]);
 mat4		*shearing_mat(mat4 m, double angles[6]);
+void		init_vector(t_tup vec, double x, double y, double z);
+void		init_point(t_tup vec, double x, double y, double z);
+void		copy_vector(t_tup new, t_tup old);
+void		copy_point(t_tup new, t_tup old);
 
 #endif
