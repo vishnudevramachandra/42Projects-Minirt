@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/18 18:29:29 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/19 09:54:25 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct s_mrt {
 	
 // }	t_rt;
 
-
+typedef double  mat4[4][4];
 
 void		erro_msg(char *str, int v);
 void		read_from_fd(char *file_name, t_scene *scene, t_list **objs);
@@ -142,5 +142,10 @@ double		dot_prod(t_tup a, t_tup b);
 double		magnitude(t_tup a);
 void		cross_prod(t_tup res, t_tup a, t_tup b);
 void		normalize(t_tup res, t_tup a);
+void		multi_and_accum_tuple(t_tup res, t_tup a, double val);
+void		multi_mat_mat(mat4 res, mat4 a, mat4 b);
+void		multi_mat_tuple(t_tup res, mat4 a, t_tup b);
+void		transpose_mat(mat4 m);
+bool		is_equal_mat(mat4 a, mat4 b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/06 17:05:59 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/07 11:07:22 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@
 t_amb_light	amb_light(char *line, t_amb_light a)
 {
 	int		i;
-	int		j;
 	int		len;
 
-	j = 0;
 	i = 0;
 	while (line[i] != '\n' && ft_isspace(line[i]))
 		i++;
@@ -79,11 +77,9 @@ t_camera	camera(char *line, t_camera c)
 //if L exists it should have 3 parametes no more no less 
 t_light	light(char *line, t_light l)
 {
-	int		j;
 	int		i;
 	int		len;
 
-	j = 0;
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
@@ -92,7 +88,6 @@ t_light	light(char *line, t_light l)
 	l.bright_ratio = atod(&line[i]);
 	while ((line[i] >= '0' && line[i] <= '9') || line[i] == '.')
 		i++;
-	j = 0;
 	while (ft_isspace(line[i]))
 		i++;
 	set_color(&l.color, line + i, &len);
@@ -101,7 +96,7 @@ t_light	light(char *line, t_light l)
 	// if (line[i] != '\n' && line[i] != '\0')
 	// 	l.bright_ratio = -1;
 	printf("light pos: x=%g, y=%g, z=%g\n", l.position.x, l.position.y, l.position.z);
-printf("brightness ratio: %g\n", l.bright_ratio);
-printf("colors: r=%d g=%d b=%d\n", l.color.r, l.color.g, l.color.b);
+	printf("brightness ratio: %g\n", l.bright_ratio);
+	printf("colors: r=%d g=%d b=%d\n", l.color.r, l.color.g, l.color.b);
 		return (l);
 }

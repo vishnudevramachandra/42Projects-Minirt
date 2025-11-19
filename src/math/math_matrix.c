@@ -6,43 +6,84 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:43:04 by vramacha          #+#    #+#             */
-/*   Updated: 2025/11/18 18:38:58 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/19 09:58:38 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../../Includes/minirt.h"
 
-typedef double  mat4[4][4];
-
-void print_vec(double v[])
+// matrix-matrix multiplication carried out as combination of rows
+void    multi_mat_mat(mat4 res, mat4 a, mat4 b)
 {
-    printf("Vec: (%g,%g,%g,%g)\n", v[0], v[1], v[2], v[3]);
-}
-
-void    multi_mat(mat4 res, mat4 a, mat4 b)
-{
-    int     i;
-    int     j;
-    t_tup   v;
+    int	i;
+    int	j;
 
     i = 0;
-    while (i++ < 4)
+    while (i < 4)
     {
         j = 0;
-        while (j++ < 4)
+        while (j < 4)
         {
-            multi_tuple(b[j]);
+            multi_and_accum_tuple(res[i], b[j], a[i][j]);
             j++;
         }
+        i++;
     }
 }
 
-int main(void)
+// matrix-tuple multiplication carried out using dot-products
+void	multi_mat_tuple(t_tup res, mat4 a, t_tup b)
 {
-    mat4    m = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 8, 7, 6}, {5, 4, 3, 2}};
-    mat4    res = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
-    mat4    n;
-    
-    multi_mat(res, n, m);
+    int	i;
+    int	j;
+
+    i = 0;
+    while (i < 4)
+    {
+        res[i] = dot_prod(a[i], b);
+        i++;
+    }
+}
+
+// in-place transpose of matrix
+void	transpose_mat(mat4 m)
+{
+	int		i;
+	int		j;
+	double	tmp;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = i + 1;
+		while (j < 4)
+		{
+			tmp = m[j][i];
+			m[j][i] = m[i][j];
+			m[i][j] = tmp;
+			j++;
+		}
+		i++;
+	}
+}
+
+// matrix comparison using epsilon
+bool	is_equal_mat(mat4 a, mat4 b)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (__DBL_EPSILON__ < fabs(a[i][j] - b[i][j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
