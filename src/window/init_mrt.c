@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mrt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:08:17 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/18 16:06:38 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:48:23 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,43 @@
 	
 // }
 
+
+
 void	ft_somefunc(void *param)
 {
-	uint32_t	i;
+	uint32_t	x;
 	uint32_t	y;
 	t_mrt		*m;
 
 	m = (t_mrt *)param;
-	i = 0;
+	x = 0;
+	 t_obj *obj = m->objs->content;
+	if (obj->typ != SPHERE)
+		return;
 	// printf("color? %x\n", get_rgba(&m->a->amb_light.color, m->a->amb_light.ratio));
-	while (i < m->image->width)
+	while (x < m->image->width)
 	{
 		y = 0;
 		while (y < m->image->height)
 		{
-			mlx_put_pixel(m->image, i, y, get_rgba(&m->scene->amb_light.color, m->scene->amb_light.ratio));
+			double px = (2.0 * x / WIDTH - 1.0) * ((double)m->image->width / m->image->height);
+			double py = 1.0 - 2.0 * y / m->image->height;
+
+			t_tup origin;
+			t_tup direction;
+			init_point(origin, 0, 0, 0); //camera at 0,0,0
+			init_vector(direction, px, py, 1);
+			normalize(direction);
+			t_ray ray;
+			create_ray(&ray, origin, direction);
+			double t = inter_sphere(obj->sp, ray);
+			if (t > 0)
+				mlx_put_pixel(m->image, x, y, rgb(255, 0, 0));
+			else
+				mlx_put_pixel(m->image, x, y, rgb(0, 0, 0));
 			y++;
 		}
-		i++;
+		x++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 19:41:19 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:48:58 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_mrt {
 	mlx_image_t	*image;
 	t_scene		*scene;
 	t_list		*objs;
+	// t_ray		*ray;
 	// void			*mlx_ptr;
 	// void			*win_ptr;
 }	t_mrt;
@@ -155,7 +156,8 @@ void		div_tuple(t_tup res, t_tup a, double val);
 double		dot_prod(t_tup a, t_tup b);
 double		magnitude(t_tup a);
 void		cross_prod(t_tup res, t_tup a, t_tup b);
-void		normalize(t_tup res, t_tup a);
+// void		normalize(t_tup res, t_tup a);
+void		normalize(t_tup a);
 void		multi_and_accum_tuple(t_tup res, t_tup a, double val);
 void		multi_mat_mat(mat4 res, mat4 a, mat4 b);
 void		multi_mat_tuple(t_tup res, mat4 a, t_tup b);
@@ -170,5 +172,8 @@ void		init_vector(t_tup vec, double x, double y, double z);
 void		init_point(t_tup vec, double x, double y, double z);
 void		copy_vector(t_tup new, t_tup old);
 void		copy_point(t_tup new, t_tup old);
+void		create_ray(t_ray *ray, t_tup point, t_tup vector);
+int			rgb(int a, int b, int c);
+double		inter_sphere(t_sphere sp, t_ray r);
 
 #endif

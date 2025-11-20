@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 16:52:54 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:58:05 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,16 @@ int	set_double(double *d, const char *s, int *len)
 	return (*len);
 }
 
-int	set_vector(t_tup *v, const char *s, int *len)
+int	set_vector(t_tup v, const char *s, int *len)
 {
 	int		i;
 	int		j;
-	double	*ptrs[3];
 
-	// ptrs[0] = &v->x;
-	// ptrs[1] = &v->y;
-	// ptrs[2] = &v->z;
-	// v->w = 0;
 	i = 0;
 	j = 0;
 	while (j < 3 && s[i] && s[i] != '\n')
 	{
-		set_double(ptrs[j], s + i, len);
+		set_double(&v[j], s + i, len);
 		if (!*len || (j < 2 && s[i + *len] != ','))
 			return (0);
 		i += *len + 1;

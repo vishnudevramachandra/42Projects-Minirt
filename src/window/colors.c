@@ -6,12 +6,16 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:59:29 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/16 21:25:45 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:36:03 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+int	rgb(int a, int b, int c)
+{
+	return (a << 24 | b << 16 | c << 8 | 1);
+}
 // okej czyli kolory sa jednym tupletem i musimy teraz ogarnac jak zamienc ten tuplet zeby mial wartosc hexadecymelowal zeby moc uzywac ich w naszych funkcjach mlx?
 
 /// @brief Colors are commonly represented as 4-byte integers. This 4-byte integer 

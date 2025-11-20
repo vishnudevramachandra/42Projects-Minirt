@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/11/17 17:47:36 by vramacha         ###   ########.fr        #
+#    Updated: 2025/11/20 22:52:40 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,20 +36,28 @@ LINKER		= 	-L$(LIBFT_DIR) -lft \
 SRCFILES	=	main.c \
 				utils_error.c \
 				window/init_mrt.c \
-				window/colors.c 
+				window/colors.c \
+				ray_sphere_inter/create_rays.c \
+				ray_sphere_inter/intersect_obj.c \
 
 PARSINGFILES =	parsing.c \
 				parsing_utils.c \
 				parse_scene.c \
 				parse_figures.c \
-				parsing_print.c \
 				atod.c
+
+MATHFILES	=	init_vec_pos.c \
+				math_matrix.c \
+				math_transf.c \
+				math_tup_arith.c \
+				math_tup_prod.c \
 
 GNLFILES	=	get_next_line.c \
 				get_next_line_utils.c
 
 SRCS	=	$(addprefix src/,$(SRCFILES)) \
 			$(addprefix src/parsing/,$(PARSINGFILES)) \
+			$(addprefix src/math/,$(MATHFILES)) \
 			$(addprefix get_next_line/,$(GNLFILES))
 
 OBJDIR	=	obj

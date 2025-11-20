@@ -14,10 +14,10 @@
 
 #include "minirt.h"
 //						(origin)	(direction)
-void	ray(t_ray *ray, t_tup point, t_tup vector)
+void	create_ray(t_ray *ray, t_tup point, t_tup vector)
 {
-	ray->origin = point;
-	ray->direction = vector;
+	copy_point(ray->origin, point);
+	copy_vector(ray->direction, vector);
 }
 
 // t_tup	position(t_ray *ray, double t)

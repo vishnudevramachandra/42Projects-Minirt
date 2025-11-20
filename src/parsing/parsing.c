@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 16:52:28 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:53:07 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 	if (fd < 0)
 		erro_msg("ERROR", 1);
 	line = get_next_line(fd);
+	printf("whaaat1\n");
 	while (line != NULL)
 	{
 		i = 0 + len_spaces(line);
@@ -174,24 +175,30 @@ void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 			line = get_next_line(fd);
 			continue ;
 		}
+		printf("whaaat2\n");
 		if (verify_id(line) == false)
 		{
 			// free(line);
 			erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
 		}
+		printf("whaaat3\n");
 		if (is_scene(line + i))
+		{
 			fill_scene(scene, line + i);
+			printf("after fill_scene\n");
+		}
 		else if (!is_object(line + i) || !parse_obj(line + i, objs))
 		{
 			free(line);
 			erro_msg("ERROR here?", STDERR_FILENO);
 		}
+		printf("after is_object\n");
 		if (line)
 			free(line);
 		line = get_next_line(fd);
 	}
-	if (*objs)
-		print_obj(*objs);
+	// if (*objs)
+	// 	print_obj(*objs);
 	close(fd);
 	if (scene_range(scene->amb_light, scene->camera, scene->light) == false)
 		erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit

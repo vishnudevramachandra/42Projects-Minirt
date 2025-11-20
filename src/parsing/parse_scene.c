@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/19 17:10:14 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:58:48 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ t_camera	camera(char *line, t_camera c)
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
-	set_vector(&c.position, line + i, &len);
+	set_vector(c.position, line + i, &len);
 	i = i + len + len_spaces(line + i + len);
-	set_vector(&c.orientation_vector, line + i, &len);
+	set_vector(c.orientation_vector, line + i, &len);
 	while (ft_isspace(line[i]))
 		i++;
 	c.horizontal_field = atod(&line[i]);
@@ -83,7 +83,7 @@ t_light	light(char *line, t_light l)
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
-	set_vector(&l.position, line + i, &len);
+	set_vector(l.position, line + i, &len);
 	i = i + len + len_spaces(line + i + len);
 	l.bright_ratio = atod(&line[i]);
 	while ((line[i] >= '0' && line[i] <= '9') || line[i] == '.')

@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/19 17:06:21 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:48:21 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@ void	init_scene(t_scene *scene)
 {
 	scene->amb_light.ratio = -1;
 	scene->amb_light.color = (t_rgb){-1, -1, -1};
-	// scene->camera.position = (t_tup){NAN, NAN, NAN, NAN};
-	// scene->camera.orientation_vector = (t_tup){-2, -2, -2, -2};
+	init_point(scene->camera.position, NAN, NAN, NAN);
+	init_vector(scene->camera.orientation_vector, -2, -2, -2);
 	scene->camera.horizontal_field = -1;
-	// scene->light.position = (t_tup){NAN, NAN, NAN, NAN};
 	scene->light.bright_ratio = -1;
 	scene->light.color = (t_rgb){-1, -1, -1};
 }
@@ -65,8 +64,11 @@ int32_t	main(int ac, char **av)
 	mrt->scene = malloc(sizeof(t_scene));
 	if (!mrt->scene)
 		erro_msg("ERROR", 1);
+	printf("before init_scene\n");
 	init_scene(mrt->scene);
+	printf("before read_from_fd\n");
 	read_from_fd(av[1], mrt->scene, &mrt->objs);
+	printf("before init_mrt\n");
 	init_mrt(mrt);
 	// free_mem();
 }

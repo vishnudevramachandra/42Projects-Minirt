@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:43:04 by vramacha          #+#    #+#             */
-/*   Updated: 2025/11/19 11:18:57 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:45:02 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	multi_mat_mat(mat4 res, mat4 a, mat4 b)
 void	multi_mat_tuple(t_tup res, mat4 a, t_tup b)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (i < 4)
