@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 15:56:48 by vramacha          #+#    #+#             */
-/*   Updated: 2025/11/17 17:35:48 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:54:39 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../Includes/minirt.h"
 
-static void print_tup(t_tup *vec)
+static void print_tup(t_tup vec)
 {
-    printf("     %g,%g,%g", vec->x, vec->y, vec->z);
+    printf("     %g,%g,%g", vec[0], vec[1], vec[2]);
 }
 
 static void print_color(t_rgb *rgb)

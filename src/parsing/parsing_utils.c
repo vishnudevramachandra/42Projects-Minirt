@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/17 17:37:37 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:52:54 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int	set_vector(t_tup *v, const char *s, int *len)
 	int		j;
 	double	*ptrs[3];
 
-	ptrs[0] = &v->x;
-	ptrs[1] = &v->y;
-	ptrs[2] = &v->z;
-	v->w = 0;
+	// ptrs[0] = &v->x;
+	// ptrs[1] = &v->y;
+	// ptrs[2] = &v->z;
+	// v->w = 0;
 	i = 0;
 	j = 0;
 	while (j < 3 && s[i] && s[i] != '\n')

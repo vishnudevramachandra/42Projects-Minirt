@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/19 22:49:59 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:41:19 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,17 @@ typedef struct s_amb_light
 
 typedef double t_tup[4]; ///i dont really get it ;//
 
+// typedef struct s_tup
+// {
+// 	double x;
+// 	double x;
+// 	double x;
+// }	t_tup;
 
 typedef struct s_ray
 {
-	t_tup	*origin;
-	t_tup	*direction;
+	t_tup	origin;
+	t_tup	direction;
 }	t_ray;
 
 typedef struct s_camera

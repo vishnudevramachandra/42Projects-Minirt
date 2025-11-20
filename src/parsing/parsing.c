@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/06 17:05:21 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:52:28 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ bool	scene_range(t_amb_light a, t_camera c, t_light l)
 	else if ((a.color.r < 0 || a.color.r > 255) || (a.color.g < 0
 			|| a.color.g > 255) || (a.color.b < 0 || a.color.b > 255))
 		return (false);
-	else if (c.position.x == NAN || c.position.y == NAN || c.position.z == NAN)
-		return (false);
-	else if ((c.orientation_vector.x < -1 || c.orientation_vector.x > 1)
-		|| (c.orientation_vector.y < -1 || c.orientation_vector.y > 1)
-		|| (c.orientation_vector.z < -1 || c.orientation_vector.z > 1))
-		return (false);
+	// else if (c.position.x == NAN || c.position.y == NAN || c.position.z == NAN)
+	// 	return (false);
+	// else if ((c.orientation_vector.x < -1 || c.orientation_vector.x > 1)
+	// 	|| (c.orientation_vector.y < -1 || c.orientation_vector.y > 1)
+	// 	|| (c.orientation_vector.z < -1 || c.orientation_vector.z > 1))
+	// 	return (false);
 	else if (c.horizontal_field < 0 || c.horizontal_field > 180)
 		return (false);
-	else if (l.position.x == NAN || l.position.y == NAN || l.position.z == NAN)
-		return (false);
+	// else if (l.position.x == NAN || l.position.y == NAN || l.position.z == NAN)
+	// 	return (false);
 	else if (l.bright_ratio < 0 || l.bright_ratio > 1)
 		return (false);
 	else if ((l.color.r < 0 || l.color.r > 255) || (l.color.g < 0
