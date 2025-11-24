@@ -6,20 +6,19 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:08:17 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 22:48:23 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:53:59 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// void	canvas(void *param)
-// {
-	
-// }
+void print_tup(t_tup vec)
+{
+	printf("	 %g,%g,%g\n", vec[0], vec[1], vec[2]);
+}
 
-
-
-void	ft_somefunc(void *param)
+// void	ft_somefunc(void *param)
+void	render(void *param)
 {
 	uint32_t	x;
 	uint32_t	y;
@@ -27,10 +26,9 @@ void	ft_somefunc(void *param)
 
 	m = (t_mrt *)param;
 	x = 0;
-	 t_obj *obj = m->objs->content;
+	t_obj *obj = m->objs->content;
 	if (obj->typ != SPHERE)
-		return;
-	// printf("color? %x\n", get_rgba(&m->a->amb_light.color, m->a->amb_light.ratio));
+		return ;
 	while (x < m->image->width)
 	{
 		y = 0;
@@ -39,12 +37,12 @@ void	ft_somefunc(void *param)
 			double px = (2.0 * x / WIDTH - 1.0) * ((double)m->image->width / m->image->height);
 			double py = 1.0 - 2.0 * y / m->image->height;
 
-			t_tup origin;
-			t_tup direction;
-			init_point(origin, 0, 0, 0); //camera at 0,0,0
+			t_tup	origin;
+			t_tup	direction;
+			init_point(origin, 0, 0, 0); //camera
 			init_vector(direction, px, py, 1);
 			normalize(direction);
-			t_ray ray;
+			t_ray	ray;
 			create_ray(&ray, origin, direction);
 			double t = inter_sphere(obj->sp, ray);
 			if (t > 0)
@@ -79,10 +77,11 @@ void	ft_hook(void *param)
 
 void	init_mrt(t_mrt *m)
 {
+
 	m->mlx = mlx_init(WIDTH, HEIGHT, "minirt", true);
 	if (!m->mlx)
 		erro_msg("ERROR", 2);
-	m->image = mlx_new_image(m->mlx, 128, 128);
+	m->image = mlx_new_image(m->mlx, WIDTH, HEIGHT);
 	if (!m->image)
 	{
 		mlx_close_window(m->mlx);
@@ -93,7 +92,7 @@ void	init_mrt(t_mrt *m)
 		mlx_close_window(m->mlx);
 		erro_msg("ERROR", 2);
 	}
-	mlx_loop_hook(m->mlx, ft_somefunc, m);
+	render(m);
 	mlx_loop_hook(m->mlx, ft_hook, m);
 	mlx_loop(m->mlx);
 	mlx_terminate(m->mlx);

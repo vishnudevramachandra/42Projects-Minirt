@@ -6,16 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 20:26:21 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:58:19 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-// static void print_tup(t_tup vec)
-// {
-//     printf("     %g,%g,%g", vec[0], vec[1], vec[2]);
-// }
 
 double	delta(double a, double b, double c)
 {
@@ -56,9 +51,9 @@ double	inter_sphere(t_sphere sp, t_ray r)
 	init_vector(l, 0, 0, 0);
 	sub_tuples(l, r.origin, sp.pos);
 	dlt = delta(dot_prod(r.direction, r.direction),
-			2 * dot_prod(r.direction, l), dot_prod(l, l) - sp.dia * sp.dia);
+			2 * dot_prod(r.direction, l), dot_prod(l, l)
+			- ((sp.dia * sp.dia) * 0.5));
 	if (dlt < 0)
-
 		return (-1);
 	else if (dlt == 0)
 	{
@@ -75,26 +70,3 @@ double	inter_sphere(t_sphere sp, t_ray r)
 	}
 	return (t);
 }
-
-// int main()
-// {
-// 	t_sphere	sp;
-// 	t_ray		r;
-// 	double		t;
-
-// 	sp.dia = 1;
-// 	init_point(sp.pos, 1, 0, 5);
-// 	// create_ray
-// 	init_point(r.origin, 0, 0, 0);
-// 	init_vector(r.direction, 1, 0, 5);
-// 	printf("before: %f\n", t);
-// 	printf("sp pos: ");
-// 	print_tup(sp.pos);
-// 	printf("\n r.origin: ");
-// 	print_tup(r.origin);
-// 	printf("\n r.direction: ");
-// 	print_tup(r.direction);
-// 	printf("\n===============================\n");
-// 	t = inter_sphere(sp, r);
-// 	printf("after: %f\n", t);
-// }

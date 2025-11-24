@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:59:29 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 22:36:03 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:42:15 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	rgb(int a, int b, int c)
 {
-	return (a << 24 | b << 16 | c << 8 | 1);
+	return (a << 24 | b << 16 | c << 8 | 255);
 }
 // okej czyli kolory sa jednym tupletem i musimy teraz ogarnac jak zamienc ten tuplet zeby mial wartosc hexadecymelowal zeby moc uzywac ich w naszych funkcjach mlx?
 

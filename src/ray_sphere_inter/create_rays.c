@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   creat_rays->c                                       :+:      :+:    :+:   */
+/*   create_rays.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 17:12:14 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/19 19:11:36 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:56:43 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	create_ray(t_ray *ray, t_tup point, t_tup vector)
 // 		1});
 // }
 
-void	position(t_tup position, t_ray *ray, double t)
-{
-	init_point(position, 0, 0, 0);
-	multi_tuple(position, ray, t);
-	add_tuples(position, ray->origin, ray->direction);
-}
+// void	position(t_tup position, t_ray *ray, double t)
+// {
+// 	init_point(position, 0, 0, 0);
+// 	multi_tuple(position, ray, t);
+// 	add_tuples(position, ray->origin, ray->direction);
+// }

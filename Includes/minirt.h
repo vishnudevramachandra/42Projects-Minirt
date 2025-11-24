@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 22:48:58 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:32:19 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,5 +175,6 @@ void		copy_point(t_tup new, t_tup old);
 void		create_ray(t_ray *ray, t_tup point, t_tup vector);
 int			rgb(int a, int b, int c);
 double		inter_sphere(t_sphere sp, t_ray r);
+void		print_tup(t_tup vec);
 
 #endif
