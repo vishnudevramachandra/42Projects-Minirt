@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 21:58:48 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/27 20:24:02 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_amb_light	amb_light(char *line, t_amb_light a)
 		i++;
 	// if (line[i] != '\n' && line[i] != '\0')
 	// 	a.ratio = -1;
-	printf("ratio: %g\n", a.ratio);
-	printf("colors: r=%d g=%d b=%d\n", a.color.r, a.color.g, a.color.b);
+	// printf("ratio: %g\n", a.ratio);
+	// printf("colors: r=%d g=%d b=%d\n", a.color.r, a.color.g, a.color.b);
 	return (a);
 }
 // printf("ratio: %g\n", a.ratio);
