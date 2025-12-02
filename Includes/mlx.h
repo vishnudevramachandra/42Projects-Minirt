@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:13:17 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/16 16:44:49 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:54:49 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // ================================= mlx ===================================
 # define HEIGHT 800
 # define WIDTH 800
-
+# define MLX_ALPHA true
 
 
 //scene struct

@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/24 20:58:19 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/01 19:08:58 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ double	delta(double a, double b, double c)
 	return (b * b - 4 * a * c);
 }
 
-double	get_hitpoint( double a, double b, double sqrt_dlt)
+double	get_hitpoint(double a, double b, double sqrt_dlt)
 {
 	double	t;
 	double	t1;
@@ -42,17 +42,19 @@ double	get_hitpoint( double a, double b, double sqrt_dlt)
 	return (t);
 }
 
+
+// l is a vector taht contains the origin of the sphere and its direction 
 double	inter_sphere(t_sphere sp, t_ray r)
 {
 	t_tup	l;
 	double	dlt;
 	double	t;
 
-	init_vector(l, 0, 0, 0);
+	init_vector(l, 0, 0, 0); 
 	sub_tuples(l, r.origin, sp.pos);
 	dlt = delta(dot_prod(r.direction, r.direction),
 			2 * dot_prod(r.direction, l), dot_prod(l, l)
-			- ((sp.dia * sp.dia) * 0.5));
+			- ((sp.dia * sp.dia) * 0.25));
 	if (dlt < 0)
 		return (-1);
 	else if (dlt == 0)

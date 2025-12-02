@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 21:48:21 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/27 20:25:31 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int32_t	main(int ac, char **av)
 	printf("before init_scene\n");
 	init_scene(mrt->scene);
 	printf("before read_from_fd\n");
-	read_from_fd(av[1], mrt->scene, &mrt->objs);
+	read_from_fd(av[1], mrt->scene, &mrt->obj);
 	printf("before init_mrt\n");
 	init_mrt(mrt);
 	// free_mem();

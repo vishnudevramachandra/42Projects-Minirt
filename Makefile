@@ -6,7 +6,7 @@
 #    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/11/20 22:52:40 by majkijew         ###   ########.fr        #
+#    Updated: 2025/11/27 20:26:39 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,10 @@ SRCFILES	=	main.c \
 				utils_error.c \
 				window/init_mrt.c \
 				window/colors.c \
+				window/start_rendering.c \
 				ray_sphere_inter/create_rays.c \
 				ray_sphere_inter/intersect_obj.c \
+				ray_sphere_inter/start_shadows.c \
 
 PARSINGFILES =	parsing.c \
 				parsing_utils.c \

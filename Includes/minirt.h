@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/24 17:32:19 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/11/27 20:08:56 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ typedef struct s_mrt {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	t_scene		*scene;
-	t_list		*objs;
+	t_list		*obj;
+	t_ray		ray;
 	// t_ray		*ray;
 	// void			*mlx_ptr;
 	// void			*win_ptr;
@@ -173,8 +174,10 @@ void		init_point(t_tup vec, double x, double y, double z);
 void		copy_vector(t_tup new, t_tup old);
 void		copy_point(t_tup new, t_tup old);
 void		create_ray(t_ray *ray, t_tup point, t_tup vector);
-int			rgb(int a, int b, int c);
+int			rgb(int a, int b, int c, int d);
 double		inter_sphere(t_sphere sp, t_ray r);
 void		print_tup(t_tup vec);
+void		normal_at(t_tup normal, t_tup sp_pos, t_tup point);
+void		canvas(void *param);
 
 #endif
