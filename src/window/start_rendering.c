@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_rendering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/27 20:40:08 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:14:54 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	render_sphere(t_mrt *m, int x, int y)
 		mlx_put_pixel(m->image, x, y, get_rgba(&obj->sp.color, 255));
 }
 // thiss is not entirelly right we have to include the 2 and 3 argument 
-void	calc_direction(t_tup *direction, uint32_t x, uint32_t y, t_mrt *m)
+void	calc_direction(t_tup direction, uint32_t x, uint32_t y, t_mrt *m)
 {
 	double	px;
 	double	py;
@@ -39,8 +39,8 @@ void	calc_direction(t_tup *direction, uint32_t x, uint32_t y, t_mrt *m)
 	px = (2.0 * (x) / m->image->width - 1.0)
 		* ((double)m->image->width / m->image->height);
 	py = 1.0 - 2.0 * (y) / m->image->height;
-	init_vector(*direction, px, py, 1);
-	normalize(*direction);
+	init_vector(direction, px, py, 1);
+	normalize(direction);
 }
 
 void	canvas(void *param)
@@ -60,9 +60,8 @@ void	canvas(void *param)
 		y = 0;
 		while (y < m->image->height)
 		{
-			calc_direction(&direction, x, y, m);
-			create_ray(&r, m->scene->camera.position,
-				direction);
+			calc_direction(direction, x, y, m);
+			create_ray(&r, m->scene->camera.position, direction);
 			normalize(r.direction);
 			m->ray = r;
 			if (obj->typ == SPHERE)

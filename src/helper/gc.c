@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:45:00 by vramacha          #+#    #+#             */
-/*   Updated: 2025/12/01 14:40:56 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:17:45 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ void	gc_destroy(void)
 	ft_lstclear((t_list **)gc_root(), free);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	printf("%p\n", gc_root());
-	printf("%p\n", *(void **)gc_root());
-	char	*str = gc_malloc(4);
-	str[0] = 'G'; str[1] = 'C'; str[3] = 0;
-	printf("%s\n", str);
-	int	*arr = gc_malloc(3 * sizeof(int));
-	arr[0] = 200; arr[2] = -200;
-	printf("%i, %i\n", arr[0], arr[2]);
-	gc_destroy();
-}
+// int	main(void)
+// {
+// 	printf("%p\n", gc_root());
+// 	printf("%p\n", *(void **)gc_root());
+// 	char	*str = gc_malloc(4);
+// 	str[0] = 'G'; str[1] = 'C'; str[3] = 0;
+// 	printf("%s\n", str);
+// 	int	*arr = gc_malloc(3 * sizeof(int));
+// 	arr[0] = 200; arr[2] = -200;
+// 	printf("%i, %i\n", arr[0], arr[2]);
+// 	gc_destroy();
+// }
