@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:13:17 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/25 17:54:49 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:02:45 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 // ================================= mlx ===================================
 # define HEIGHT 800
-# define WIDTH 800
+# define WIDTH 1200
 # define MLX_ALPHA true
 
 

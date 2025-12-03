@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_rays.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 17:12:14 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/24 20:56:43 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:00:08 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 //						(origin)	(direction)
 void	create_ray(t_ray *ray, t_tup point, t_tup vector)
 {
-	copy_point(ray->origin, point);
-	copy_vector(ray->direction, vector);
+	copy_tup(ray->origin, point);
+	copy_tup(ray->direction, vector);
 }
 
 // t_tup	position(t_ray *ray, double t)

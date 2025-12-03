@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_shadows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:59:40 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/27 15:44:42 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/03 13:16:18 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,12 @@ void	render_light(t_mrt *m, uint32_t *x, uint32_t *y)
 	init_vector(direction, px, py, 1);
 	create_ray(&r, m->scene->light.position, direction);
 }
+
+void	reflect(t_tup out, t_tup in, t_tup normal)
+{
+	t_tup	normal_comp_ray;
+
+	multi_tuple(normal_comp_ray, normal, 2 * dot_prod(in, normal));
+	sub_tuples(out, in, normal_comp_ray);
+}
+

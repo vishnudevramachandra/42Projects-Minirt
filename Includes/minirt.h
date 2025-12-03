@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/27 20:08:56 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:51:41 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,12 @@ typedef struct s_mrt {
 	// void			*win_ptr;
 }	t_mrt;
 
+typedef struct s_view {
+	double	pitch_start;
+	double	roll_start;
+	double	pitch_delta;
+	double	roll_delta;
+}	t_view;
 
 //everything struct
 
@@ -173,11 +179,12 @@ void		init_vector(t_tup vec, double x, double y, double z);
 void		init_point(t_tup vec, double x, double y, double z);
 void		copy_vector(t_tup new, t_tup old);
 void		copy_point(t_tup new, t_tup old);
+void		copy_tup(t_tup new, t_tup old);
 void		create_ray(t_ray *ray, t_tup point, t_tup vector);
 int			rgb(int a, int b, int c, int d);
 double		inter_sphere(t_sphere sp, t_ray r);
 void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_tup sp_pos, t_tup point);
-void		canvas(void *param);
+void		canvas(t_mrt *m);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/02 16:14:54 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:17:08 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	render_sphere(t_mrt *m, int x, int y)
 	if (t > 0)
 		mlx_put_pixel(m->image, x, y, get_rgba(&obj->sp.color, 255));
 }
+
 // thiss is not entirelly right we have to include the 2 and 3 argument 
 void	calc_direction(t_tup direction, uint32_t x, uint32_t y, t_mrt *m)
 {
@@ -43,17 +44,34 @@ void	calc_direction(t_tup direction, uint32_t x, uint32_t y, t_mrt *m)
 	normalize(direction);
 }
 
-void	canvas(void *param)
+void	setup_viewport(t_view *view, t_mrt *m)
+{
+	double	vertical_field;
+
+	view->pitch_start = m->scene->camera.horizontal_field / 2;
+	view->pitch_delta= m->scene->camera.horizontal_field / (m->image->width - 1);
+	vertical_field = (double)m->image->height / m->image->width\
+					* m->scene->camera.horizontal_field;
+	view->roll_start = vertical_field / 2;
+	view->roll_delta= vertical_field / (m->image->height - 1);
+	printf("%f,%f,%f,%f\n", view->pitch_start, view->pitch_delta, view->roll_start, view->roll_delta);
+
+}
+
+void	canvas(t_mrt *m)
 {
 	uint32_t	x;
 	uint32_t	y;
-	t_mrt		*m;
 	t_ray		r;
 	t_tup		direction;
 	t_obj		*obj;
+	t_view		view;
 
-	m = (t_mrt *)param;
 	obj = m->obj->content;
+	normalize(m->scene->camera.orientation_vector);
+	setup_viewport(&view, m);
+	printf("%i,%i\n", m->image->width, m->image->height);
+	printf("%f,%f,%f,%f\n", view.pitch_start, view.pitch_delta, view.roll_start, view.roll_delta);
 	x = 0;
 	while (x < m->image->width)
 	{

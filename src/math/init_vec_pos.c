@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vec_pos.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:22:51 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 20:26:49 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/03 15:59:03 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ void	init_point(t_tup vec, double x, double y, double z)
 	vec[1] = y;
 	vec[2] = z;
 	vec[3] = 1;
+}
+
+void	copy_tup(t_tup new, t_tup old)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		new[i] = old[i];
+		i++;
+	}
 }
 
 void	copy_vector(t_tup new, t_tup old)
