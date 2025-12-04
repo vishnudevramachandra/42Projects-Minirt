@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/27 20:24:02 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:44:06 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_camera	camera(char *line, t_camera c)
 	set_vector(c.position, line + i, &len);
 	i = i + len + len_spaces(line + i + len);
 	set_vector(c.orientation_vector, line + i, &len);
+	i = i + len + len_spaces(line + i + len);
 	while (ft_isspace(line[i]))
 		i++;
 	c.horizontal_field = atod(&line[i]);

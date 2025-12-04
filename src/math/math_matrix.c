@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:43:04 by vramacha          #+#    #+#             */
-/*   Updated: 2025/11/20 21:45:02 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/04 09:56:39 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	multi_mat_mat(mat4 res, mat4 a, mat4 b)
 }
 
 // matrix-tuple multiplication carried out using dot-products
-void	multi_mat_tuple(t_tup res, mat4 a, t_tup b)
+void	multi_mat_tuple(t_tup res, mat4 m, t_tup t)
 {
 	int	i;
 
 	i = 0;
 	while (i < 4)
 	{
-		res[i] = dot_prod(a[i], b);
+		res[i] = dot_prod(m[i], t);
 		i++;
 	}
 }

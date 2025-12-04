@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
+#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/11/27 20:26:39 by majkijew         ###   ########.fr        #
+#    Updated: 2025/12/03 12:24:52 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
