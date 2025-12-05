@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/04 09:56:44 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/04 17:12:15 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,8 @@ double		inter_sphere(t_sphere sp, t_ray r);
 void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_tup sp_pos, t_tup point);
 void		canvas(t_mrt *m);
-
+t_rgb		add_colors(t_rgb *c1, t_rgb *c2);
+t_rgb		sub_colors(t_rgb *c1, t_rgb *c2);
+t_rgb		mult_scalar_colors(t_rgb *c1, double scalar);
+t_rgb		multi_colors(t_rgb *c1, t_rgb *c2);
 #endif

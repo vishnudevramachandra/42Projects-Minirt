@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/04 11:40:58 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/04 17:31:05 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,24 @@ void	render_sphere(t_mrt *m, int x, int y)
 {
 	t_obj	*obj = m->obj->content;
 	double	t;
+	t_tup	inter_point;
+	t_tup	tmp;
+	t_rgb	color;
+	t_tup	light_ray;
 
 	t = inter_sphere(obj->sp, m->ray);
 	if (t > 0)
+	{
+		multi_tuple(tmp, m->ray.direction, t);
+		add_tuples(inter_point, m->ray.origin, tmp);
+		if (x == 600  && y == 400)
+		{
+			printf("{x:%f, y:%f, z:%f\n}", m->ray.direction[0], m->ray.direction[1], m->ray.direction[2]);
+			printf("{x:%f, y:%f, z:%f\n}", inter_point[0], inter_point[1], inter_point[2]);
+		}
+		color = mult_scalar_colors(&obj->sp.color, m->scene->light.bright_ratio * );
 		mlx_put_pixel(m->image, x, y, get_rgba(&obj->sp.color, 255));
+	}
 }
 
 // thiss is not entirelly right we have to include the 2 and 3 argument 
