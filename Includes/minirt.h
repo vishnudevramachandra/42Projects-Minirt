@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/07 18:04:23 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/07 19:39:46 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,5 +188,6 @@ void		normal_at(t_tup normal, t_tup sp_pos, t_tup point);
 void		canvas(t_mrt *m);
 void		render_light(t_mrt *m, uint32_t *x, uint32_t *y);
 t_rgb		mult_scalar_colors(t_rgb *c1, double scalar);
+void		reflect(t_tup out, t_tup in, t_tup normal);
 
 #endif

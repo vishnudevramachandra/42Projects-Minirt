@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_obj.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/02 16:20:13 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/07 22:02:14 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,8 @@ double	inter_sphere(t_sphere sp, t_ray r)
 				sqrt(dlt));
 	return (t);
 }
+
+// double	inter_plane()
+// {
+	
+// }
