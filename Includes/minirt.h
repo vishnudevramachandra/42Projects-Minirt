@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/04 09:56:44 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/07 18:04:23 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_amb_light
 	t_rgb	color;
 }	t_amb_light;
 
-typedef double t_tup[4]; ///i dont really get it ;//
+typedef double t_tup[4];
 
 // typedef struct s_tup
 // {
@@ -186,5 +186,7 @@ double		inter_sphere(t_sphere sp, t_ray r);
 void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_tup sp_pos, t_tup point);
 void		canvas(t_mrt *m);
+void		render_light(t_mrt *m, uint32_t *x, uint32_t *y);
+t_rgb		mult_scalar_colors(t_rgb *c1, double scalar);
 
 #endif
