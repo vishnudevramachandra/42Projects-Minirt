@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_rendering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/07 21:05:44 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/08 16:23:33 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	render_obj(t_mrt *m, t_obj *obj, int x, int y)
 {
 	// t_obj	*obj = m->obj->content;
-	double	t;
+	double	t = 0.0;
 	t_tup	hit_point;
 	t_tup	normal;
 
 	if (obj->typ == SPHERE)
 		t = inter_sphere(obj->sp, m->ray);
 	else if (obj->typ == PLANE)	
-		t = inter_plane(obj->pl, m->ray);
+		// t = inter_plane(obj->pl, m->ray);
 	multi_tuple(hit_point, m->ray.direction, t);
 	normal_at(normal, &obj->sp.dia, hit_point);
 	t_tup light_dir;
@@ -65,6 +65,63 @@ void	setup_viewport(t_view *view, t_mrt *m)
 	view->roll_delta= v_field_in_radians / (m->image->height - 1);
 }
 
+// translates objects using negative of camera's position, effectively
+// recentering the co-ordinate system so that the camera resides at the origin.
+void	translate_objects(t_mrt *m)
+{
+	t_list	*node;
+	t_obj	*obj;
+	mat4	mat;
+	t_tup	n_pos;
+
+	multi_tuple(n_pos, m->scene->camera.position, -1);
+	translation_mat(mat, n_pos);
+	node = m->obj;
+	while (node)
+	{
+		obj = node->content;
+		if (obj->typ == SPHERE)
+			multi_mat_tuple(obj->sp.pos, mat, obj->sp.pos);
+		node = node->next;
+	}
+	multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
+	multi_mat_tuple(m->scene->camera.position, mat, m->scene->camera.position);
+}
+
+// project objects on to camera's axes. This is done so that the objects in the
+// same direction as camera's orientation vector are now in front of the camera.
+void	project_objects(t_mrt *m)
+{
+	mat4	mat;
+	t_list	*node;
+	t_obj	*obj;
+
+	identity_mat(mat);
+	if (__DBL_EPSILON__ < (dot_prod(m->scene->camera.orientation_vector,
+		m->scene->camera.orientation_vector) - 1))
+		normalize(m->scene->camera.orientation_vector);
+	copy_vector(mat[2], m->scene->camera.orientation_vector);
+	cross_prod(mat[0], (t_tup){0, 1, 0}, mat[2]);
+	if (dot_prod(mat[0], mat[0]) == 0)
+	{
+		if (0 < mat[2][1])
+			cross_prod(mat[0], (t_tup){0, 0, -1}, mat[2]);
+		else
+			cross_prod(mat[0], (t_tup){0, 0, 1}, mat[2]);
+	}
+	normalize(mat[0]);
+	cross_prod(mat[1], mat[2], mat[0]);
+	node = m->obj;
+	while (node)
+	{
+		obj = node->content;
+		if (obj->typ == SPHERE)
+			multi_mat_tuple(obj->sp.pos, mat, obj->sp.pos);
+		node = node->next;
+	}
+	copy_vector(m->scene->camera.orientation_vector, (t_tup){0, 0, 1});
+}
+
 //for every pixel i am looking for the nearest object 
 void	canvas(t_mrt *m)
 {
@@ -74,6 +131,8 @@ void	canvas(t_mrt *m)
 	t_view		view;
 
 	normalize(m->scene->camera.orientation_vector);
+	translate_objects(m);
+	project_objects(m);
 	setup_viewport(&view, m);
 	y = 0;
 	while (y < m->image->height)

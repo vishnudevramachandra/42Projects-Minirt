@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mrt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:08:17 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/07 21:07:55 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/08 12:02:52 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_hook(void *param)
 		mlx_close_window(m->mlx);
 	}
 	if (mlx_is_key_down(m->mlx, MLX_KEY_UP))
-		m->scene->camera.position ;
+		// m->scene->camera.position ;
 	if (mlx_is_key_down(m->mlx, MLX_KEY_DOWN))
 		m->image->instances[0].y += 5;
 	if (mlx_is_key_down(m->mlx, MLX_KEY_RIGHT))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_figures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2025/11/20 21:59:48 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:34:53 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_obj	*parse_sphere(char *line)
 	i = 0 + len_spaces(line);
 	if (!set_vector(obj->sp.pos, line + i, &len))
 		return (free(obj), NULL);
+	obj->sp.pos[3] = 1;
 	i = i + len + len_spaces(line + i + len);
 	if (!set_double(&obj->sp.dia, line + i, &len))
 		return (free(obj), NULL);
