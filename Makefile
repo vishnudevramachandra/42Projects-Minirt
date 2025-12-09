@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/12/03 12:24:52 by vramacha         ###   ########.fr        #
+#    Updated: 2025/12/08 19:50:10 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCFILES	=	main.c \
 				window/init_mrt.c \
 				window/colors.c \
 				window/start_rendering.c \
+				window/camera.c \
 				ray_sphere_inter/create_rays.c \
 				ray_sphere_inter/intersect_obj.c \
 				ray_sphere_inter/start_shadows.c \

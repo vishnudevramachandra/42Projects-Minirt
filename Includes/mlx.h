@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:13:17 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/04 11:33:08 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/08 17:02:16 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 // ================================= mlx ===================================
 # define HEIGHT 800
-# define WIDTH 1200
+# define WIDTH 800
 # define MLX_ALPHA true
 
 

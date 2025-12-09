@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/08 19:59:11 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/08 20:55:49 by majkijew         ###   ########.fr       */
+/*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
+/*   Updated: 2025/12/09 15:20:12 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,18 @@ void	free_list(t_inter *i)
 		free(i);
 		i = temp;
 	}
+	normalize(mat[0]);
+	cross_prod(mat[1], mat[2], mat[0]);
+	node = m->obj;
+	while (node)
+	{
+		obj = node->content;
+		if (obj->typ == SPHERE)
+			multi_mat_tuple(obj->sp.pos, mat, obj->sp.pos);
+		node = node->next;
+	}
+	multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
+	copy_vector(m->scene->camera.orientation_vector, (t_tup){0, 0, 1});
 }
 
 void	canvas(t_mrt *m)

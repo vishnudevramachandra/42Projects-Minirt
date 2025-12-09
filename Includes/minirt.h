@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/07 19:39:46 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/08 20:38:50 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef double t_tup[4];
 // 	double x;
 // 	double x;
 // }	t_tup;
+
 
 typedef struct s_ray
 {
@@ -98,6 +99,7 @@ typedef struct s_plane
 	t_rgb	color;
 }	t_plane;
 
+
 typedef enum	e_obj_type
 {
 	SPHERE,
@@ -116,12 +118,23 @@ typedef struct s_obj
 	};
 }	t_obj;
 
+typedef struct s_inter
+{
+	double			t;
+	t_obj			*obj;
+	t_tup			hit_point;
+	t_tup			scaled;
+	t_tup			normal;	
+	struct s_inter	*next;
+}	t_inter;
+
 typedef struct s_mrt {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	t_scene		*scene;
 	t_list		*obj;
 	t_ray		ray;
+	t_inter		*i;
 	// t_ray		*ray;
 	// void			*mlx_ptr;
 	// void			*win_ptr;
@@ -189,5 +202,9 @@ void		canvas(t_mrt *m);
 void		render_light(t_mrt *m, uint32_t *x, uint32_t *y);
 t_rgb		mult_scalar_colors(t_rgb *c1, double scalar);
 void		reflect(t_tup out, t_tup in, t_tup normal);
+void		translate_objects(t_mrt *m);
+void		project_objects(t_mrt *m);
+void		calc_direction(t_tup dir, t_tup ori_vec, double pitch, double roll);
+void		setup_viewport(t_view *view, t_mrt *m);
 
 #endif
