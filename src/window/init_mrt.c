@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:08:17 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/08 17:26:42 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/09 19:52:45 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_hook(void *param)
 		mlx_close_window(m->mlx);
 	}
 	if (mlx_is_key_down(m->mlx, MLX_KEY_UP))
-		// m->scene->camera.position ;
+		m->image->instances[0].y -= 5;
 	if (mlx_is_key_down(m->mlx, MLX_KEY_DOWN))
 		m->image->instances[0].y += 5;
 	if (mlx_is_key_down(m->mlx, MLX_KEY_RIGHT))

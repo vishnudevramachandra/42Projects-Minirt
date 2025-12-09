@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/08 19:56:35 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/09 15:38:48 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ void	project_objects(t_mrt *m)
 			multi_mat_tuple(obj->sp.pos, mat, obj->sp.pos);
 		node = node->next;
 	}
+	// multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
 	copy_vector(m->scene->camera.orientation_vector, (t_tup){0, 0, 1});
 }
