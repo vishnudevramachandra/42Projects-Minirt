@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/09 15:38:48 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:31:57 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	project_objects(t_mrt *m)
 	mat4	mat;
 	t_list	*node;
 	t_obj	*obj;
+	t_tup	tup;
 
 	identity_mat(mat);
 	if (__DBL_EPSILON__ < (dot_prod(m->scene->camera.orientation_vector,
@@ -89,7 +90,10 @@ void	project_objects(t_mrt *m)
 	{
 		obj = node->content;
 		if (obj->typ == SPHERE)
-			multi_mat_tuple(obj->sp.pos, mat, obj->sp.pos);
+		{
+			multi_mat_tuple(tup, mat, obj->sp.pos);
+			copy_vector(obj->sp.pos, tup);
+		}
 		node = node->next;
 	}
 	// multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
