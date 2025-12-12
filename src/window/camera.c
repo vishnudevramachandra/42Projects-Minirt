@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/10 14:31:57 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:59:23 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ void	project_objects(t_mrt *m)
 		}
 		node = node->next;
 	}
-	// multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
+	multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
 	copy_vector(m->scene->camera.orientation_vector, (t_tup){0, 0, 1});
 }

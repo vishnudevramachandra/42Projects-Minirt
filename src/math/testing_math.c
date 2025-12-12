@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:51:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/19 16:13:12 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/12 15:14:01 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		div_tuple(t_tup res, t_tup a, double val);
 //how far u would travel in straight line if u were to walk from one end of vector to the other
 double	magnitude(t_tup a);
 
-void		normalize(t_tup res, t_tup a);
+// void		normalize(t_tup res, t_tup a);
 
 // vectors with magnitude of 1 are called a unit vectors and u will use them when computing
 // the MATRIX when determinin the direction prepend
@@ -85,7 +85,7 @@ int main()
 	printf("Addition: (%g,%g,%g,%g)\n", tup[0], tup[1], tup[2], tup[3]);
 	div_tuple(tmp, tup, 2);
 	printf("Division: (%g,%g,%g,%g)\n", tup[0], tup[1], tup[2], tup[3]);
-	normalize(tup, tup);
+	normalize(tup);
 	printf("Normalize: (%g,%g,%g,%g)\n", tup[0], tup[1], tup[2], tup[3]);
 	cross_prod(tmp, tup, tup);
 	printf("Cross-product: (%g,%g,%g,%g)\n", tmp[0], tmp[1], tmp[2], tmp[3]);

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_obj.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/07 22:02:14 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/12 17:09:10 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../Includes/minirt.h"
 
 double	delta(double a, double b_h, double c)
 {
 	return ((b_h * b_h) - (a * c));
 }
- 
+
 double	get_hitpoint(double a, double b_h, double sqrt_dlt)
 {
 	double	t;
@@ -25,7 +25,6 @@ double	get_hitpoint(double a, double b_h, double sqrt_dlt)
 
 	t1 = (-b_h - sqrt_dlt) / a;
 	t2 = (-b_h + sqrt_dlt) / a;
-
 	if (t1 > 0 || t2 > 0)
 	{
 		if (t1 > t2)
@@ -38,10 +37,9 @@ double	get_hitpoint(double a, double b_h, double sqrt_dlt)
 	return (t);
 }
 
-
 // l is the vector that points from sphere center to ray origin
-// t = ( (2 * b_h) +/- sqrt((2 * b_h) * (2 * b_h) - (4 * a * c)) ) / (2 * a) can be
-// converted to t = (b_h +/- sqrt((b_h * b_h) - (a * c))) / a
+// t = ( (2 * b_h) +/- sqrt((2 * b_h) * (2 * b_h) - (4 * a * c)) ) / (2 * a) can
+// be converted to t = (b_h +/- sqrt((b_h * b_h) - (a * c))) / a
 // TODO: if we always normalize the ray.direction then we can replace a = 1.
 double	inter_sphere(t_sphere sp, t_ray r)
 {
@@ -62,7 +60,16 @@ double	inter_sphere(t_sphere sp, t_ray r)
 	return (t);
 }
 
-// double	inter_plane()
-// {
-	
-// }
+double	inter_plane(t_plane *pl, t_ray *r)
+{
+	t_tup	proj_vec;
+	t_tup	perp_vec;
+	double	m;
+
+	m = fabs(dot_prod(pl->norm_vec, r->direction));
+	if (m < __DBL_EPSILON__)
+		return (-1);
+	multi_tuple(proj_vec, r->direction, m);
+	sub_tuples(perp_vec, 
+	return (1);
+}

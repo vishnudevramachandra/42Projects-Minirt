@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_rendering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/09 20:37:49 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/12 16:26:55 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	render_obj(t_mrt *m, t_inter *i, int x, int y)
 // 	mlx_put_pixel(m->image, x, y, get_rgba(&final_color, m->scene->light.bright_ratio));
 // }
 
-void	calc_intersections(t_inter **list, t_inter *new)
+void	insert_intersections(t_inter **list, t_inter *new)
 {
 	t_inter	*cur;
 
@@ -163,6 +163,24 @@ void	free_list(t_inter *i)
 	}
 }
 
+void	normalize_all_normal_vectors(t_mrt *m)
+{
+	t_list	*cur;
+	t_obj	*obj;
+
+	normalize(m->scene->camera.orientation_vector);
+	if (!m->obj)
+		return ;
+	cur = m->obj;
+	while (cur)
+	{
+		obj = cur->content;
+		if (obj->typ == PLANE)
+			normalize(obj->pl.norm_vec);
+		cur = cur->next;
+	}
+}
+
 void	canvas(t_mrt *m)
 {
 	uint32_t	x;
@@ -171,7 +189,7 @@ void	canvas(t_mrt *m)
 	t_view		view;
 	t_inter		*i = NULL;
 
-	normalize(m->scene->camera.orientation_vector);
+	normalize_all_normal_vectors(m);
 	translate_objects(m);
 	project_objects(m);
 	setup_viewport(&view, m);
@@ -194,8 +212,8 @@ void	canvas(t_mrt *m)
 				double t = -1;
 				if (obj->typ == SPHERE)
 					t = inter_sphere(obj->sp, m->ray);
-				// if (obj->typ == PLANE)
-				// 	t = inter_plane(obj->sp, m->ray);
+				if (obj->typ == PLANE)
+					t = inter_plane(&obj->pl, &m->ray);
 				// if (obj->typ == CYLINDER)
 				// 	t = inter_cylinder(obj->sp, m->ray);
 				if (t > 0)
@@ -204,7 +222,7 @@ void	canvas(t_mrt *m)
 					i->t = t;
 					i->obj = obj;
 					i->next = NULL;
-					calc_intersections(&inter, i);
+					insert_intersections(&inter, i);
 				}
 				current = current->next;
 			}
