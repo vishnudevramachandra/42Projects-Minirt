@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/12 15:21:12 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/14 20:38:49 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ typedef struct s_amb_light
 }	t_amb_light;
 
 typedef double t_tup[4];
-
-// typedef struct s_tup
-// {
-// 	double x;
-// 	double x;
-// 	double x;
-// }	t_tup;
-
 
 typedef struct s_ray
 {
@@ -173,6 +165,7 @@ void		add_tuples(t_tup res, t_tup a, t_tup b);
 void		sub_tuples(t_tup res, t_tup a, t_tup b);
 void		multi_tuple(t_tup res, t_tup a, double val);
 void		div_tuple(t_tup res, t_tup a, double val);
+void		cross_prod(t_tup res, t_tup a, t_tup b);
 double		dot_prod(t_tup a, t_tup b);
 double		magnitude(t_tup a);
 void		normalize(t_tup a);
@@ -195,8 +188,9 @@ void		create_ray(t_ray *ray, t_tup point, t_tup vector);
 int			rgb(int a, int b, int c, int d);
 double		inter_sphere(t_sphere sp, t_ray r);
 double		inter_plane(t_plane *pl, t_ray *r);
+t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl);
 void		print_tup(t_tup vec);
-void		normal_at(t_tup normal, t_tup sp_pos, t_tup point);
+void		normal_at(t_tup normal, t_obj *obj, t_tup point);
 void		canvas(t_mrt *m);
 void		render_light(t_mrt *m, uint32_t *x, uint32_t *y);
 void		mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar);

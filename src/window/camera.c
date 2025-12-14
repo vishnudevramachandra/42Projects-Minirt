@@ -6,11 +6,11 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/10 14:59:23 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/13 09:21:38 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../Includes/minirt.h"
 
 // camera orientation vector is rotated step-by-step to cover the field of view
 void	calc_direction(t_tup dir, t_tup ori_vec, double pitch, double roll)
@@ -55,6 +55,8 @@ void	translate_objects(t_mrt *m)
 		obj = node->content;
 		if (obj->typ == SPHERE)
 			multi_mat_tuple(obj->sp.pos, mat, obj->sp.pos);
+		else if (obj->typ == PLANE)
+			multi_mat_tuple(obj->pl.point, mat, obj->pl.point);
 		node = node->next;
 	}
 	multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
@@ -92,7 +94,14 @@ void	project_objects(t_mrt *m)
 		if (obj->typ == SPHERE)
 		{
 			multi_mat_tuple(tup, mat, obj->sp.pos);
-			copy_vector(obj->sp.pos, tup);
+			copy_tup(obj->sp.pos, tup);
+		}
+		else if (obj->typ == PLANE)
+		{
+			multi_mat_tuple(tup, mat, obj->pl.point);
+			copy_tup(obj->pl.point, tup);
+			multi_mat_tuple(tup, mat, obj->pl.norm_vec);
+			copy_tup(obj->pl.norm_vec, tup);
 		}
 		node = node->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/12 17:09:10 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/14 18:57:08 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,23 @@ double	inter_sphere(t_sphere sp, t_ray r)
 	return (t);
 }
 
-double	inter_plane(t_plane *pl, t_ray *r)
+// compute the perpendicular vector from the origin to the plane
+t_tup	*perpvec_to_plane(t_tup vec, t_plane *pl)
 {
-	t_tup	proj_vec;
-	t_tup	perp_vec;
 	double	m;
 
-	m = fabs(dot_prod(pl->norm_vec, r->direction));
-	if (m < __DBL_EPSILON__)
-		return (-1);
-	multi_tuple(proj_vec, r->direction, m);
-	sub_tuples(perp_vec, 
-	return (1);
+	sub_tuples(vec, pl->point, (double[4]){0, 0, 0, 1});
+	m = dot_prod(pl->norm_vec, vec);
+	multi_tuple(vec, pl->norm_vec, m);
+	return ((t_tup *)vec);
+}
+
+double	inter_plane(t_plane *pl, t_ray *r)
+{
+	t_tup	perp_vec;
+
+	if (fabs(dot_prod(pl->norm_vec, r->direction)) < __DBL_EPSILON__)
+		return (-INFINITY);
+	perpvec_to_plane(perp_vec, pl);
+	return (dot_prod(perp_vec, perp_vec) / dot_prod(r->direction, perp_vec));
 }

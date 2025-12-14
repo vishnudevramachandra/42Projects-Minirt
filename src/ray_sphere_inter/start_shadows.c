@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:59:40 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/03 13:16:18 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/14 20:45:31 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 // void normal_at(t_obj x, t_tup)
 							// various points on a sphere
-void	normal_at(t_tup normal, t_tup sp_pos, t_tup point)
+void	normal_at(t_tup normal, t_obj *obj, t_tup point)
 {
-	sub_tuples(normal, point, sp_pos);
-	normalize(normal);
+	if (obj->typ == SPHERE)
+	{
+		sub_tuples(normal, point, obj->sp.pos);
+		normalize(normal);
+	}
+	else if (obj->typ == PLANE)
+		copy_tup(normal, obj->pl.norm_vec);
 }
 
 void	render_light(t_mrt *m, uint32_t *x, uint32_t *y)
