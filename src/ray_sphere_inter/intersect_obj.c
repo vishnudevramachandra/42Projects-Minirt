@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/07 22:02:14 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:09:45 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ double	delta(double a, double b_h, double c)
 {
 	return ((b_h * b_h) - (a * c));
 }
- 
+
 double	get_hitpoint(double a, double b_h, double sqrt_dlt)
 {
 	double	t;
@@ -61,8 +61,3 @@ double	inter_sphere(t_sphere sp, t_ray r)
 				sqrt(dlt));
 	return (t);
 }
-
-// double	inter_plane()
-// {
-	
-// }

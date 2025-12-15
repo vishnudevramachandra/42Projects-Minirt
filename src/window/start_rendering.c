@@ -6,32 +6,13 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/09 20:37:49 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:59:56 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-
-void	print_color(t_rgb *c)
-{
-	if (!c)
-		return ;
-
-	printf("Color: R=%.2d, G=%.2d, B=%.2d\n", c->r, c->g, c->b);
-}
-
-void	color_range(t_rgb *c)
-{
-	if (c->r > 255)
-		c->r = 255;
-	if (c->g > 255)
-		c->g = 255;
-	if (c->b > 255)
-		c->b = 255;
-}
-
-void	find_obj_color(t_rgb **obj_col, t_inter *i)
+void	get_obj_color(t_rgb **obj_col, t_inter *i)
 {
 	if (i->obj->typ == SPHERE)
 		*obj_col = &i->obj->sp.color;
@@ -40,14 +21,46 @@ void	find_obj_color(t_rgb **obj_col, t_inter *i)
 	else
 		*obj_col = &i->obj->cy.color;
 }
+int is_in_shadow(t_mrt *m, t_inter *hit)
+{
+	t_ray	shadow_ray;
+	t_tup	light_vec;
+	t_tup	offset;
+	double	light_dist;
 
-// // uzglednij ambiento color padanie swiatla iwgl
-void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
+	sub_tuples(light_vec,
+		m->scene->light.position,
+		hit->hit_point);
+	light_dist = magnitude(light_vec);
+	normalize(light_vec);
+	multi_tuple(offset, hit->normal, EPSILON);
+	add_tuples(shadow_ray.origin, hit->hit_point, offset);
+	copy_tup(shadow_ray.direction, light_vec);
+	t_list *cur = m->obj;
+	while (cur)
+	{
+		t_obj *obj = cur->content;
+		double t = -1;
+		if (obj->typ == SPHERE)
+			t = inter_sphere(obj->sp, shadow_ray);
+		else if (obj->typ == PLANE)
+			t = inter_plane(obj->pl, shadow_ray);
+		// else if (obj->typ == CYLINDER)
+		//	 t = inter_cylinder(obj->cy, shadow_ray);
+		if (t > EPSILON && t < light_dist)
+			return (1);
+		cur = cur->next;
+	}
+	return (0);
+}
+
+void	illuminate_obj(t_rgb *final_col, t_mrt *m, t_inter *i)
 {
 	t_rgb	ambient = m->scene->amb_light.color;
 	t_rgb	*obj_col;
 
-	find_obj_color(&obj_col, i);
+	//aplly ambient light
+	get_obj_color(&obj_col, i);
 	mult_scalar_colors(&ambient, &m->scene->amb_light.color,
 		m->scene->amb_light.ratio);
 	multi_colors(final_col, &ambient, obj_col);
@@ -56,12 +69,16 @@ void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
 	normalize(light_dir);
 	double	cos_theta;
 	cos_theta = dot_prod(i->normal, light_dir);
-	// include_shadows();
 	if (cos_theta < 0)
 		cos_theta = 0;
 	cos_theta = 0.1 + (1 - 0.1) * cos_theta;
+	if (is_in_shadow(m, i))
+	{
+		color_range(final_col);
+		return ;
+	}
 	t_rgb diffuse_color;
-	mult_scalar_colors(&diffuse_color, &i->obj->sp.color, cos_theta * m->scene->light.bright_ratio);
+	mult_scalar_colors(&diffuse_color, obj_col, cos_theta * m->scene->light.bright_ratio);
 	add_colors(final_col, final_col, &diffuse_color);
 	t_tup view_dir;
 	sub_tuples(view_dir, m->scene->camera.position, i->hit_point);
@@ -79,60 +96,22 @@ void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
 	color_range(final_col);
 }
 
-
 void	render_obj(t_mrt *m, t_inter *i, int x, int y)
 {
 	t_tup	scaled;
-	// t_tup	light_dir;
-	// t_tup	reflected_dir;
-	// double	cos_theta;
-	t_rgb final_color;
-	
+	t_rgb	final_color;
+
 	multi_tuple(scaled, m->ray.direction, i->t);
 	add_tuples(i->hit_point, m->ray.origin, scaled);
-	normal_at(i->normal, i->obj->sp.pos, i->hit_point);
+	if (i->obj->typ == SPHERE)
+		normal_at(i->normal, i->obj->sp.pos, i->hit_point);
 	normalize(i->normal);
-	// sub_tuples(light_dir, m->scene->light.position, i->hit_point);
-	// normalize(light_dir);
-	// reflect(reflected_dir, m->ray.direction, i->normal);
-	// t_ray ref_ray;
-	// create_ray(&ref_ray, i->hit_point, reflected_dir);
-	// cos_theta = dot_prod(i->normal, light_dir);
-	// if (cos_theta < 0)
-	// 	cos_theta = 0;
-	// cos_theta = 0.1 + (1 - 0.1) * cos_theta;
-	// final_color = mult_scalar_colors(&i->obj->sp.color, cos_theta);
-	// mlx_put_pixel(m->image, x, y, get_rgba(&final_color, m->scene->light.bright_ratio));
-	final_obj_light(&final_color, m, i);
-	mlx_put_pixel(m->image, x, y, get_rgba(&final_color, m->scene->light.bright_ratio));
+	if (dot_prod(i->normal, m->ray.direction) > 0)
+	multi_tuple(i->normal, i->normal, -1);
+	illuminate_obj(&final_color, m, i);
+	mlx_put_pixel(m->image, x, y, get_rgba(&final_color,
+			m->scene->light.bright_ratio));
 }
-
-
-// void	render_obj(t_mrt *m, t_inter *i, int x, int y)
-// {
-// 	t_tup	scaled;
-// 	t_tup	light_dir;
-// 	// t_tup	reflected_dir;
-// 	// double	cos_theta;
-	
-
-// 	multi_tuple(scaled, m->ray.direction, i->t);
-// 	add_tuples(i->hit_point, m->ray.origin, scaled);
-// 	normal_at(i->normal, i->obj->sp.pos, i->hit_point);
-// 	normalize(i->normal);
-// 	sub_tuples(light_dir, m->scene->light.position, i->hit_point);
-// 	normalize(light_dir);
-// 	// reflect(reflected_dir, m->ray.direction, i->normal);
-// 	// t_ray ref_ray;
-// 	// create_ray(&ref_ray, i->hit_point, reflected_dir);
-// 	final_obj_light();
-// 	cos_theta = dot_prod(i->normal, light_dir);
-// 	if (cos_theta < 0)
-// 		cos_theta = 0;
-// 	cos_theta = 0.1 + (1 - 0.1) * cos_theta;
-// 	t_rgb final_color = mult_scalar_colors(&i->obj->sp.color, cos_theta);
-// 	mlx_put_pixel(m->image, x, y, get_rgba(&final_color, m->scene->light.bright_ratio));
-// }
 
 void	calc_intersections(t_inter **list, t_inter *new)
 {
@@ -194,8 +173,8 @@ void	canvas(t_mrt *m)
 				double t = -1;
 				if (obj->typ == SPHERE)
 					t = inter_sphere(obj->sp, m->ray);
-				// if (obj->typ == PLANE)
-				// 	t = inter_plane(obj->sp, m->ray);
+				if (obj->typ == PLANE)
+					t = inter_plane(obj->pl, m->ray);
 				// if (obj->typ == CYLINDER)
 				// 	t = inter_cylinder(obj->sp, m->ray);
 				if (t > 0)

@@ -6,11 +6,13 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/09 20:14:29 by majkijew         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:11:29 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
+
+#define EPSILON 1e-4
 
 # define MINIRT_H
 # include <math.h>
@@ -209,6 +211,7 @@ void		calc_direction(t_tup dir, t_tup ori_vec, double pitch, double roll);
 void		setup_viewport(t_view *view, t_mrt *m);
 void		add_colors(t_rgb *new_c, t_rgb *c1, t_rgb *c2);
 void		add_to_color(t_rgb *new_c, t_rgb *c1, double comp);
+void		color_range(t_rgb *c);
 
 
 #endif
