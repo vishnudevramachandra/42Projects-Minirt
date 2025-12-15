@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/14 20:38:49 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/15 11:18:25 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,9 @@ typedef struct s_mrt {
 }	t_mrt;
 
 typedef struct s_view {
-	double	pitch_start;
-	double	roll_start;
-	double	pitch_delta;
-	double	roll_delta;
+	double	px_width;
+	double	h_start_pos;
+	double	v_start_pos;
 }	t_view;
 
 //everything struct
@@ -198,7 +197,7 @@ void		multi_colors(t_rgb	*c_new, t_rgb *c1, t_rgb *c2);
 void		reflect(t_tup out, t_tup in, t_tup normal);
 void		translate_objects(t_mrt *m);
 void		project_objects(t_mrt *m);
-void		calc_direction(t_tup dir, t_tup ori_vec, double pitch, double roll);
+void		calc_direction(t_camera *cam, t_view *view, int x, int y);
 void		setup_viewport(t_view *view, t_mrt *m);
 void		add_colors(t_rgb *new_c, t_rgb *c1, t_rgb *c2);
 void		add_to_color(t_rgb *new_c, t_rgb *c1, double comp);

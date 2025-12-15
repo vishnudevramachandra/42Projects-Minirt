@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/14 20:44:53 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:10:19 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,6 @@ void	canvas(t_mrt *m)
 {
 	uint32_t	x;
 	uint32_t	y;
-	t_tup		direction;
 	t_view		view;
 	t_inter		*i = NULL;
 
@@ -210,11 +209,9 @@ void	canvas(t_mrt *m)
 		x = 0;
 		while (x < m->image->width)
 		{
-			calc_direction(direction,
-				m->scene->camera.orientation_vector,
-				(x * view.pitch_delta) - view.pitch_start,
-				(y * view.roll_delta) - view.roll_start);
-			create_ray(&m->ray, m->scene->camera.position, direction);
+			calc_direction(&m->scene->camera, &view, x, y);
+			create_ray(&m->ray, m->scene->camera.position,
+				m->scene->camera.orientation_vector);
 			t_inter	*inter = NULL;
 			t_list *current = m->obj;
 			while (current)

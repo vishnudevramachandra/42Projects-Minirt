@@ -6,36 +6,35 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/13 09:21:38 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:21:16 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minirt.h"
 
-// camera orientation vector is rotated step-by-step to cover the field of view
-void	calc_direction(t_tup dir, t_tup ori_vec, double pitch, double roll)
+// camera orientation vector is computed step-by-step to cover the field of view
+void	calc_direction(t_camera *cam, t_view *view, int x, int y)
 {
-	mat4	m;
+	t_tup	point;
 
-	// Create rotation matrix
-	rotation_mat(m, (double [3]){0, pitch, roll});
-	// Apply combined rotation to the original orientation vector
-	multi_mat_tuple(dir, m, ori_vec);
+	init_point(point,
+		view->h_start_pos + (x * view->px_width),
+		view->v_start_pos - (y * view->px_width),
+		1);
+	sub_tuples(cam->orientation_vector, point, cam->position);
+	normalize(cam->orientation_vector);
 }
 
 // sets up the viewport parameters based on camera and image properties
 void	setup_viewport(t_view *view, t_mrt *m)
 {
-	double	h_field_in_radians;
-	double	v_field_in_radians;
-
-	h_field_in_radians = m->scene->camera.horizontal_field / 180 * M_PI;
-	view->pitch_start = h_field_in_radians / 2;
-	view->pitch_delta= h_field_in_radians / (m->image->width - 1);
-	v_field_in_radians = (double)m->image->height / m->image->width\
-					* h_field_in_radians;
-	view->roll_start = v_field_in_radians / 2;
-	view->roll_delta= v_field_in_radians / (m->image->height - 1);
+	double	half_h_dist;
+	
+	half_h_dist = tan((m->scene->camera.horizontal_field / 180 * M_PI) / 2);
+	view->px_width = (half_h_dist * 2) / m->image->width;
+	view->h_start_pos = -half_h_dist + (view->px_width / 2);
+	view->v_start_pos = half_h_dist\
+		* ((double)m->image->height / m->image->width) - (view->px_width / 2);
 }
 
 // translates objects using negative of camera's position, effectively
