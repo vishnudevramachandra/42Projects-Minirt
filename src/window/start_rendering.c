@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/15 13:10:19 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:23:06 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
 	double spec_angle = dot_prod(reflect_dir, view_dir);
 	if(spec_angle < 0) 
 		spec_angle = 0;
-	double shininess = 100;
+	double shininess = 150;
 	double spec_intensity = pow(spec_angle, shininess);
 	// add_to_color(final_col, final_col, ((double)255 * spec_intensity));
 	t_rgb spec_color;

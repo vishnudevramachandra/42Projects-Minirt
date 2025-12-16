@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/15 11:18:25 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/16 11:02:59 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_amb_light
 	t_rgb	color;
 }	t_amb_light;
 
-typedef double t_tup[4];
+typedef double	t_tup[4];
 
 typedef struct s_ray
 {
@@ -52,14 +52,14 @@ typedef struct s_camera
 	double	horizontal_field;
 }	t_camera;
 
-typedef	struct s_light
+typedef struct s_light
 {
 	t_tup	position; //coordinates of the lightning point
 	double	bright_ratio;
-	t_rgb  	color;
+	t_rgb	color;
 }	t_light;
 
-typedef	struct s_scene
+typedef struct s_scene
 {
 	// mlx_t		mlx;
 	// mlx_image_t		*img; those two for the mlx window
@@ -67,6 +67,22 @@ typedef	struct s_scene
 	t_camera	camera;
 	t_light		light;
 }				t_scene;
+
+typedef t_rgb(*pattern_fcn)(t_tup param, t_rgb color1, t_rgb color2);
+
+typedef struct s_pattern
+{
+	t_tup		param;
+	t_rgb		color1;
+	t_rgb		color2;
+	pattern_fcn	fcn;
+}	t_pattern;
+
+typedef struct s_material
+{
+	double		shininess;
+	t_pattern	pattern;
+}	t_material;
 
 typedef struct s_sphere
 {
@@ -91,8 +107,7 @@ typedef struct s_plane
 	t_rgb	color;
 }	t_plane;
 
-
-typedef enum	e_obj_type
+typedef enum e_obj_type
 {
 	SPHERE,
 	CYLINDER,
@@ -120,7 +135,8 @@ typedef struct s_inter
 	struct s_inter	*next;
 }	t_inter;
 
-typedef struct s_mrt {
+typedef struct s_mrt
+{
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	t_scene		*scene;
@@ -132,7 +148,8 @@ typedef struct s_mrt {
 	// void			*win_ptr;
 }	t_mrt;
 
-typedef struct s_view {
+typedef struct s_view
+{
 	double	px_width;
 	double	h_start_pos;
 	double	v_start_pos;
@@ -143,10 +160,9 @@ typedef struct s_view {
 // typedef struct s_rt
 // {
 // 	t_mlx	*m;
-	
 // }	t_rt;
 
-typedef double  mat4[4][4];
+typedef double	mat4[4][4];
 
 void		erro_msg(char *str, int v);
 void		read_from_fd(char *file_name, t_scene *scene, t_list **objs);
@@ -201,6 +217,5 @@ void		calc_direction(t_camera *cam, t_view *view, int x, int y);
 void		setup_viewport(t_view *view, t_mrt *m);
 void		add_colors(t_rgb *new_c, t_rgb *c1, t_rgb *c2);
 void		add_to_color(t_rgb *new_c, t_rgb *c1, double comp);
-
 
 #endif
