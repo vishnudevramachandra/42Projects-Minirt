@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/16 10:23:06 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:05:26 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ void	color_range(t_rgb *c)
 
 void	find_obj_color(t_rgb **obj_col, t_inter *i)
 {
-	if (i->obj->typ == SPHERE)
-		*obj_col = &i->obj->sp.color;
-	else if (i->obj->typ == PLANE)
-		*obj_col = &i->obj->pl.color;
+	if (!i->obj->sp.mt.pattern.fcn)
+		*obj_col = &i->obj->sp.mt.pattern.color1;
 	else
-		*obj_col = &i->obj->cy.color;
+		*obj_col = i->obj->sp.mt.pattern.fcn(
+			i->obj->sp.mt.pattern.param,
+			&i->obj->sp.mt.pattern.color1, 
+			&i->obj->sp.mt.pattern.color2,
+			i->hit_point);
 }
 
 // // uzglednij ambiento color padanie swiatla iwgl
@@ -75,8 +77,8 @@ void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
 	double spec_angle = dot_prod(reflect_dir, view_dir);
 	if(spec_angle < 0) 
 		spec_angle = 0;
-	double shininess = 150;
-	double spec_intensity = pow(spec_angle, shininess);
+	// double shininess = 150;
+	double spec_intensity = pow(spec_angle, i->obj->sp.mt.shininess);
 	// add_to_color(final_col, final_col, ((double)255 * spec_intensity));
 	t_rgb spec_color;
 	mult_scalar_colors(&spec_color, &m->scene->light.color,

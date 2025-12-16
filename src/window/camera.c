@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/15 13:21:16 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:29:57 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	project_objects(t_mrt *m)
 		{
 			multi_mat_tuple(tup, mat, obj->sp.pos);
 			copy_tup(obj->sp.pos, tup);
+			multi_mat_tuple(tup, mat, obj->sp.mt.pattern.param);
+			copy_tup(obj->sp.mt.pattern.param, tup);
 		}
 		else if (obj->typ == PLANE)
 		{
@@ -101,6 +103,8 @@ void	project_objects(t_mrt *m)
 			copy_tup(obj->pl.point, tup);
 			multi_mat_tuple(tup, mat, obj->pl.norm_vec);
 			copy_tup(obj->pl.norm_vec, tup);
+			multi_mat_tuple(tup, mat, obj->pl.mt.pattern.param);
+			copy_tup(obj->pl.mt.pattern.param, tup);
 		}
 		node = node->next;
 	}

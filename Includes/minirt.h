@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/16 11:02:59 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:09:26 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,15 @@ typedef struct s_scene
 	t_light		light;
 }				t_scene;
 
-typedef t_rgb(*pattern_fcn)(t_tup param, t_rgb color1, t_rgb color2);
+typedef t_rgb*(*t_pattern_fcn)(t_tup param, t_rgb *c1, t_rgb *c2,
+	t_tup hit_point);
 
 typedef struct s_pattern
 {
-	t_tup		param;
-	t_rgb		color1;
-	t_rgb		color2;
-	pattern_fcn	fcn;
+	t_tup			param;
+	t_rgb			color1;
+	t_rgb			color2;
+	t_pattern_fcn	fcn;
 }	t_pattern;
 
 typedef struct s_material
@@ -86,25 +87,25 @@ typedef struct s_material
 
 typedef struct s_sphere
 {
-	t_tup	pos; //center
-	double	dia; //radious
-	t_rgb	color;
+	t_material	mt;
+	t_tup		pos; //center
+	double		dia; //radious
 }	t_sphere;
 
 typedef struct s_cylinder
 {
-	t_tup	pos;
-	t_tup	axis;
-	double	dia;
-	double	height;
-	t_rgb	color;
+	t_material	mt;
+	t_tup		pos;
+	t_tup		axis;
+	double		dia;
+	double		height;
 }	t_cylinder;
 
 typedef struct s_plane
 {
-	t_tup	point;
-	t_tup	norm_vec;
-	t_rgb	color;
+	t_material	mt;
+	t_tup		point;
+	t_tup		norm_vec;
 }	t_plane;
 
 typedef enum e_obj_type
@@ -217,5 +218,8 @@ void		calc_direction(t_camera *cam, t_view *view, int x, int y);
 void		setup_viewport(t_view *view, t_mrt *m);
 void		add_colors(t_rgb *new_c, t_rgb *c1, t_rgb *c2);
 void		add_to_color(t_rgb *new_c, t_rgb *c1, double comp);
+t_rgb		*stripped_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
+t_rgb		*ring_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
+t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 
 #endif

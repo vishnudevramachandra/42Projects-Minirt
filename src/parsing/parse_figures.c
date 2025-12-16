@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2025/12/08 13:34:53 by vramacha         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:32:04 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ t_obj	*parse_sphere(char *line)
 	if (!set_double(&obj->sp.dia, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	if (!set_color(&obj->sp.color, line + i, &len))
+	if (!set_color(&obj->sp.mt.pattern.color1, line + i, &len))
 		return (free(obj), NULL);
+	obj->sp.mt.pattern.color2 = (t_rgb){0,0,0};
+	init_vector(obj->sp.mt.pattern.param, 2, 2, 0);
+	obj->sp.mt.pattern.fcn = ring_pattern;
+	obj->sp.mt.shininess = 150;
 	return (obj);
 }
 
@@ -60,8 +64,10 @@ t_obj	*parse_cylinder(char *line)
 	if (!set_double(&obj->cy.height, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	if (!set_color(&obj->cy.color, line + i, &len))
+	if (!set_color(&obj->cy.mt.pattern.color1, line + i, &len))
 		return (free(obj), NULL);
+	obj->cy.mt.pattern.fcn = NULL;
+	obj->cy.mt.shininess = 100;
 	return (obj);
 }
 
@@ -82,8 +88,12 @@ t_obj	*parse_plane(char *line)
 	if (!set_vector(obj->pl.norm_vec, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	if (!set_color(&obj->pl.color, line + i, &len))
+	if (!set_color(&obj->pl.mt.pattern.color1, line + i, &len))
 		return (free(obj), NULL);
+	obj->pl.mt.pattern.color2 = (t_rgb){0,0,0};
+	init_vector(obj->pl.mt.pattern.param, 0, 1, 1);
+	obj->pl.mt.pattern.fcn = checker_pattern;
+	obj->pl.mt.shininess = 10;
 	return (obj);
 }
 
