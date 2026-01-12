@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/16 15:09:26 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/12 14:08:39 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,15 @@ typedef struct s_inter
 	struct s_inter	*next;
 }	t_inter;
 
+typedef double	mat4[4][4];
+
+typedef struct s_cam_inv
+{
+	mat4	trsl;
+	mat4	proj;
+	mat4	final;
+}	t_cam_inv;
+
 typedef struct s_mrt
 {
 	mlx_t		*mlx;
@@ -144,6 +153,7 @@ typedef struct s_mrt
 	t_list		*obj;
 	t_ray		ray;
 	t_inter		*i;
+	t_cam_inv	inv;
 	// t_ray		*ray;
 	// void			*mlx_ptr;
 	// void			*win_ptr;
@@ -162,8 +172,6 @@ typedef struct s_view
 // {
 // 	t_mlx	*m;
 // }	t_rt;
-
-typedef double	mat4[4][4];
 
 void		erro_msg(char *str, int v);
 void		read_from_fd(char *file_name, t_scene *scene, t_list **objs);
@@ -190,6 +198,7 @@ void		multi_mat_mat(mat4 res, mat4 a, mat4 b);
 void		multi_mat_tuple(t_tup res, mat4 m, t_tup t);
 void		transpose_mat(mat4 m);
 bool		is_equal_mat(mat4 a, mat4 b);
+mat4		*copy_mat(mat4 new, mat4 old);
 mat4		*identity_mat(mat4 m);
 mat4		*translation_mat(mat4 m, double d[3]);
 mat4		*scaling_mat(mat4 m, double d[3]);

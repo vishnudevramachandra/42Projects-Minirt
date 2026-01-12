@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/16 15:29:57 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:22:05 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	translate_objects(t_mrt *m)
 
 	multi_tuple(n_pos, m->scene->camera.position, -1);
 	translation_mat(mat, n_pos);
+	translation_mat(m->inv.trsl, m->scene->camera.position);
 	node = m->obj;
 	while (node)
 	{
@@ -86,6 +87,8 @@ void	project_objects(t_mrt *m)
 	}
 	normalize(mat[0]);
 	cross_prod(mat[1], mat[2], mat[0]);
+	transpose_mat(*copy_mat(m->inv.proj, mat));
+	multi_mat_mat(m->inv.final, m->inv.trsl, m->inv.proj);
 	node = m->obj;
 	while (node)
 	{
@@ -94,8 +97,6 @@ void	project_objects(t_mrt *m)
 		{
 			multi_mat_tuple(tup, mat, obj->sp.pos);
 			copy_tup(obj->sp.pos, tup);
-			multi_mat_tuple(tup, mat, obj->sp.mt.pattern.param);
-			copy_tup(obj->sp.mt.pattern.param, tup);
 		}
 		else if (obj->typ == PLANE)
 		{
@@ -103,8 +104,6 @@ void	project_objects(t_mrt *m)
 			copy_tup(obj->pl.point, tup);
 			multi_mat_tuple(tup, mat, obj->pl.norm_vec);
 			copy_tup(obj->pl.norm_vec, tup);
-			multi_mat_tuple(tup, mat, obj->pl.mt.pattern.param);
-			copy_tup(obj->pl.mt.pattern.param, tup);
 		}
 		node = node->next;
 	}

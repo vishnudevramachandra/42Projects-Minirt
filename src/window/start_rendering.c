@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/16 15:05:26 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:53:43 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,21 @@ void	color_range(t_rgb *c)
 		c->b = 255;
 }
 
-void	find_obj_color(t_rgb **obj_col, t_inter *i)
+void	find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i)
 {
+	t_tup	inv_hit_point;
+
 	if (!i->obj->sp.mt.pattern.fcn)
 		*obj_col = &i->obj->sp.mt.pattern.color1;
 	else
+	{
+		multi_mat_tuple(inv_hit_point, m->inv.final, i->hit_point);	
 		*obj_col = i->obj->sp.mt.pattern.fcn(
 			i->obj->sp.mt.pattern.param,
 			&i->obj->sp.mt.pattern.color1, 
 			&i->obj->sp.mt.pattern.color2,
-			i->hit_point);
+			inv_hit_point);
+	}
 }
 
 // // uzglednij ambiento color padanie swiatla iwgl
@@ -49,7 +54,7 @@ void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
 	t_rgb	ambient;
 	t_rgb	*obj_col;
 
-	find_obj_color(&obj_col, i);
+	find_obj_color(&obj_col, m, i);
 	mult_scalar_colors(&ambient, &m->scene->amb_light.color,
 		m->scene->amb_light.ratio);
 	multi_colors(final_col, obj_col, &ambient);
