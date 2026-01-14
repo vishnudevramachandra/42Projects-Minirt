@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/15 18:11:29 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:25:39 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,7 @@ typedef struct s_amb_light
 	t_rgb	color;
 }	t_amb_light;
 
-typedef double t_tup[4];
-
-// typedef struct s_tup
-// {
-// 	double x;
-// 	double x;
-// 	double x;
-// }	t_tup;
-
+typedef double	t_tup[4];
 
 typedef struct s_ray
 {
@@ -62,14 +54,14 @@ typedef struct s_camera
 	double	horizontal_field;
 }	t_camera;
 
-typedef	struct s_light
+typedef struct s_light
 {
 	t_tup	position; //coordinates of the lightning point
 	double	bright_ratio;
-	t_rgb  	color;
+	t_rgb	color;
 }	t_light;
 
-typedef	struct s_scene
+typedef struct s_scene
 {
 	// mlx_t		mlx;
 	// mlx_image_t		*img; those two for the mlx window
@@ -78,31 +70,47 @@ typedef	struct s_scene
 	t_light		light;
 }				t_scene;
 
+typedef t_rgb*(*t_pattern_fcn)(t_tup param, t_rgb *c1, t_rgb *c2,
+	t_tup hit_point);
+
+typedef struct s_pattern
+{
+	t_tup			param;
+	t_rgb			color1;
+	t_rgb			color2;
+	t_pattern_fcn	fcn;
+}	t_pattern;
+
+typedef struct s_material
+{
+	double		shininess;
+	t_pattern	pattern;
+}	t_material;
+
 typedef struct s_sphere
 {
-	t_tup	pos; //center
-	double	dia; //radious
-	t_rgb	color;
+	t_material	mt;
+	t_tup		pos; //center
+	double		dia; //radious
 }	t_sphere;
 
 typedef struct s_cylinder
 {
-	t_tup	pos;
-	t_tup	axis;
-	double	dia;
-	double	height;
-	t_rgb	color;
+	t_material	mt;
+	t_tup		pos;
+	t_tup		axis;
+	double		dia;
+	double		height;
 }	t_cylinder;
 
 typedef struct s_plane
 {
-	t_tup	point;
-	t_tup	norm_vec;
-	t_rgb	color;
+	t_material	mt;
+	t_tup		point;
+	t_tup		norm_vec;
 }	t_plane;
 
-
-typedef enum	e_obj_type
+typedef enum e_obj_type
 {
 	SPHERE,
 	CYLINDER,
@@ -130,23 +138,34 @@ typedef struct s_inter
 	struct s_inter	*next;
 }	t_inter;
 
-typedef struct s_mrt {
+typedef double	mat4[4][4];
+
+typedef struct s_cam_inv
+{
+	mat4	trsl;
+	mat4	proj;
+	mat4	final;
+}	t_cam_inv;
+
+typedef struct s_mrt
+{
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	t_scene		*scene;
 	t_list		*obj;
 	t_ray		ray;
 	t_inter		*i;
+	t_cam_inv	inv;
 	// t_ray		*ray;
 	// void			*mlx_ptr;
 	// void			*win_ptr;
 }	t_mrt;
 
-typedef struct s_view {
-	double	pitch_start;
-	double	roll_start;
-	double	pitch_delta;
-	double	roll_delta;
+typedef struct s_view
+{
+	double	px_width;
+	double	h_start_pos;
+	double	v_start_pos;
 }	t_view;
 
 //everything struct
@@ -154,10 +173,7 @@ typedef struct s_view {
 // typedef struct s_rt
 // {
 // 	t_mlx	*m;
-	
 // }	t_rt;
-
-typedef double  mat4[4][4];
 
 void		erro_msg(char *str, int v);
 void		read_from_fd(char *file_name, t_scene *scene, t_list **objs);
@@ -175,16 +191,16 @@ void		add_tuples(t_tup res, t_tup a, t_tup b);
 void		sub_tuples(t_tup res, t_tup a, t_tup b);
 void		multi_tuple(t_tup res, t_tup a, double val);
 void		div_tuple(t_tup res, t_tup a, double val);
+void		cross_prod(t_tup res, t_tup a, t_tup b);
 double		dot_prod(t_tup a, t_tup b);
 double		magnitude(t_tup a);
-void		cross_prod(t_tup res, t_tup a, t_tup b);
-// void		normalize(t_tup res, t_tup a);
 void		normalize(t_tup a);
 void		multi_and_accum_tuple(t_tup res, t_tup a, double val);
 void		multi_mat_mat(mat4 res, mat4 a, mat4 b);
 void		multi_mat_tuple(t_tup res, mat4 m, t_tup t);
 void		transpose_mat(mat4 m);
 bool		is_equal_mat(mat4 a, mat4 b);
+mat4		*copy_mat(mat4 new, mat4 old);
 mat4		*identity_mat(mat4 m);
 mat4		*translation_mat(mat4 m, double d[3]);
 mat4		*scaling_mat(mat4 m, double d[3]);
@@ -198,8 +214,10 @@ void		copy_tup(t_tup new, t_tup old);
 void		create_ray(t_ray *ray, t_tup point, t_tup vector);
 int			rgb(int a, int b, int c, int d);
 double		inter_sphere(t_sphere sp, t_ray r);
+double		inter_plane(t_plane *pl, t_ray *r);
+t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl);
 void		print_tup(t_tup vec);
-void		normal_at(t_tup normal, t_tup sp_pos, t_tup point);
+void		normal_at(t_tup normal, t_obj *obj, t_tup point);
 void		canvas(t_mrt *m);
 void		render_light(t_mrt *m, uint32_t *x, uint32_t *y);
 void		mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar);
@@ -207,11 +225,12 @@ void		multi_colors(t_rgb	*c_new, t_rgb *c1, t_rgb *c2);
 void		reflect(t_tup out, t_tup in, t_tup normal);
 void		translate_objects(t_mrt *m);
 void		project_objects(t_mrt *m);
-void		calc_direction(t_tup dir, t_tup ori_vec, double pitch, double roll);
+void		calc_direction(t_camera *cam, t_view *view, int x, int y);
 void		setup_viewport(t_view *view, t_mrt *m);
 void		add_colors(t_rgb *new_c, t_rgb *c1, t_rgb *c2);
 void		add_to_color(t_rgb *new_c, t_rgb *c1, double comp);
-void		color_range(t_rgb *c);
-
+t_rgb		*stripped_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
+t_rgb		*ring_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
+t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 
 #endif

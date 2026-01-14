@@ -6,36 +6,35 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/10 14:31:57 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:22:05 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../Includes/minirt.h"
 
-// camera orientation vector is rotated step-by-step to cover the field of view
-void	calc_direction(t_tup dir, t_tup ori_vec, double pitch, double roll)
+// camera orientation vector is computed step-by-step to cover the field of view
+void	calc_direction(t_camera *cam, t_view *view, int x, int y)
 {
-	mat4	m;
+	t_tup	point;
 
-	// Create rotation matrix
-	rotation_mat(m, (double [3]){0, pitch, roll});
-	// Apply combined rotation to the original orientation vector
-	multi_mat_tuple(dir, m, ori_vec);
+	init_point(point,
+		view->h_start_pos + (x * view->px_width),
+		view->v_start_pos - (y * view->px_width),
+		1);
+	sub_tuples(cam->orientation_vector, point, cam->position);
+	normalize(cam->orientation_vector);
 }
 
 // sets up the viewport parameters based on camera and image properties
 void	setup_viewport(t_view *view, t_mrt *m)
 {
-	double	h_field_in_radians;
-	double	v_field_in_radians;
-
-	h_field_in_radians = m->scene->camera.horizontal_field / 180 * M_PI;
-	view->pitch_start = h_field_in_radians / 2;
-	view->pitch_delta= h_field_in_radians / (m->image->width - 1);
-	v_field_in_radians = (double)m->image->height / m->image->width\
-					* h_field_in_radians;
-	view->roll_start = v_field_in_radians / 2;
-	view->roll_delta= v_field_in_radians / (m->image->height - 1);
+	double	half_h_dist;
+	
+	half_h_dist = tan((m->scene->camera.horizontal_field / 180 * M_PI) / 2);
+	view->px_width = (half_h_dist * 2) / m->image->width;
+	view->h_start_pos = -half_h_dist + (view->px_width / 2);
+	view->v_start_pos = half_h_dist\
+		* ((double)m->image->height / m->image->width) - (view->px_width / 2);
 }
 
 // translates objects using negative of camera's position, effectively
@@ -49,12 +48,15 @@ void	translate_objects(t_mrt *m)
 
 	multi_tuple(n_pos, m->scene->camera.position, -1);
 	translation_mat(mat, n_pos);
+	translation_mat(m->inv.trsl, m->scene->camera.position);
 	node = m->obj;
 	while (node)
 	{
 		obj = node->content;
 		if (obj->typ == SPHERE)
 			multi_mat_tuple(obj->sp.pos, mat, obj->sp.pos);
+		else if (obj->typ == PLANE)
+			multi_mat_tuple(obj->pl.point, mat, obj->pl.point);
 		node = node->next;
 	}
 	multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
@@ -85,6 +87,8 @@ void	project_objects(t_mrt *m)
 	}
 	normalize(mat[0]);
 	cross_prod(mat[1], mat[2], mat[0]);
+	transpose_mat(*copy_mat(m->inv.proj, mat));
+	multi_mat_mat(m->inv.final, m->inv.trsl, m->inv.proj);
 	node = m->obj;
 	while (node)
 	{
@@ -92,10 +96,17 @@ void	project_objects(t_mrt *m)
 		if (obj->typ == SPHERE)
 		{
 			multi_mat_tuple(tup, mat, obj->sp.pos);
-			copy_vector(obj->sp.pos, tup);
+			copy_tup(obj->sp.pos, tup);
+		}
+		else if (obj->typ == PLANE)
+		{
+			multi_mat_tuple(tup, mat, obj->pl.point);
+			copy_tup(obj->pl.point, tup);
+			multi_mat_tuple(tup, mat, obj->pl.norm_vec);
+			copy_tup(obj->pl.norm_vec, tup);
 		}
 		node = node->next;
 	}
-	// multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
+	multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
 	copy_vector(m->scene->camera.orientation_vector, (t_tup){0, 0, 1});
 }

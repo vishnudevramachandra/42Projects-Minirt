@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:43:04 by vramacha          #+#    #+#             */
-/*   Updated: 2025/12/04 09:56:39 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/12 14:48:34 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	multi_mat_mat(mat4 res, mat4 a, mat4 b)
 	int	i;
 	int	j;
 
+	i = 0;
+	while (i < 16)
+	{
+		*((double *)res + i) = 0;
+		i++;
+	}
 	i = 0;
 	while (i < 4)
 	{
@@ -85,4 +91,17 @@ bool	is_equal_mat(mat4 a, mat4 b)
 		i++;
 	}
 	return (1);
+}
+
+mat4	*copy_mat(mat4 new, mat4 old)
+{
+	int	i;
+
+	i = 0;
+	while (i < 16)
+	{
+		*((double *)new + i) = *((double *)old + i);
+		i++;
+	}
+	return ((mat4 *)new);
 }

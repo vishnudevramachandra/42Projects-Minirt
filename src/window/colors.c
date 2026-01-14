@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:59:29 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/15 17:59:02 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:28:54 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar)
 // Hadamard product 
 void	multi_colors(t_rgb	*c_new, t_rgb *c1, t_rgb *c2)
 {
-	c_new->r = (c1->r / 255.0) * (c2->r / 255.0) * 255.0;
-	c_new->g = (c1->g / 255.0) * (c2->g / 255.0) * 255.0;
-	c_new->b = (c1->b / 255.0) * (c2->b / 255.0) * 255.0;
+	c_new->r = (c1->r / 255.0) * c2->r;
+	c_new->g = (c1->g / 255.0) * c2->g;
+	c_new->b = (c1->b / 255.0) * c2->b;
 }
 
 void	color_range(t_rgb *c)
