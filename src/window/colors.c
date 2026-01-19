@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:59:29 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/14 13:28:54 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:31:31 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,4 @@ void	multi_colors(t_rgb	*c_new, t_rgb *c1, t_rgb *c2)
 	c_new->r = (c1->r / 255.0) * c2->r;
 	c_new->g = (c1->g / 255.0) * c2->g;
 	c_new->b = (c1->b / 255.0) * c2->b;
-}
-
-void	color_range(t_rgb *c)
-{
-	if (c->r > 255)
-		c->r = 255;
-	if (c->g > 255)
-		c->g = 255;
-	if (c->b > 255)
-		c->b = 255;
 }
