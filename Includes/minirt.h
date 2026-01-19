@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/14 13:25:39 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:05:16 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void		multi_and_accum_tuple(t_tup res, t_tup a, double val);
 void		multi_mat_mat(mat4 res, mat4 a, mat4 b);
 void		multi_mat_tuple(t_tup res, mat4 m, t_tup t);
 void		transpose_mat(mat4 m);
+bool		is_equal_tup(t_tup a, t_tup b);
 bool		is_equal_mat(mat4 a, mat4 b);
 mat4		*copy_mat(mat4 new, mat4 old);
 mat4		*identity_mat(mat4 m);
@@ -215,7 +216,7 @@ void		create_ray(t_ray *ray, t_tup point, t_tup vector);
 int			rgb(int a, int b, int c, int d);
 double		inter_sphere(t_sphere sp, t_ray r);
 double		inter_plane(t_plane *pl, t_ray *r);
-t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl);
+t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
 void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_obj *obj, t_tup point);
 void		canvas(t_mrt *m);

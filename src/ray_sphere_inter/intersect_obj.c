@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/14 13:27:54 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:31:45 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ double	get_hitpoint(double a, double b_h, double sqrt_dlt)
 
 	t1 = (-b_h - sqrt_dlt) / a;
 	t2 = (-b_h + sqrt_dlt) / a;
-	if (t1 > 0 || t2 > 0)
+	if (0 < t1 || 0 < t2)
 	{
-		if (t1 > t2)
+		if (t2 < t1)
 			t = t2;
 		else
 			t = t1;
@@ -60,12 +60,12 @@ double	inter_sphere(t_sphere sp, t_ray r)
 	return (t);
 }
 
-// compute the perpendicular vector from the origin to the plane
-t_tup	*perpvec_to_plane(t_tup vec, t_plane *pl)
+// compute the perpendicular vector from the user-defined origin to the plane
+t_tup	*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin)
 {
 	double	m;
 
-	sub_tuples(vec, pl->point, (double[4]){0, 0, 0, 1});
+	sub_tuples(vec, pl->point, origin);
 	m = dot_prod(pl->norm_vec, vec);
 	multi_tuple(vec, pl->norm_vec, m);
 	return ((t_tup *)vec);
@@ -75,8 +75,8 @@ double	inter_plane(t_plane *pl, t_ray *r)
 {
 	t_tup	perp_vec;
 
-	if (fabs(dot_prod(pl->norm_vec, r->direction)) < __DBL_EPSILON__)
+	perpvec_to_plane(perp_vec, pl, r->origin);
+	if (fabs(dot_prod(r->direction, perp_vec)) < __DBL_EPSILON__)
 		return (-INFINITY);
-	perpvec_to_plane(perp_vec, pl);
 	return (dot_prod(perp_vec, perp_vec) / dot_prod(r->direction, perp_vec));
 }

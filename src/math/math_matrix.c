@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:43:04 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/12 14:48:34 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:07:20 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,12 @@ void	transpose_mat(mat4 m)
 bool	is_equal_mat(mat4 a, mat4 b)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (i < 4)
 	{
-		j = 0;
-		while (j < 4)
-		{
-			if (__DBL_EPSILON__ < fabs(a[i][j] - b[i][j]))
-				return (0);
-			j++;
-		}
+		if (!is_equal_tup(a[i], b[i]))
+			return (0);
 		i++;
 	}
 	return (1);
