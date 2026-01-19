@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/03 17:44:06 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:36:53 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,8 @@ t_camera	camera(char *line, t_camera c)
 		i++;
 	// if (line[i] != '\n' && line[i] != '\0')
 	// 	c.horizontal_field = -1;
-	// printf("position: x=%g y=%g z=%g\n", c.position.x, c.position.y, c.position.z);
-	// printf("orientation: x=%g y=%g z=%g\n", c.orientation_vector.x, c.orientation_vector.y, c.orientation_vector.z);
-	// printf("horizontal field %g\n", c.horizontal_field);
 	return (c);
 }
-// printf("position: x=%g y=%g z=%g\n", c.position.x, c.position.y, c.position.z);
-// printf("orientation: x=%g y=%g z=%g\n", c.orientation_vector.x, c.orientation_vector.y, c.orientation_vector.z);
-// printf("horizontal field %g\n", c.horizontal_field);
 
 //if L exists it should have 3 parametes no more no less 
 t_light	light(char *line, t_light l)
@@ -96,8 +90,5 @@ t_light	light(char *line, t_light l)
 		i++;
 	// if (line[i] != '\n' && line[i] != '\0')
 	// 	l.bright_ratio = -1;
-	// printf("light pos: x=%g, y=%g, z=%g\n", l.position.x, l.position.y, l.position.z);
-	// printf("brightness ratio: %g\n", l.bright_ratio);
-	// printf("colors: r=%d g=%d b=%d\n", l.color.r, l.color.g, l.color.b);
 	return (l);
 }

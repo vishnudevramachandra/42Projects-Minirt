@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_tup_prod.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 15:01:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/01 19:12:11 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:13:14 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,16 @@ double	magnitude(t_tup a)
 }
 
 // Normalization is the process of taking an arbitrary vector and converting it
-// into a unit vector. It will keep your calculations anchored relative to a common
-// scale (the unit vector), which is pretty important. If you were to skip normalizing your ray vectors or your surface normals, your calculations would be
-// scaled differently for every ray you cast, and your scenes would look terrible
-// (if they rendered at all).
+// into a unit vector. It will keep your calculations anchored relative to a
+// common scale (the unit vector), which is pretty important. If you were to
+// skip normalizing your ray vectors or your surface normals, your calculations
+// would be scaled differently for every ray you cast, and your scenes would
+// look terrible (if they rendered at all).
 
 void	normalize(t_tup a)
 {
 	div_tuple(a, a, magnitude(a));
 }
-// void	normalize(t_tup res, t_tup a)
-// {
-// 	div_tuple(res, a, magnitude(a));
-// }
 
 void	multi_and_accum_tuple(t_tup res, t_tup a, double val)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/27 20:24:22 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:39:04 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 //1)Verify that the id(first word) is correct: A, C, L, pl, sp or cy ONLY ✅ 
 //2)Verift that each element has the correct number of params 50/50 ✅ TODO
 //-mandatory = A: 3, C: 4, L: 3, sp: 4, pl: 4, cy: 6
-//------so for now we just make sure that it has at least the numbers of the elements
-//------that it should but there is no max 
+//------so for now we just make sure that it has at least the numbers of the
+//------elements that it should but there is no max 
 //
 //ELEMENTS: (analyze the line of each element and put it in a structure)
 //1) CAMERA ✅
@@ -47,8 +47,9 @@
 // -ambience ✅
 // -point of light ✅
 
-// There is a MAXIMUM of one camera, one diffused light and one ambient light (there can be 0 or one, but no more!)
-// ok so with that my solution in the init_scene with assigning it first with inncorect values my not be the besttt 
+// There is a MAXIMUM of one camera, one diffused light and one ambient light
+// (there can be 0 or one, but no more!) ok so with that my solution in the
+// init_scene with assigning it first with inncorect values my not be the besttt
 // but idk something to think abt bc i think its good for some solutionsss 
 
 //if A exists it should have 3 parametes no more no less 
@@ -200,6 +201,3 @@ void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 	//if everything is correct with that part procceed to parse the figures
 	printf("great success\n");
 }
-
-
-

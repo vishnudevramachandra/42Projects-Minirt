@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/20 21:58:05 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:08:12 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 
 static int	ft_strspn(const char *s, t_dataype dtype)
 {
-	int		i;
-	int		tmp;
+	int			i;
+	int			tmp;
 	const char	charset[] = "0123456789";
 
 	if (dtype == INT)
 	{
 		i = 0;
 		if (s[i] && s[i + 1])
-		while (s[i])
-		{
-			if (!ft_strchr(charset, s[i]))
-				break ;
-			i++;
-		}
+			while (s[i])
+			{
+				if (!ft_strchr(charset, s[i]))
+					break ;
+				i++;
+			}
 	}
 	else
 	{

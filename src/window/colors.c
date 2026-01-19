@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:59:29 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/14 13:31:31 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:03:00 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@ int	rgb(int a, int b, int c, int d)
 {
 	return (a << 24 | b << 16 | c << 8 | d);
 }
-// okej czyli kolory sa jednym tupletem i musimy teraz ogarnac jak zamienc ten tuplet zeby mial wartosc hexadecymelowal zeby moc uzywac ich w naszych funkcjach mlx?
 
-/// @brief Colors are commonly represented as 4-byte integers. This 4-byte integer 
-// is a grouping of four individual channels: red, green, blue and alpha, with alpha representing transparency.
-// Additionally, colors are usually shown in hexadecimal to make each channel value identifiable:
+// okej czyli kolory sa jednym tupletem i musimy teraz ogarnac jak zamienc ten
+// tuplet zeby mial wartosc hexadecymelowal zeby moc uzywac ich w naszych
+// funkcjach mlx?
+/// @brief Colors are commonly represented as 4-byte integers. This 4-byte
+// integer is a grouping of four individual channels: red, green, blue and alpha
+// with alpha representing transparency.
+// Additionally, colors are usually shown in hexadecimal to make each channel
+// value identifiable:
 /// @param c color 
 /// @param a brightness ratio
-/// @return 
+/// @return
 int	get_rgba(t_rgb *c, double a)
 {
 	unsigned int	alpha;
@@ -33,7 +37,6 @@ int	get_rgba(t_rgb *c, double a)
 		alpha = 0;
 	if (alpha > 255)
 		alpha = 255;
-	// printf("r=%d\n g=%d\n b=%d\n a=%d\n", c->r, c->g, c->b, alpha);
 	return (c->r << 24 | c->g << 16 | c->b << 8 | alpha);
 }
 
@@ -44,12 +47,14 @@ void	add_colors(t_rgb *new_c, t_rgb *c1, t_rgb *c2)
 	new_c->g = c2->g + c1->g;
 	new_c->b = c2->b + c1->b;
 }
+
 void	add_to_color(t_rgb *new_c, t_rgb *c1, double comp)
 {
 	new_c->r = c1->r + comp;
 	new_c->g = c1->g + comp;
 	new_c->b = c1->b + comp;
 }
+
 //substract colors
 t_rgb	sub_colors(t_rgb *c1, t_rgb *c2)
 {

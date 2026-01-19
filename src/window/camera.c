@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/12 15:22:05 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:00:10 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	calc_direction(t_camera *cam, t_view *view, int x, int y)
 void	setup_viewport(t_view *view, t_mrt *m)
 {
 	double	half_h_dist;
-	
+
 	half_h_dist = tan((m->scene->camera.horizontal_field / 180 * M_PI) / 2);
 	view->px_width = (half_h_dist * 2) / m->image->width;
 	view->h_start_pos = -half_h_dist + (view->px_width / 2);
-	view->v_start_pos = half_h_dist\
-		* ((double)m->image->height / m->image->width) - (view->px_width / 2);
+	view->v_start_pos = half_h_dist \
+	* ((double)m->image->height / m->image->width) - (view->px_width / 2);
 }
 
 // translates objects using negative of camera's position, effectively
@@ -74,7 +74,7 @@ void	project_objects(t_mrt *m)
 
 	identity_mat(mat);
 	if (__DBL_EPSILON__ < (dot_prod(m->scene->camera.orientation_vector,
-		m->scene->camera.orientation_vector) - 1))
+				m->scene->camera.orientation_vector) - 1))
 		normalize(m->scene->camera.orientation_vector);
 	copy_vector(mat[2], m->scene->camera.orientation_vector);
 	cross_prod(mat[0], (t_tup){0, 1, 0}, mat[2]);
