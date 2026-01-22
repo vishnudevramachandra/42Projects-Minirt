@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_patterns.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 19:32:19 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/20 22:22:02 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:55:31 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	set_pattern(t_material *mt, char *line, int *len)
 			return (0);
 		i += *len;
 		i += len_spaces(line + i);
-		if (!set_vector(mt->pattern.param, line + i, len))
+		if (!set_tuple(mt->pattern.param, line + i, len, 0))
 			return (0);
 		i += *len;
 		i += len_spaces(line + i);
@@ -61,5 +61,6 @@ int	set_pattern(t_material *mt, char *line, int *len)
 		mt->shininess = atod(&line[i]);
 		return (1);
 	}
+	mt->shininess = 500;
 	return (0);
 }

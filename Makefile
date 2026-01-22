@@ -6,7 +6,7 @@
 #    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/12/16 15:11:33 by vramacha         ###   ########.fr        #
+#    Updated: 2026/01/22 17:07:06 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,8 @@ PARSINGFILES =	parsing.c \
 				parsing_utils.c \
 				parse_scene.c \
 				parse_figures.c \
+				parse_patterns.c \
+				parsing_print.c \
 				atod.c
 
 MATHFILES	=	init_vec_pos.c \

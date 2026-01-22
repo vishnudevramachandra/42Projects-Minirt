@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/20 19:29:09 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:53:12 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ t_camera	camera(char *line, t_camera c)
 
 	flag = 0;
 	i = 0 + len_spaces(line);
-	if (!set_vector(c.position, line + i, &len))
+	if (!set_tuple(c.position, line + i, &len, 1))
 		flag = -1;
 	i = i + len + len_spaces(line + i + len);
-	if (!set_vector(c.orientation_vector, line + i, &len))
+	if (!set_tuple(c.orientation_vector, line + i, &len, 0))
 		flag = -1;
 	i = i + len + len_spaces(line + i + len);
 	if (!is_numeric(line[i]))
@@ -64,7 +64,7 @@ t_light	light(char *line, t_light l)
 
 	flag = 0;
 	i = 0 + len_spaces(line);
-	if (!set_vector(l.position, line + i, &len))
+	if (!set_tuple(l.position, line + i, &len, 1))
 		flag = -1;
 	i = i + len + len_spaces(line + i + len);
 	l.bright_ratio = atod(&line[i]);
