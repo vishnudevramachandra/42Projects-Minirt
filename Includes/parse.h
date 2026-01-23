@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 09:20:31 by vishnudevra       #+#    #+#             */
-/*   Updated: 2025/11/20 21:58:27 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/20 22:08:04 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int			set_double(double *d, const char *s, int *len);
 int			set_int(int *i, const char *s, int *len);
 t_list		*parse_obj(char *line, t_list **objs);
 void		print_obj(t_list *objs);
+int			set_pattern(t_material *mt, char *line, int *len);
 
 #endif
