@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 17:00:10 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:11:59 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,22 @@ void	setup_viewport(t_view *view, t_mrt *m)
 	* ((double)m->image->height / m->image->width) - (view->px_width / 2);
 }
 
-// translates objects using negative of camera's position, effectively
-// recentering the co-ordinate system so that the camera resides at the origin.
+void	adjust_lights_to_view(t_scene *scene, mat4 mat)
+{
+	t_list	*node;
+	t_light	*light;
+	t_tup	tmp;
+
+	node = scene->lights_list;
+	while (node)
+	{
+		light = node->content;
+		multi_mat_tuple(tmp, mat, light->position);
+		copy_tup(light->position, tmp);
+		node = node->next;
+	}
+}
+
 void	translate_objects(t_mrt *m)
 {
 	t_list	*node;
@@ -59,7 +73,7 @@ void	translate_objects(t_mrt *m)
 			multi_mat_tuple(obj->pl.point, mat, obj->pl.point);
 		node = node->next;
 	}
-	multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
+	// multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
 	multi_mat_tuple(m->scene->camera.position, mat, m->scene->camera.position);
 }
 
@@ -107,6 +121,7 @@ void	project_objects(t_mrt *m)
 		}
 		node = node->next;
 	}
-	multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
+	adjust_lights_to_view(m->scene, mat);
+	// multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
 	copy_vector(m->scene->camera.orientation_vector, (t_tup){0, 0, 1});
 }
