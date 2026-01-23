@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 15:05:16 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/23 13:24:41 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,8 +214,9 @@ void		copy_point(t_tup new, t_tup old);
 void		copy_tup(t_tup new, t_tup old);
 void		create_ray(t_ray *ray, t_tup point, t_tup vector);
 int			rgb(int a, int b, int c, int d);
-double		inter_sphere(t_sphere sp, t_ray r);
+double		inter_sphere(t_sphere *sp, t_ray *r);
 double		inter_plane(t_plane *pl, t_ray *r);
+double		inter_cylinder(t_cylinder *cy, t_ray *r);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
 void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_obj *obj, t_tup point);

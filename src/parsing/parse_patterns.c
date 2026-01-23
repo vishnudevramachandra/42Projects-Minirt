@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 19:32:19 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/22 18:55:31 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/23 12:53:04 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int	set_pattern(t_material *mt, char *line, int *len)
 		mt->shininess = atod(&line[i]);
 		return (1);
 	}
-	mt->shininess = 500;
+	mt->shininess = 1000000;
 	return (0);
 }

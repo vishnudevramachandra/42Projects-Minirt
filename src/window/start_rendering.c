@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 15:40:49 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/23 13:23:16 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ int	is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec)
 		obj = cur->content;
 		t = -1;
 		if (obj->typ == SPHERE)
-			t = inter_sphere(obj->sp, shadow_ray);
+			t = inter_sphere(&obj->sp, &shadow_ray);
 		else if (obj->typ == PLANE)
 			t = inter_plane(&obj->pl, &shadow_ray);
-		// else if (obj->typ == CYLINDER)
-		//	 t = inter_cylinder(obj->cy, shadow_ray);
+		else if (obj->typ == CYLINDER)
+			 t = inter_cylinder(&obj->cy, &shadow_ray);
 		if (EPSILON < t && t < light_dist)
 			return (1);
 		cur = cur->next;
@@ -236,11 +236,11 @@ void	compute_intersections(t_inter **inter, t_mrt *m)
 		obj = current->content;
 		t = -1;
 		if (obj->typ == SPHERE)
-			t = inter_sphere(obj->sp, m->ray);
+			t = inter_sphere(&obj->sp, &m->ray);
 		else if (obj->typ == PLANE)
 			t = inter_plane(&obj->pl, &m->ray);
-		// if (obj->typ == CYLINDER)
-		// 	t = inter_cylinder(obj->sp, m->ray);
+		else if (obj->typ == CYLINDER)
+			t = inter_cylinder(&obj->cy, &m->ray);
 		if (0 < t)
 			insert_intersection(inter, malloc(sizeof(t_inter)), obj, t);
 		current = current->next;

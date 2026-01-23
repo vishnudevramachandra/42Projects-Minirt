@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 15:31:45 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/23 13:24:21 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ double	get_hitpoint(double a, double b_h, double sqrt_dlt)
 // t = ( (2 * b_h) +/- sqrt((2 * b_h) * (2 * b_h) - (4 * a * c)) ) / (2 * a) can
 // be converted to t = (b_h +/- sqrt((b_h * b_h) - (a * c))) / a
 // TODO: if we always normalize the ray.direction then we can replace a = 1.
-double	inter_sphere(t_sphere sp, t_ray r)
+double	inter_sphere(t_sphere *sp, t_ray *r)
 {
 	t_tup	l;
 	double	dlt;
 	double	t;
 
-	sub_tuples(l, r.origin, sp.pos);
-	dlt = delta(dot_prod(r.direction, r.direction),
-			dot_prod(r.direction, l),
-			dot_prod(l, l) - ((sp.dia * sp.dia) * 0.25));
+	sub_tuples(l, r->origin, sp->pos);
+	dlt = delta(dot_prod(r->direction, r->direction),
+			dot_prod(r->direction, l),
+			dot_prod(l, l) - ((sp->dia * sp->dia) * 0.25));
 	if (dlt < 0)
 		return (-1);
 	else
-		t = get_hitpoint(dot_prod(r.direction, r.direction),
-				dot_prod(r.direction, l),
+		t = get_hitpoint(dot_prod(r->direction, r->direction),
+				dot_prod(r->direction, l),
 				sqrt(dlt));
 	return (t);
 }
@@ -79,4 +79,9 @@ double	inter_plane(t_plane *pl, t_ray *r)
 	if (fabs(dot_prod(r->direction, perp_vec)) < __DBL_EPSILON__)
 		return (-INFINITY);
 	return (dot_prod(perp_vec, perp_vec) / dot_prod(r->direction, perp_vec));
+}
+
+double	inter_cylinder(t_cylinder *cy, t_ray *r)
+{
+	
 }
