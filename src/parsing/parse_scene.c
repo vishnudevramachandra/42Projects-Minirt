@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/21 16:59:46 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/23 17:46:12 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ t_camera	camera(char *line, t_camera c)
 
 	flag = 0;
 	i = 0 + len_spaces(line);
-	if (!set_vector(c.position, line + i, &len))
+	if (!set_tuple(c.position, line + i, &len, 1))
 		flag = -1;
 	i = i + len + len_spaces(line + i + len);
-	if (!set_vector(c.orientation_vector, line + i, &len))
+	if (!set_tuple(c.orientation_vector, line + i, &len, 0))
 		flag = -1;
 	i = i + len + len_spaces(line + i + len);
 	if (!is_numeric(line[i]))
@@ -56,40 +56,11 @@ t_camera	camera(char *line, t_camera c)
 	return (c);
 }
 
-// t_light	light(char *line, t_light l)
-// {
-// 	int		i;
-// 	int		len;
-// 	int		flag;
-
-// 	flag = 0;
-// 	i = 0 + len_spaces(line);
-// 	if (!set_vector(l.position, line + i, &len))
-// 		flag = -1;
-// 	i = i + len + len_spaces(line + i + len);
-// 	l.bright_ratio = atod(&line[i]);
-// 	if (line[i] == '.')
-// 		flag = -1;
-// 	while (is_numeric(line[i]))
-// 		i++;
-// 	if (line[i - 1] == '.')
-// 		flag = -1;
-// 	while (ft_isspace(line[i]))
-// 		i++;
-// 	if (!set_color(&l.color, line + i, &len))
-// 		flag = -1;
-// 	i = i + len + len_spaces(line + i + len);
-// 	if ((line[i] != '\n' && line[i] != '\0') || flag == -1)
-// 		l.bright_ratio = -1;
-// 	return (l);
-// }
-
 t_light	*light_f(char *line, t_light *l)
 {
 	int		i;
 	int		len;
 
-	printf("maybe here\n");
 	i = 0 + len_spaces(line);
 	if (!set_vector(l->position, line + i, &len))
 		return (NULL);

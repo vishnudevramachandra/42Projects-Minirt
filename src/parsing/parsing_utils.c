@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 16:08:12 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:56:59 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	set_double(double *d, const char *s, int *len)
 	return (*len);
 }
 
-int	set_vector(t_tup v, const char *s, int *len)
+int	set_tuple(t_tup v, const char *s, int *len, double w)
 {
 	int		i;
 	int		j;
@@ -91,6 +91,7 @@ int	set_vector(t_tup v, const char *s, int *len)
 	}
 	if (j != 3)
 		return (0);
+	v[j] = w;
 	*len = i - 1;
 	return (*len);
 }

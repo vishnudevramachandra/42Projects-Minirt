@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 09:20:31 by vishnudevra       #+#    #+#             */
-/*   Updated: 2026/01/20 22:08:04 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/23 17:44:14 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ typedef enum e_datatype
 	INT,
 }	t_dataype;
 
-int			set_vector(t_tup v, const char *s, int *len);
-int			set_color(t_rgb *c, const char *s, int *len);
-int			set_double(double *d, const char *s, int *len);
-int			set_int(int *i, const char *s, int *len);
-t_list		*parse_obj(char *line, t_list **objs);
-void		print_obj(t_list *objs);
-int			set_pattern(t_material *mt, char *line, int *len);
+int		set_tuple(t_tup v, const char *s, int *len, double w);
+int		set_color(t_rgb *c, const char *s, int *len);
+int		set_double(double *d, const char *s, int *len);
+int		set_int(int *i, const char *s, int *len);
+t_list	*parse_obj(char *line, t_list **objs);
+void	print_obj(t_list *objs);
+int		set_pattern(t_material *mt, char *line, int *len);
 
 #endif

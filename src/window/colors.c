@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:59:29 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 17:03:00 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:34:53 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,6 @@ int	rgb(int a, int b, int c, int d)
 	return (a << 24 | b << 16 | c << 8 | d);
 }
 
-// okej czyli kolory sa jednym tupletem i musimy teraz ogarnac jak zamienc ten
-// tuplet zeby mial wartosc hexadecymelowal zeby moc uzywac ich w naszych
-// funkcjach mlx?
-/// @brief Colors are commonly represented as 4-byte integers. This 4-byte
-// integer is a grouping of four individual channels: red, green, blue and alpha
-// with alpha representing transparency.
-// Additionally, colors are usually shown in hexadecimal to make each channel
-// value identifiable:
-/// @param c color 
-/// @param a brightness ratio
-/// @return
 int	get_rgba(t_rgb *c, double a)
 {
 	unsigned int	alpha;
