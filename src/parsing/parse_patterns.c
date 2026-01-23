@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 19:32:19 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/20 22:22:02 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:02:56 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	set_pattern(t_material *mt, char *line, int *len)
 	int	i;
 
 	i = 1;
+	mt->shininess = 150;
 	if (line[0] == 'P')
 	{
 		i += len_spaces(line + i);

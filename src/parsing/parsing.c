@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 16:39:04 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/23 17:38:36 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,67 +15,22 @@
 #include "minirt.h"
 #include "parse.h"
 
-//TO DO OF PARSING THE SCENE
-// norm.... ❌ TODO
-//
-//FILE:
-//1)correct type file (.rt)? ✅
-//
-//2)empty file? ✅ 
-//^(u might want to check i mean for now at the begginig i am 
-//assigning in the init scene that if the value will be asign inncorectlly 
-//therefore if there is no value its out of range so i guess it should work??)
-//
-//3)incorrect file? (idk i guess its done but just idk what do they mean)
-//
-//SCENE:
-//1)Verify that the id(first word) is correct: A, C, L, pl, sp or cy ONLY ✅ 
-//2)Verift that each element has the correct number of params 50/50 ✅ TODO
-//-mandatory = A: 3, C: 4, L: 3, sp: 4, pl: 4, cy: 6
-//------so for now we just make sure that it has at least the numbers of the
-//------elements that it should but there is no max 
-//
-//ELEMENTS: (analyze the line of each element and put it in a structure)
-//1) CAMERA ✅
-//
-//2)OBJECTS
-//-plane ✅ TODO
-//-sphere ✅ TODO
-//-cylinder ✅ TODO
-//
-// 3)Lights
-// -ambience ✅
-// -point of light ✅
-
-// There is a MAXIMUM of one camera, one diffused light and one ambient light
-// (there can be 0 or one, but no more!) ok so with that my solution in the
-// init_scene with assigning it first with inncorect values my not be the besttt
-// but idk something to think abt bc i think its good for some solutionsss 
-
-//if A exists it should have 3 parametes no more no less 
+void	print_tup(t_tup vec)
+{
+	printf("     %g,%g,%g\n", vec[0], vec[1], vec[2]);
+}
 
 
-bool	scene_range(t_amb_light a, t_camera c, t_light l)
+bool	scene_range(t_amb_light a, t_camera c)
 {
 	if (a.ratio < 0 || a.ratio > 1)
 		return (false);
 	else if ((a.color.r < 0 || a.color.r > 255) || (a.color.g < 0
 			|| a.color.g > 255) || (a.color.b < 0 || a.color.b > 255))
 		return (false);
-	// else if (c.position.x == NAN || c.position.y == NAN || c.position.z == NAN)
-	// 	return (false);
-	// else if ((c.orientation_vector.x < -1 || c.orientation_vector.x > 1)
-	// 	|| (c.orientation_vector.y < -1 || c.orientation_vector.y > 1)
-	// 	|| (c.orientation_vector.z < -1 || c.orientation_vector.z > 1))
+	// else if ((*c.orientation_vector < -1 || *c.orientation_vector > 1))
 	// 	return (false);
 	else if (c.horizontal_field < 0 || c.horizontal_field > 180)
-		return (false);
-	// else if (l.position.x == NAN || l.position.y == NAN || l.position.z == NAN)
-	// 	return (false);
-	else if (l.bright_ratio < 0 || l.bright_ratio > 1)
-		return (false);
-	else if ((l.color.r < 0 || l.color.r > 255) || (l.color.g < 0
-			|| l.color.g > 255) || (l.color.b < 0 || l.color.b > 255))
 		return (false);
 	else
 		return (true);
@@ -132,6 +87,7 @@ int	is_scene(char *line)
 	if ((line[0] == 'A' && line[1] == ' ')
 		|| (line[0] == 'C' && line[1] == ' ')
 		|| (line[0] == 'L' && line[1] == ' '))
+
 		return (1);
 	return (0);
 }
@@ -145,6 +101,20 @@ int	is_object(char *line)
 	return (0);
 }
 
+t_list	*parse_lights(char *line, t_list **lights)
+{
+	t_light	*light;
+
+	light = malloc(sizeof(t_light));
+	if (!light)
+		return (ft_lstclear(lights, free), NULL);
+	if (!light_f(line + 1, light))
+		return (ft_lstclear(lights, free), NULL);
+	if (!create_node_and_add_to_list(light, lights))
+		return (free(light), ft_lstclear(lights, free), NULL);
+	return (*lights);
+}
+
 void	fill_scene(t_scene *scene, char *line)
 {
 	if (line[0] == 'A')
@@ -152,7 +122,7 @@ void	fill_scene(t_scene *scene, char *line)
 	else if (line[0] == 'C')
 		scene->camera = camera(line + 1, scene->camera);
 	else if (line[0] == 'L')
-		scene->light = light(line + 1, scene->light);
+		scene->lights_list = parse_lights(line, &scene->lights_list);
 }
 
 void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
@@ -196,7 +166,7 @@ void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 	// if (*objs)
 	// 	print_obj(*objs);
 	close(fd);
-	if (scene_range(scene->amb_light, scene->camera, scene->light) == false)
+	if (scene_range(scene->amb_light, scene->camera) == false)
 		erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
 	//if everything is correct with that part procceed to parse the figures
 	printf("great success\n");
