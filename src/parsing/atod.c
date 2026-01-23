@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atod.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:16:17 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 16:07:11 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/19 18:06:58 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static double	atofrac(const char *str, int *i)
 	return (result / dev);
 }
 
-//asci to double
 double	atod(const char *s)
 {
 	int		i;
