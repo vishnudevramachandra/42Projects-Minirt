@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/27 20:25:31 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:51:40 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,9 @@ void	init_scene(t_scene *scene)
 	init_point(scene->camera.position, NAN, NAN, NAN);
 	init_vector(scene->camera.orientation_vector, -2, -2, -2);
 	scene->camera.horizontal_field = -1;
-	scene->light.bright_ratio = -1;
-	scene->light.color = (t_rgb){-1, -1, -1};
+	// scene->light.bright_ratio = -1;
+	// scene->light.color = (t_rgb){-1, -1, -1};
 }
-
-// void	free_mem(t_scene *scene, t_list *objs, t_mlx *mlx)
-// {
-// 	(void)scene;
-// 	(void)objs;
-// 	mlx_terminate(mlx->mlx);
-// }
 
 int32_t	main(int ac, char **av)
 {
@@ -69,6 +62,10 @@ int32_t	main(int ac, char **av)
 	printf("before read_from_fd\n");
 	read_from_fd(av[1], mrt->scene, &mrt->obj);
 	printf("before init_mrt\n");
+	t_list *n = mrt->scene->lights_list;
+	int count = 0;
+	while (n) { count++; n = n->next; }
+	printf("DEBUG: %d lights in scene\n", count);
+
 	init_mrt(mrt);
-	// free_mem();
 }

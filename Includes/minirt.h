@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 15:05:16 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:36:27 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ typedef struct s_scene
 	// mlx_image_t		*img; those two for the mlx window
 	t_amb_light	amb_light;
 	t_camera	camera;
-	t_light		light;
+	t_list		*lights_list;
+	// t_light		light;
 }				t_scene;
 
 typedef t_rgb*(*t_pattern_fcn)(t_tup param, t_rgb *c1, t_rgb *c2,
@@ -183,7 +184,8 @@ double		atod(const char *s);
 int			is_numeric(char c);
 t_amb_light	amb_light(char *line, t_amb_light a);
 t_camera	camera(char *line, t_camera c);
-t_light		light(char *line, t_light l);
+// t_light		light(char *line, t_light l);
+t_light		*light_f(char *line, t_light *l);
 int			ft_strcmp(char *s1, char *s2);
 int			get_rgba(t_rgb *c, double a);
 void		init_mrt(t_mrt *m);
@@ -233,5 +235,8 @@ void		add_to_color(t_rgb *new_c, t_rgb *c1, double comp);
 t_rgb		*stripped_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 t_rgb		*ring_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
+int			create_node_and_add_to_list(void *content, t_list **lst);
+void		final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i);
+
 
 #endif

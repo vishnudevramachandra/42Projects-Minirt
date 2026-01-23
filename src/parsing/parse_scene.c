@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/23 17:46:12 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:02:36 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_light	*light_f(char *line, t_light *l)
 	int		len;
 
 	i = 0 + len_spaces(line);
-	if (!set_vector(l->position, line + i, &len))
+	if (!set_tuple(l->position, line + i, &len, 1))
 		return (NULL);
 	i = i + len + len_spaces(line + i + len);
 	l->bright_ratio = atod(&line[i]);
