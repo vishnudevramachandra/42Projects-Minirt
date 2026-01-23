@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2025/12/16 15:11:33 by vramacha         ###   ########.fr        #
+#    Updated: 2026/01/22 17:37:30 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCFILES	=	main.c \
 				utils_error.c \
 				window/init_mrt.c \
 				window/colors.c \
+				window/lights.c \
 				window/start_rendering.c \
 				window/camera.c \
 				window/pattern.c \
@@ -48,6 +49,7 @@ PARSINGFILES =	parsing.c \
 				parsing_utils.c \
 				parse_scene.c \
 				parse_figures.c \
+				parse_patterns.c \
 				atod.c
 
 MATHFILES	=	init_vec_pos.c \
