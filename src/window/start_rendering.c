@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/22 18:31:58 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:14:16 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ void	compute_intersections(t_inter **inter, t_mrt *m)
 			t = inter_sphere(obj->sp, m->ray);
 		else if (obj->typ == PLANE)
 			t = inter_plane(&obj->pl, &m->ray);
-		// if (obj->typ == CYLINDER)
+		if (obj->typ == CONE)
+			inter_cone(obj->co, m->ray);
+			// if (obj->typ == CYLINDER)
 		// 	t = inter_cylinder(obj->sp, m->ray);
 		if (0 < t)
 			insert_intersection(inter, malloc(sizeof(t_inter)), obj, t);

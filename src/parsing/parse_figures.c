@@ -6,13 +6,22 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/23 17:42:53 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:14:34 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parse.h"
 #include "minirt.h"
+
+void	print_tup(t_tup vec)
+{
+	printf("     %g,%g,%g,%g\n", vec[0], vec[1], vec[2], vec[3]);
+}
+void	print_color(t_rgb *rgb)
+{
+	printf("     %i,%i,%i\n", rgb->r, rgb->g, rgb->b);
+}
 
 t_obj	*parse_sphere(char *line)
 {
@@ -101,6 +110,40 @@ t_obj	*parse_plane(char *line)
 // obj->pl.mt.pattern.fcn = checker_pattern;
 // obj->pl.mt.shininess = 10;
 
+//co pos dia height color P
+
+t_obj	*parse_cone(char *line)
+{
+	int		i;
+	int		len;
+	t_obj	*obj;
+
+	obj = malloc(sizeof(t_obj));
+	obj->typ = CONE;
+	i = 0 + len_spaces(line);
+	if (!set_tuple(obj->co.pos, line + i, &len, 1))
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	if (!set_double(&obj->co.dia, line + i, &len))
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	if (!set_double(&obj->co.height, line + i, &len))
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	if (!set_color(&obj->co.mt.pattern.color1, line + i, &len))
+		return (free(obj), NULL);
+	// i = i + len + len_spaces(line + i + len);
+	// if (!set_pattern(&obj->pl.mt, line + i, &len))
+	// 	obj->pl.mt.pattern.fcn = NULL;
+	// printf("position: ");	
+	// print_tup(obj->co.pos);
+	// printf("dia: %f\n", obj->co.dia);	
+	// printf("height: %f\n", obj->co.height);	
+	// printf("color: ");	
+	// print_color(&obj->co.mt.pattern.color1);
+	return (obj);
+}
+
 int	create_node_and_add_to_list(void *content, t_list **lst)
 {
 	t_list	*node;
@@ -120,6 +163,8 @@ t_list	*parse_obj(char *line, t_list **objs)
 		obj = parse_sphere(line + 2);
 	else if (line[0] == 'c' && line[1] == 'y')
 		obj = parse_cylinder(line + 2);
+	else if (line[0] == 'c' && line[1] == 'o')
+		obj = parse_cone(line + 2);
 	else
 		obj = parse_plane(line + 2);
 	if (!obj)

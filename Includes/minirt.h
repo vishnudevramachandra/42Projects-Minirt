@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/22 17:36:27 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:14:53 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,14 @@ typedef struct s_cylinder
 	double		height;
 }	t_cylinder;
 
+typedef struct s_cone 
+{
+	t_material	mt;
+	t_tup		pos;
+	double		dia; //radious
+	double		height;
+}	t_cone;
+
 typedef struct s_plane
 {
 	t_material	mt;
@@ -116,6 +124,7 @@ typedef enum e_obj_type
 	SPHERE,
 	CYLINDER,
 	PLANE,
+	CONE,
 }	t_obj_type;
 
 typedef struct s_obj
@@ -126,6 +135,7 @@ typedef struct s_obj
 		t_cylinder	cy;
 		t_plane		pl;
 		t_sphere	sp;
+		t_cone		co;
 	};
 }	t_obj;
 
@@ -222,7 +232,7 @@ t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
 void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_obj *obj, t_tup point);
 void		canvas(t_mrt *m);
-void		render_light(t_mrt *m, uint32_t *x, uint32_t *y);
+// void		render_light(t_mrt *m, uint32_t *x, uint32_t *y);
 void		mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar);
 void		multi_colors(t_rgb	*c_new, t_rgb *c1, t_rgb *c2);
 void		reflect(t_tup out, t_tup in, t_tup normal);
@@ -237,6 +247,7 @@ t_rgb		*ring_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 int			create_node_and_add_to_list(void *content, t_list **lst);
 void		final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i);
+void		inter_cone(t_cone co, t_ray r);
 
 
 #endif

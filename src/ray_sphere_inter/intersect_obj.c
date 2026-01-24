@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_obj.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 15:31:45 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:15:26 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,11 @@ double	inter_plane(t_plane *pl, t_ray *r)
 	if (fabs(dot_prod(r->direction, perp_vec)) < __DBL_EPSILON__)
 		return (-INFINITY);
 	return (dot_prod(perp_vec, perp_vec) / dot_prod(r->direction, perp_vec));
+}
+
+void	inter_cone(t_cone co, t_ray r)
+{
+	(void)co;
+	(void)r;
+	printf("inter cone\n");
 }

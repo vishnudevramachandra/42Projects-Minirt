@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/23 17:38:36 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/23 18:50:34 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 #include <unistd.h>
 #include "minirt.h"
 #include "parse.h"
-
-void	print_tup(t_tup vec)
-{
-	printf("     %g,%g,%g\n", vec[0], vec[1], vec[2]);
-}
 
 
 bool	scene_range(t_amb_light a, t_camera c)
@@ -76,6 +71,7 @@ bool	verify_id(char *line)
 		|| ft_strcmp(id, "L") == 0
 		|| ft_strcmp(id, "sp") == 0
 		|| ft_strcmp(id, "pl") == 0
+		|| ft_strcmp(id, "co") == 0
 		|| ft_strcmp(id, "cy") == 0)
 		valid = true;
 	free(id);
@@ -96,7 +92,8 @@ int	is_object(char *line)
 {
 	if ((line[0] == 's' && line[1] == 'p' && line[2] == ' ')
 		|| (line[0] == 'c' && line[1] == 'y' && line[2] == ' ')
-		|| (line[0] == 'p' && line[1] == 'l' && line[2] == ' '))
+		|| (line[0] == 'p' && line[1] == 'l' && line[2] == ' ')
+		|| (line[0] == 'c' && line[1] == 'o' && line[2] == ' '))
 		return (1);
 	return (0);
 }

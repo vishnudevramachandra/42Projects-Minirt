@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:59:40 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/23 01:43:15 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:13:11 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	normal_at(t_tup normal, t_obj *obj, t_tup point)
 	}
 	else if (obj->typ == PLANE)
 		copy_tup(normal, obj->pl.norm_vec);
+	else if (obj->typ == CONE)
+	{
+		printf("normalize cone\n");
+	}
 }
 
 // void	render_light(t_mrt *m, uint32_t *x, uint32_t *y)
