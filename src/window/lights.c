@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/24 15:15:09 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/24 15:48:01 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int	is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec, t_light *light)
 		else if (obj->typ == PLANE)
 			t = inter_plane(&obj->pl, &shadow_ray);
 		else if (obj->typ == CONE)
-			inter_cone(obj->co, shadow_ray);
-			// t = inter_cone(obj->co, shadow_ray);
+			t = inter_cone(obj->co, shadow_ray);
 		// else if (obj->typ == CYLINDER)
 		//	 t = inter_cylinder(obj->cy, shadow_ray);
 		if (EPSILON < t && t < light_dist)

@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/24 15:12:29 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 13:40:51 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	translate_objects(t_mrt *m)
 			multi_mat_tuple(obj->co.pos, mat, obj->co.pos);
 		node = node->next;
 	}
-	// multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
 	multi_mat_tuple(m->scene->camera.position, mat, m->scene->camera.position);
 }
 
@@ -123,11 +122,11 @@ void	project_objects(t_mrt *m)
 		}
 		else if (obj->typ == CONE)
 		{
-			printf("");
+			multi_mat_tuple(tup, mat, obj->cy.pos);
+			copy_tup(obj->cy.pos, tup);
 		}
 		node = node->next;
 	}
 	adjust_lights_to_view(m->scene, mat);
-	// multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
 	copy_vector(m->scene->camera.orientation_vector, (t_tup){0, 0, 1});
 }

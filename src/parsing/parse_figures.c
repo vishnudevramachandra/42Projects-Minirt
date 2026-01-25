@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/24 15:14:34 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 13:39:35 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "parse.h"
 #include "minirt.h"
 
-void	print_tup(t_tup vec)
-{
-	printf("     %g,%g,%g,%g\n", vec[0], vec[1], vec[2], vec[3]);
-}
-void	print_color(t_rgb *rgb)
-{
-	printf("     %i,%i,%i\n", rgb->r, rgb->g, rgb->b);
-}
+// void	print_tup(t_tup vec)
+// {
+// 	printf("     %g,%g,%g,%g\n", vec[0], vec[1], vec[2], vec[3]);
+// }
+// void	print_color(t_rgb *rgb)
+// {
+// 	printf("     %i,%i,%i\n", rgb->r, rgb->g, rgb->b);
+// }
 
 t_obj	*parse_sphere(char *line)
 {
@@ -132,15 +132,9 @@ t_obj	*parse_cone(char *line)
 	i = i + len + len_spaces(line + i + len);
 	if (!set_color(&obj->co.mt.pattern.color1, line + i, &len))
 		return (free(obj), NULL);
-	// i = i + len + len_spaces(line + i + len);
-	// if (!set_pattern(&obj->pl.mt, line + i, &len))
-	// 	obj->pl.mt.pattern.fcn = NULL;
-	// printf("position: ");	
-	// print_tup(obj->co.pos);
-	// printf("dia: %f\n", obj->co.dia);	
-	// printf("height: %f\n", obj->co.height);	
-	// printf("color: ");	
-	// print_color(&obj->co.mt.pattern.color1);
+	i = i + len + len_spaces(line + i + len);
+	if (!set_pattern(&obj->co.mt, line + i, &len))
+		obj->co.mt.pattern.fcn = NULL;
 	return (obj);
 }
 

@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 22:06:26 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/24 15:15:26 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 13:45:22 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,29 @@ double	inter_plane(t_plane *pl, t_ray *r)
 	return (dot_prod(perp_vec, perp_vec) / dot_prod(r->direction, perp_vec));
 }
 
-void	inter_cone(t_cone co, t_ray r)
+double	inter_cone(t_cone co, t_ray r)
 {
-	(void)co;
-	(void)r;
-	printf("inter cone\n");
+	double	t;
+	double	k;
+	t_tup	l;
+	double	a;
+	double	b_half;
+	double	c;
+	double	dlt;
+
+	k = (co.dia * 0.5) / co.height;
+	sub_tuples(l, r.origin, co.pos);
+	a = r.direction[0] * r.direction[0] + r.direction[2]
+		* r.direction[2] - k * k * r.direction[1] * r.direction[1];
+	if (fabs(a) < EPSILON)
+		return (-1);
+	b_half = l[0] * r.direction[0] + l[2] * r.direction[2]
+		- k * k * l[1] * r.direction[1];
+	c = l[0] * l[0] + l[2] * l[2] - k * k * l[1] * l[1];
+	dlt = delta(a, b_half, c);
+	if (dlt < 0)
+		return (-1);
+	else
+		t = get_hitpoint(a, b_half, sqrt(dlt));
+	return (t);
 }

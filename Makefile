@@ -6,7 +6,7 @@
 #    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/23 17:48:02 by majkijew         ###   ########.fr        #
+#    Updated: 2026/01/25 13:55:34 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NC := \033[0m # No Color
 CC 			= 	cc
 CFLAGS		= 	-Wall -Wextra -Werror -IIncludes -Ilibft -IMLX42/include
 
-NAME		= 	my_program 
+NAME		= 	miniRT
 INCD		=	Includes
 
 LIBFT_DIR 	= 	libft

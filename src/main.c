@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/22 17:51:40 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 13:40:13 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,10 @@ int32_t	main(int ac, char **av)
 	mrt->scene = malloc(sizeof(t_scene));
 	if (!mrt->scene)
 		erro_msg("ERROR", 1);
-	printf("before init_scene\n");
+	// printf("before init_scene\n");
 	init_scene(mrt->scene);
-	printf("before read_from_fd\n");
+	// printf("before read_from_fd\n");
 	read_from_fd(av[1], mrt->scene, &mrt->obj);
-	printf("before init_mrt\n");
-	t_list *n = mrt->scene->lights_list;
-	int count = 0;
-	while (n) { count++; n = n->next; }
-	printf("DEBUG: %d lights in scene\n", count);
-
+	// printf("before init_mrt\n");
 	init_mrt(mrt);
 }

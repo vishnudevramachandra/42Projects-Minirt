@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/24 15:14:16 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 13:42:41 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	normalize_vectors(t_mrt *m)
 		{
 			normalize(obj->pl.norm_vec);
 			if (0 < dot_prod(
-				*perpvec_to_plane(vec, &obj->pl, (double[4]){0, 0, 0, 1}),
+					*perpvec_to_plane(vec, &obj->pl, (double[4]){0, 0, 0, 1}),
 				obj->pl.norm_vec))
 				multi_tuple(obj->pl.norm_vec, obj->pl.norm_vec, -1);
 		}
@@ -101,7 +101,7 @@ void	compute_intersections(t_inter **inter, t_mrt *m)
 		else if (obj->typ == PLANE)
 			t = inter_plane(&obj->pl, &m->ray);
 		if (obj->typ == CONE)
-			inter_cone(obj->co, m->ray);
+			t = inter_cone(obj->co, m->ray);
 			// if (obj->typ == CYLINDER)
 		// 	t = inter_cylinder(obj->sp, m->ray);
 		if (0 < t)

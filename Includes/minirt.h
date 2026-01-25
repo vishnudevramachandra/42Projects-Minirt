@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/24 15:14:53 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 13:35:33 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_cone
 {
 	t_material	mt;
 	t_tup		pos;
+	// t_tup		axis;
 	double		dia; //radious
 	double		height;
 }	t_cone;
@@ -247,7 +248,7 @@ t_rgb		*ring_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 int			create_node_and_add_to_list(void *content, t_list **lst);
 void		final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i);
-void		inter_cone(t_cone co, t_ray r);
+double		inter_cone(t_cone co, t_ray r);
 
 
 #endif
