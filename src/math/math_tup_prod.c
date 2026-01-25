@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_tup_prod.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 15:01:54 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/19 16:13:14 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/25 15:13:40 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ double	magnitude(t_tup a)
 // skip normalizing your ray vectors or your surface normals, your calculations
 // would be scaled differently for every ray you cast, and your scenes would
 // look terrible (if they rendered at all).
-
 void	normalize(t_tup a)
 {
 	div_tuple(a, a, magnitude(a));
@@ -63,4 +62,3 @@ void	multi_and_accum_tuple(t_tup res, t_tup a, double val)
 		i++;
 	}
 }
-// trick function to be implemented most of them need testing but idk

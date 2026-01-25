@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 13:35:33 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 15:23:10 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,13 +180,8 @@ typedef struct s_view
 	double	v_start_pos;
 }	t_view;
 
-//everything struct
-
-// typedef struct s_rt
-// {
-// 	t_mlx	*m;
-// }	t_rt;
-
+void		check_arguments(int ac, char **av);
+void		init_scene(t_scene *scene);
 void		erro_msg(char *str, int v);
 void		read_from_fd(char *file_name, t_scene *scene, t_list **objs);
 int			ft_isspace(char c);
@@ -195,7 +190,6 @@ double		atod(const char *s);
 int			is_numeric(char c);
 t_amb_light	amb_light(char *line, t_amb_light a);
 t_camera	camera(char *line, t_camera c);
-// t_light		light(char *line, t_light l);
 t_light		*light_f(char *line, t_light *l);
 int			ft_strcmp(char *s1, char *s2);
 int			get_rgba(t_rgb *c, double a);
@@ -249,6 +243,11 @@ t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 int			create_node_and_add_to_list(void *content, t_list **lst);
 void		final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i);
 double		inter_cone(t_cone co, t_ray r);
+int			is_object(char *line);
+int			is_scene(char *line);
+bool		verify_id(char *line);
+char		*get_identifier(char *line);
+bool		scene_range(t_amb_light a, t_camera c);
 
 
 #endif
