@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 18:22:47 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 14:56:28 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:48:22 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ double	inter_sphere(t_sphere *sp, t_ray *r)
 	t_tup	l;
 	double	dlt;
 	double	t[2];
-	double	ret;
 
 	sub_tuples(l, r->origin, sp->pos);
 	dlt = delta(dot_prod(r->direction, r->direction),
@@ -31,17 +30,15 @@ double	inter_sphere(t_sphere *sp, t_ray *r)
 		return (-1);
 	else
 	{
-		get_hitpoint(t, dot_prod(r->direction, r->direction),
-			dot_prod(r->direction, l), sqrt(dlt));
-		if (0 < t[0] || 0 < t[1])
-		{
-			if (t[1] < t[0])
-				ret = t[1];
-			else
-				ret = t[0];
-		}
+		get_hitpoints(t,
+			dot_prod(r->direction, r->direction),
+			dot_prod(r->direction, l),
+			sqrt(dlt));
+		if (t[1] < 0)
+			return (-1);
+		if (0 < t[0])
+			return (t[0]);
 		else
-			ret = -1;
+			return (t[1]);
 	}
-	return (ret);
 }

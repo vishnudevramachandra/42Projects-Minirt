@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:59:40 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 18:08:49 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:23:39 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,23 @@ void	reflect(t_tup out, t_tup in, t_tup normal)
 
 	multi_tuple(normal_comp_ray, normal, 2 * dot_prod(in, normal));
 	sub_tuples(out, in, normal_comp_ray);
+}
+
+void	project_point_on_vector(t_tup res, t_tup center_to_hit, t_tup vec)
+{
+	double	proj_len;
+
+	proj_len = dot_prod(center_to_hit, vec);
+	multi_tuple(res, vec, proj_len);
+}
+
+void	compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy)
+{
+	t_tup	center_to_hit;
+	t_tup	proj_on_axis;
+
+	sub_tuples(center_to_hit, hit_point, cy->pos);
+	project_point_on_vector(proj_on_axis, center_to_hit, cy->axis);
+	sub_tuples(normal, center_to_hit, proj_on_axis);
+	normalize(normal);
 }
