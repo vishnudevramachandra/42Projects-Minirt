@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/24 15:48:01 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 19:31:34 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ int	is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec, t_light *light)
 		obj = cur->content;
 		t = -1;
 		if (obj->typ == SPHERE)
-			t = inter_sphere(obj->sp, shadow_ray);
+			t = inter_sphere(&obj->sp, &shadow_ray);
 		else if (obj->typ == PLANE)
 			t = inter_plane(&obj->pl, &shadow_ray);
+		else if (obj->typ == CYLINDER)
+			t = inter_cylinder(&obj->cy, &shadow_ray);
 		else if (obj->typ == CONE)
 			t = inter_cone(obj->co, shadow_ray);
-		// else if (obj->typ == CYLINDER)
-		//	 t = inter_cylinder(obj->cy, shadow_ray);
 		if (EPSILON < t && t < light_dist)
 			return (1);
 		cur = cur->next;
@@ -89,8 +89,8 @@ void	add_ambient_component(t_rgb *final_col, t_rgb *obj_col, t_mrt *m)
 	multi_colors(final_col, obj_col, &ambient_illumination);
 }
 
-void	add_direct_component(t_rgb *final_col, t_rgb *obj_col,
-	t_light *light, double cos_theta)
+void	add_direct_component(t_rgb *final_col, t_rgb *obj_col, t_light *light,
+	double cos_theta)
 {
 	t_rgb	direct_illumination;
 	t_rgb	direct_color;
@@ -115,7 +115,6 @@ void	add_specular_component(t_rgb *final_col, t_mrt *m, t_inter *i,
 	multi_tuple(neg_vec, light_unit_vec, -1);
 	reflect(reflected_light_vec, neg_vec, i->normal);
 	cos_theta = dot_prod(reflected_light_vec, view_unit_vec);
-
 	if (cos_theta <= 0)
 		return ;
 	mult_scalar_colors(&spec_color, &light->color,
@@ -126,7 +125,7 @@ void	add_specular_component(t_rgb *final_col, t_mrt *m, t_inter *i,
 void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
 {
 	t_rgb	*obj_col;
-	t_tup	light_dir;
+	t_tup	light_unit_vec;
 	double	cos_theta;
 	t_list	*node;
 	t_light	*light;
@@ -137,19 +136,19 @@ void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
 	while (node)
 	{
 		light = node->content;
-		if (is_in_shadow(m, i, light_dir, light))
+		if (is_in_shadow(m, i, light_unit_vec, light))
 		{
 			node = node->next;
 			continue ;
 		}
-		cos_theta = dot_prod(i->normal, light_dir);
+		cos_theta = dot_prod(i->normal, light_unit_vec);
 		if (cos_theta <= 0)
 		{
 			node = node->next;
 			continue ;
 		}
 		add_direct_component(final_col, obj_col, light, cos_theta);
-		add_specular_component(final_col, m, i, light_dir, light);
+		add_specular_component(final_col, m, i, light_unit_vec, light);
 		node = node->next;
 	}
 	color_range(final_col);

@@ -6,22 +6,12 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/25 18:48:21 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 19:13:26 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "parse.h"
 #include "minirt.h"
-
-// void	print_tup(t_tup vec)
-// {
-// 	printf("     %g,%g,%g,%g\n", vec[0], vec[1], vec[2], vec[3]);
-// }
-// void	print_color(t_rgb *rgb)
-// {
-// 	printf("     %i,%i,%i\n", rgb->r, rgb->g, rgb->b);
-// }
 
 t_obj	*parse_sphere(char *line)
 {
@@ -62,7 +52,7 @@ t_obj	*parse_cylinder(char *line)
 	if (!set_tuple(obj->cy.pos, line + i, &len, 1))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	if (!set_tuple(obj->cy.axis, line + i, &len, 1))
+	if (!set_tuple(obj->cy.axis, line + i, &len, 0))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
 	if (!set_double(&obj->cy.dia, line + i, &len))
@@ -71,15 +61,13 @@ t_obj	*parse_cylinder(char *line)
 	if (!set_double(&obj->cy.height, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
+	if (!set_color(&obj->cy.mt.pattern.color1, line + i, &len))
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
 	if (!set_pattern(&obj->cy.mt, line + i, &len))
 		obj->cy.mt.pattern.fcn = NULL;
 	return (obj);
 }
-
-// if (!set_color(&obj->cy.mt.pattern.color1, line + i, &len))
-	// 	return (free(obj), NULL);
-	// obj->cy.mt.pattern.fcn = NULL;
-	// obj->cy.mt.shininess = 100;
 
 t_obj	*parse_plane(char *line)
 {
@@ -105,12 +93,6 @@ t_obj	*parse_plane(char *line)
 		obj->pl.mt.pattern.fcn = NULL;
 	return (obj);
 }
-// obj->pl.mt.pattern.color2 = (t_rgb){0, 0, 0};
-// init_vector(obj->pl.mt.pattern.param, 0.5, 0.5, 0.5);
-// obj->pl.mt.pattern.fcn = checker_pattern;
-// obj->pl.mt.shininess = 10;
-
-//co pos dia height color P
 
 t_obj	*parse_cone(char *line)
 {
