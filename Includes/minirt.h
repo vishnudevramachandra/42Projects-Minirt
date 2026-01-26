@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 17:56:34 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 18:21:11 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,7 @@ void		copy_point(t_tup new, t_tup old);
 void		copy_tup(t_tup new, t_tup old);
 void		create_ray(t_ray *ray, t_tup point, t_tup vector);
 int			rgb(int a, int b, int c, int d);
+void		color_range(t_rgb *c);
 double		inter_sphere(t_sphere *sp, t_ray *r);
 double		inter_plane(t_plane *pl, t_ray *r);
 double		inter_cylinder(t_cylinder *cy, t_ray *r);
@@ -253,6 +254,6 @@ int			is_scene(char *line);
 bool		verify_id(char *line);
 char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
-
+int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec, t_light *light);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 16:08:20 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 19:01:05 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 	int		i;
 
 	*objs = NULL;
+
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		erro_msg("ERROR", 1);
@@ -59,7 +60,7 @@ void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 		}
 		if (verify_id(line) == false)
 		{
-			// free(line);
+			free(line);
 			erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
 		}
 		if (is_scene(line + i))
@@ -80,7 +81,7 @@ void	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 	close(fd);
 	if (scene_range(scene->amb_light, scene->camera) == false)
 		erro_msg("INCORRECT RANGE", STDERR_FILENO); // free and exit
-	//if everything is correct with that part procceed to parse the figures
+	// //if everything is correct with that part procceed to parse the figures
 	printf("great success\n");
 }
 // printf("great success\n");

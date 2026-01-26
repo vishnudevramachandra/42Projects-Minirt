@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 17:42:50 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 18:08:45 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	print_color(t_rgb *c)
 void	render_obj(t_mrt *m, t_inter *i, int x, int y)
 {
 	t_tup	scaled;
-	t_rgb	final_color = (t_rgb){0,0,0};
+	t_rgb	final_color;
 
+	final_color = (t_rgb){0, 0, 0};
 	multi_tuple(scaled, m->ray.direction, i->t);
 	add_tuples(i->hit_point, m->ray.origin, scaled);
 	normal_at(i->normal, i->obj, i->hit_point);
@@ -84,7 +85,7 @@ void	normalize_vectors(t_mrt *m)
 		{
 			normalize(obj->pl.norm_vec);
 			if (0 < dot_prod(
-					*perpvec_to_plane(vec, &obj->pl, (double[4]){0, 0, 0, 1}),
+					*perpvec_to_plane(vec, &obj->pl, (double [4]){0, 0, 0, 1}),
 				obj->pl.norm_vec))
 				multi_tuple(obj->pl.norm_vec, obj->pl.norm_vec, -1);
 		}
