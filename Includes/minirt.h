@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 15:23:10 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 17:56:34 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdint.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <unistd.h>
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../get_next_line/get_next_line.h"
@@ -221,13 +222,17 @@ void		copy_point(t_tup new, t_tup old);
 void		copy_tup(t_tup new, t_tup old);
 void		create_ray(t_ray *ray, t_tup point, t_tup vector);
 int			rgb(int a, int b, int c, int d);
-double		inter_sphere(t_sphere sp, t_ray r);
+double		inter_sphere(t_sphere *sp, t_ray *r);
 double		inter_plane(t_plane *pl, t_ray *r);
+double		inter_cylinder(t_cylinder *cy, t_ray *r);
+double		delta(double a, double b_h, double c);
+void		get_hitpoints(double *t, double a, double b_h, double sqrt_dlt);
+void		project_point_on_vector(t_tup res, t_tup center_to_hit, t_tup vec);
+void		compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
 void		print_tup(t_tup vec);
-void		normal_at(t_tup normal, t_obj *obj, t_tup point);
+void		normal_at(t_tup normal, t_obj *obj, t_tup hit_point);
 void		canvas(t_mrt *m);
-// void		render_light(t_mrt *m, uint32_t *x, uint32_t *y);
 void		mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar);
 void		multi_colors(t_rgb	*c_new, t_rgb *c1, t_rgb *c2);
 void		reflect(t_tup out, t_tup in, t_tup normal);

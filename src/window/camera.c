@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 14:56:37 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 17:00:05 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	translate_objects(t_mrt *m)
 			multi_mat_tuple(obj->pl.point, mat, obj->pl.point);
 		else if (obj->typ == CONE)
 			multi_mat_tuple(obj->co.pos, mat, obj->co.pos);
+		else if (obj->typ == CYLINDER)
+			multi_mat_tuple(obj->cy.pos, mat, obj->cy.pos);
 		node = node->next;
 	}
 	multi_mat_tuple(m->scene->camera.position, mat, m->scene->camera.position);
@@ -124,6 +126,13 @@ void	project_objects(t_mrt *m)
 		{
 			multi_mat_tuple(tup, mat, obj->cy.pos);
 			copy_tup(obj->cy.pos, tup);
+		}
+		else if (obj->typ == CYLINDER)
+		{
+			multi_mat_tuple(tup, mat, obj->cy.pos);
+			copy_tup(obj->cy.pos, tup);
+			multi_mat_tuple(tup, mat, obj->cy.axis);
+			copy_tup(obj->cy.axis, tup);
 		}
 		node = node->next;
 	}

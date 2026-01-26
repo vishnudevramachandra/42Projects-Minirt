@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_figures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/25 13:39:35 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 16:56:31 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,16 @@ t_obj	*parse_cylinder(char *line)
 	if (!set_tuple(obj->cy.pos, line + i, &len, 1))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	if (!set_tuple(obj->cy.axis, line + i, &len, 1))
+	if (!set_tuple(obj->cy.axis, line + i, &len, 0))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
 	if (!set_double(&obj->cy.dia, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
 	if (!set_double(&obj->cy.height, line + i, &len))
+		return (free(obj), NULL);
+	i = i + len + len_spaces(line + i + len);
+	if (!set_color(&obj->cy.mt.pattern.color1, line + i, &len))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
 	if (!set_pattern(&obj->cy.mt, line + i, &len))

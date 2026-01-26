@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   start_rendering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 13:42:41 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 17:42:50 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	print_color(t_rgb *c)
+{
+	if (!c)
+		return ;
+	printf("Color: R=%.2d, G=%.2d, B=%.2d\n", c->r, c->g, c->b);
+}
 
 void	render_obj(t_mrt *m, t_inter *i, int x, int y)
 {
@@ -81,6 +88,8 @@ void	normalize_vectors(t_mrt *m)
 				obj->pl.norm_vec))
 				multi_tuple(obj->pl.norm_vec, obj->pl.norm_vec, -1);
 		}
+		else if (obj->typ == CYLINDER)
+			normalize(obj->cy.axis);
 		cur = cur->next;
 	}
 }
@@ -97,13 +106,13 @@ void	compute_intersections(t_inter **inter, t_mrt *m)
 		obj = current->content;
 		t = -1;
 		if (obj->typ == SPHERE)
-			t = inter_sphere(obj->sp, m->ray);
+			t = inter_sphere(&obj->sp, &m->ray);
 		else if (obj->typ == PLANE)
 			t = inter_plane(&obj->pl, &m->ray);
 		if (obj->typ == CONE)
 			t = inter_cone(obj->co, m->ray);
-			// if (obj->typ == CYLINDER)
-		// 	t = inter_cylinder(obj->sp, m->ray);
+		else if (obj->typ == CYLINDER)
+			t = inter_cylinder(&obj->cy, &m->ray);
 		if (0 < t)
 			insert_intersection(inter, malloc(sizeof(t_inter)), obj, t);
 		current = current->next;

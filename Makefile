@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
+#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/25 15:20:56 by majkijew         ###   ########.fr        #
+#    Updated: 2026/01/26 17:02:14 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,12 @@ SRCFILES	=	main.c \
 				window/camera.c \
 				window/pattern.c \
 				ray_sphere_inter/create_rays.c \
-				ray_sphere_inter/intersect_obj.c \
 				ray_sphere_inter/start_shadows.c \
-
+				intersect/intersect_sphere.c \
+				intersect/intersect_plane.c \
+				intersect/intersect_cylinder.c \
+				intersect/intersect_utils.c
+				
 PARSINGFILES =	parsing.c \
 				parser_utils.c \
 				scene_validation.c \
