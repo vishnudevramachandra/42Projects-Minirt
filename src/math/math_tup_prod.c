@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_tup_prod.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 15:01:54 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 15:13:40 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 18:05:07 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

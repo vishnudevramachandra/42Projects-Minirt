@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:20:27 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 16:08:50 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 18:04:10 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	is_scene(char *line)
 	if ((line[0] == 'A' && line[1] == ' ')
 		|| (line[0] == 'C' && line[1] == ' ')
 		|| (line[0] == 'L' && line[1] == ' '))
-
 		return (1);
 	return (0);
 }

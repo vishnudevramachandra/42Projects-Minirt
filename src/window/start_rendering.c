@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 19:20:19 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 19:35:27 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	normalize_vectors(t_mrt *m)
 		{
 			normalize(obj->pl.norm_vec);
 			if (0 < dot_prod(
-					*perpvec_to_plane(vec, &obj->pl, origin),
-					obj->pl.norm_vec))
+					*perpvec_to_plane(vec, &obj->pl, (double[4]){0, 0, 0, 1}),
+				obj->pl.norm_vec))
 				multi_tuple(obj->pl.norm_vec, obj->pl.norm_vec, -1);
 		}
 		else if (obj->typ == CYLINDER)
