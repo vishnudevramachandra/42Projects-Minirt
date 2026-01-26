@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 19:37:48 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:28:56 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 	int		i;
 
 	*objs = NULL;
-
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		return (0);

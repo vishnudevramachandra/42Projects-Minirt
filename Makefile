@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
+#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/26 19:36:03 by majkijew         ###   ########.fr        #
+#    Updated: 2026/01/26 21:12:21 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRCFILES	=	main.c \
 				window/lights.c \
 				window/shadows.c \
 				window/start_rendering.c \
+				window/rendering_utils.c \
+				window/inter_utils.c \
 				window/camera.c \
 				window/pattern.c \
 				ray_inter/create_rays.c \

@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:55 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/12 15:53:29 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:11:50 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,23 @@ t_rgb	*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point)
 		return (c2);
 	else
 		return (c1);
+}
+
+void	find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i)
+{
+	t_tup	inv_hit_point;
+
+	if (!i->obj->sp.mt.pattern.fcn)
+		*obj_col = &i->obj->sp.mt.pattern.color1;
+	else
+	{
+		multi_mat_tuple(inv_hit_point, m->inv.final, i->hit_point);
+		*obj_col = i->obj->sp.mt.pattern.fcn(
+				i->obj->sp.mt.pattern.param,
+				&i->obj->sp.mt.pattern.color1,
+				&i->obj->sp.mt.pattern.color2,
+				inv_hit_point);
+	}
 }
 
 // int	main()

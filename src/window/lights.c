@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lights.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 19:38:23 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:27:34 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-void	find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i)
-{
-	t_tup	inv_hit_point;
-
-	if (!i->obj->sp.mt.pattern.fcn)
-		*obj_col = &i->obj->sp.mt.pattern.color1;
-	else
-	{
-		multi_mat_tuple(inv_hit_point, m->inv.final, i->hit_point);
-		*obj_col = i->obj->sp.mt.pattern.fcn(
-				i->obj->sp.mt.pattern.param,
-				&i->obj->sp.mt.pattern.color1,
-				&i->obj->sp.mt.pattern.color2,
-				inv_hit_point);
-	}
-}
 
 void	add_ambient_component(t_rgb *final_col, t_rgb *obj_col, t_mrt *m)
 {
@@ -50,55 +33,55 @@ void	add_direct_component(t_rgb *final_col, t_rgb *obj_col, t_light *light,
 	add_colors(final_col, final_col, &direct_color);
 }
 
-void	add_specular_component(t_rgb *final_col, t_mrt *m, t_inter *i,
-	t_tup light_unit_vec, t_light *light)
+double	get_specular_factor(t_mrt *m, t_inter *i, t_tup light_unit_vec)
 {
 	t_tup	view_unit_vec;
 	t_tup	neg_vec;
 	t_tup	reflected_light_vec;
-	double	cos_theta;
-	t_rgb	spec_color;
 
 	sub_tuples(view_unit_vec, m->scene->camera.position, i->hit_point);
 	normalize(view_unit_vec);
 	multi_tuple(neg_vec, light_unit_vec, -1);
 	reflect(reflected_light_vec, neg_vec, i->normal);
-	cos_theta = dot_prod(reflected_light_vec, view_unit_vec);
+	return (dot_prod(reflected_light_vec, view_unit_vec));
+}
+
+void	add_specular_component(
+	t_rgb *final_col, t_light *light, double shininess, double cos_theta)
+{
+	t_rgb	spec_color;
+
 	if (cos_theta <= 0)
 		return ;
-	mult_scalar_colors(&spec_color, &light->color,
-		pow(cos_theta, i->obj->sp.mt.shininess) * light->bright_ratio);
+	mult_scalar_colors(&spec_color,
+		&light->color,
+		pow(cos_theta, shininess) * light->bright_ratio);
 	add_colors(final_col, final_col, &spec_color);
 }
 
-void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
+void	final_obj_light(t_rgb *final_c, t_mrt *m, t_inter *i)
 {
-	t_rgb	*obj_col;
-	t_tup	light_unit_vec;
-	double	cos_theta;
+	t_rgb	*obj_c;
+	t_tup	light_uv;
 	t_list	*node;
-	t_light	*light;
+	t_light	*lt;
 
 	node = m->scene->lights_list;
-	find_obj_color(&obj_col, m, i);
-	add_ambient_component(final_col, obj_col, m);
+	find_obj_color(&obj_c, m, i);
+	add_ambient_component(final_c, obj_c, m);
 	while (node)
 	{
-		light = node->content;
-		if (is_in_shadow(m, i, light_unit_vec, light))
+		lt = node->content;
+		if (is_in_shadow(m, i, light_uv, lt)
+			|| dot_prod(i->normal, light_uv) <= 0)
 		{
 			node = node->next;
 			continue ;
 		}
-		cos_theta = dot_prod(i->normal, light_unit_vec);
-		if (cos_theta <= 0)
-		{
-			node = node->next;
-			continue ;
-		}
-		add_direct_component(final_col, obj_col, light, cos_theta);
-		add_specular_component(final_col, m, i, light_unit_vec, light);
+		add_direct_component(final_c, obj_c, lt, dot_prod(i->normal, light_uv));
+		add_specular_component(final_c, lt, i->obj->sp.mt.shininess,
+			get_specular_factor(m, i, light_uv));
 		node = node->next;
 	}
-	color_range(final_col);
+	color_range(final_c);
 }

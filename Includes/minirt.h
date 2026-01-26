@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 19:37:01 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:12:39 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,8 +204,8 @@ double		dot_prod(t_tup a, t_tup b);
 double		magnitude(t_tup a);
 void		normalize(t_tup a);
 void		multi_and_accum_tuple(t_tup res, t_tup a, double val);
-void		multi_mat_mat(mat4 res, mat4 a, mat4 b);
-void		multi_mat_tuple(t_tup res, mat4 m, t_tup t);
+mat4		*multi_mat_mat(mat4 res, mat4 a, mat4 b);
+t_tup		*multi_mat_tuple(t_tup res, mat4 m, t_tup t);
 void		transpose_mat(mat4 m);
 bool		is_equal_tup(t_tup a, t_tup b);
 bool		is_equal_mat(mat4 a, mat4 b);
@@ -233,10 +233,13 @@ void		compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
 void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_obj *obj, t_tup hit_point);
+void		insert_intersection(t_inter **list, t_inter *new, t_obj *obj, double t);
+void		free_list(t_inter *i);
 void		canvas(t_mrt *m);
 void		mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar);
 void		multi_colors(t_rgb	*c_new, t_rgb *c1, t_rgb *c2);
 void		reflect(t_tup out, t_tup in, t_tup normal);
+void		normalize_vectors(t_mrt *m);
 void		translate_objects(t_mrt *m);
 void		project_objects(t_mrt *m);
 void		calc_direction(t_camera *cam, t_view *view, int x, int y);
@@ -254,6 +257,7 @@ int			is_scene(char *line);
 bool		verify_id(char *line);
 char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
+void		find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
 int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec, t_light *light);
 void		erro_clean(t_mrt *mrt, char *str, int v);
 

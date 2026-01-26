@@ -6,14 +6,14 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:43:04 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/19 16:14:05 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 21:22:46 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minirt.h"
 
 // matrix-matrix multiplication carried out as combination of rows
-void	multi_mat_mat(mat4 res, mat4 a, mat4 b)
+mat4	*multi_mat_mat(mat4 res, mat4 a, mat4 b)
 {
 	int	i;
 	int	j;
@@ -35,10 +35,11 @@ void	multi_mat_mat(mat4 res, mat4 a, mat4 b)
 		}
 		i++;
 	}
+	return ((mat4 *)res);
 }
 
 // matrix-tuple multiplication carried out using dot-products
-void	multi_mat_tuple(t_tup res, mat4 m, t_tup t)
+t_tup	*multi_mat_tuple(t_tup res, mat4 m, t_tup t)
 {
 	int	i;
 
@@ -48,6 +49,7 @@ void	multi_mat_tuple(t_tup res, mat4 m, t_tup t)
 		res[i] = dot_prod(m[i], t);
 		i++;
 	}
+	return ((t_tup *)res);
 }
 
 // in-place transpose of matrix

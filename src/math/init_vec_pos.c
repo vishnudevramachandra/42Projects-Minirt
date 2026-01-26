@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:22:51 by majkijew          #+#    #+#             */
-/*   Updated: 2025/12/03 15:59:03 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 21:05:16 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	copy_tup(t_tup new, t_tup old)
 {
 	int	i;
 
+	if (new == old)
+		return ;
 	i = 0;
 	while (i < 4)
 	{
