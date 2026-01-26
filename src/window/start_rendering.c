@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 10:17:54 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:36:13 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,6 @@ void	final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i)
 
 	find_obj_color(&obj_col, m, i);
 	add_ambient_component(final_col, obj_col, m);
-	color_range(final_col);
-	return ; 
 	if (is_in_shadow(m, i, light_unit_vec))
 	{
 		color_range(final_col);
@@ -245,7 +243,6 @@ void	compute_intersections(t_inter **inter, t_mrt *m)
 			t = inter_plane(&obj->pl, &m->ray);
 		else if (obj->typ == CYLINDER)
 			t = inter_cylinder(&obj->cy, &m->ray);
-		printf("%.1f ," , t);
 		if (0 < t)
 			insert_intersection(inter, malloc(sizeof(t_inter)), obj, t);
 		current = current->next;
@@ -282,6 +279,5 @@ void	canvas(t_mrt *m)
 			x++;
 		}
 		y++;
-		printf("\n");
 	}
 }

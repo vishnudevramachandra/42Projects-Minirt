@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/23 13:01:05 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:56:55 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_obj	*parse_cylinder(char *line)
 	if (!set_tuple(obj->cy.pos, line + i, &len, 1))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
-	if (!set_tuple(obj->cy.axis, line + i, &len, 1))
+	if (!set_tuple(obj->cy.axis, line + i, &len, 0))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
 	if (!set_double(&obj->cy.dia, line + i, &len))

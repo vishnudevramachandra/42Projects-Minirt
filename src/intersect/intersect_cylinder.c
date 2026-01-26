@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 18:24:38 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 10:25:08 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:57:18 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,20 @@ double	inter_cylinder(t_cylinder *cy, t_ray *r)
 	if (dlt < 0)
 		return (-1);
 	else if (dot_prod(p_v, p_v) == 0)
-	{
 		return (-1);
-		t = get_hitpoint(1,
-				dot_prod(p_v, q_v),
-				sqrt(dlt));
-	}
 	else
-		t = get_hitpoint(dot_prod(p_v, p_v),
-				dot_prod(p_v, q_v),
-				sqrt(dlt));
+	{
+		// t = get_hitpoint(dot_prod(p_v, p_v), dot_prod(p_v, q_v), sqrt(dlt));
+		t = -1;
+		if (t != -1)
+		{
+			multi_tuple(l, r->direction, t);
+			add_tuples(l, r->origin, l);
+			sub_tuples(l, l, cy->pos);
+			if ((cy->height / 2) < fabs(dot_prod(l, cy->axis)))
+				t = -1;
+		}
+	}
 	return (t);
 }
 
