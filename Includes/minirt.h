@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/23 13:24:41 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/25 18:42:01 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,9 +217,13 @@ int			rgb(int a, int b, int c, int d);
 double		inter_sphere(t_sphere *sp, t_ray *r);
 double		inter_plane(t_plane *pl, t_ray *r);
 double		inter_cylinder(t_cylinder *cy, t_ray *r);
+double		delta(double a, double b_h, double c);
+double		get_hitpoint(double a, double b_h, double sqrt_dlt);
+void		project_point_on_vector(t_tup res, t_tup center_to_hit, t_tup vec);
+void		compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
 void		print_tup(t_tup vec);
-void		normal_at(t_tup normal, t_obj *obj, t_tup point);
+void		normal_at(t_tup normal, t_obj *obj, t_tup hit_point);
 void		canvas(t_mrt *m);
 void		render_light(t_mrt *m, uint32_t *x, uint32_t *y);
 void		mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar);

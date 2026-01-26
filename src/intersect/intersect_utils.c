@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx.h                                              :+:      :+:    :+:   */
+/*   intersect_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/16 14:13:17 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 10:21:03 by vramacha         ###   ########.fr       */
+/*   Created: 2026/01/25 18:21:52 by vramacha          #+#    #+#             */
+/*   Updated: 2026/01/25 18:22:26 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX_H
-# define MLX_H
+double	delta(double a, double b_h, double c)
+{
+	return ((b_h * b_h) - (a * c));
+}
 
-# include "minirt.h"
+double	get_hitpoint(double a, double b_h, double sqrt_dlt)
+{
+	double	t;
+	double	t1;
+	double	t2;
 
-// ================================= mlx ===================================
-# define HEIGHT 25
-# define WIDTH 25
-# define MLX_ALPHA true
-
-
-//scene struct
-
-#endif
+	t1 = (-b_h - sqrt_dlt) / a;
+	t2 = (-b_h + sqrt_dlt) / a;
+	if (0 < t1 || 0 < t2)
+	{
+		if (t2 < t1)
+			t = t2;
+		else
+			t = t1;
+	}
+	else
+		t = -1;
+	return (t);
+}

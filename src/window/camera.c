@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/22 18:38:21 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/25 19:01:58 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	translate_objects(t_mrt *m)
 			multi_mat_tuple(obj->sp.pos, mat, obj->sp.pos);
 		else if (obj->typ == PLANE)
 			multi_mat_tuple(obj->pl.point, mat, obj->pl.point);
+		else if (obj->typ == CYLINDER)
+			multi_mat_tuple(obj->cy.pos, mat, obj->cy.pos);
 		node = node->next;
 	}
 	multi_mat_tuple(m->scene->light.position, mat, m->scene->light.position);
@@ -104,6 +106,13 @@ void	project_objects(t_mrt *m)
 			copy_tup(obj->pl.point, tup);
 			multi_mat_tuple(tup, mat, obj->pl.norm_vec);
 			copy_tup(obj->pl.norm_vec, tup);
+		}
+		else if (obj->typ == CYLINDER)
+		{
+			multi_mat_tuple(tup, mat, obj->cy.pos);
+			copy_tup(obj->cy.pos, tup);
+			multi_mat_tuple(tup, mat, obj->cy.axis);
+			copy_tup(obj->cy.axis, tup);
 		}
 		node = node->next;
 	}
