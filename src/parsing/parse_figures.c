@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/25 13:39:35 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 18:48:21 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,17 +136,6 @@ t_obj	*parse_cone(char *line)
 	if (!set_pattern(&obj->co.mt, line + i, &len))
 		obj->co.mt.pattern.fcn = NULL;
 	return (obj);
-}
-
-int	create_node_and_add_to_list(void *content, t_list **lst)
-{
-	t_list	*node;
-
-	node = ft_lstnew(content);
-	if (!node)
-		return (0);
-	ft_lstadd_back(lst, node);
-	return (1);
 }
 
 t_list	*parse_obj(char *line, t_list **objs)

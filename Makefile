@@ -6,7 +6,7 @@
 #    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/25 15:20:56 by majkijew         ###   ########.fr        #
+#    Updated: 2026/01/25 18:53:38 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRCFILES	=	main.c \
 				ray_sphere_inter/start_shadows.c \
 
 PARSINGFILES =	parsing.c \
-				parser_utils.c \
+				utils.c \
 				scene_validation.c \
 				parsing_utils.c \
 				parse_scene.c \

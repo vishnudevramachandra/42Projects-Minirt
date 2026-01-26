@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 15:23:10 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 19:49:08 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ typedef struct s_view
 void		check_arguments(int ac, char **av);
 void		init_scene(t_scene *scene);
 void		erro_msg(char *str, int v);
-void		read_from_fd(char *file_name, t_scene *scene, t_list **objs);
+int			read_from_fd(char *file_name, t_scene *scene, t_list **objs);
 int			ft_isspace(char c);
 int			len_spaces(char *str);
 double		atod(const char *s);
@@ -248,6 +248,7 @@ int			is_scene(char *line);
 bool		verify_id(char *line);
 char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
+void		erro_clean(t_mrt *mrt, char *str, int v);
 
 
 #endif

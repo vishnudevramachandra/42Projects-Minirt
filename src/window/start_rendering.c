@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 13:42:41 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/25 20:52:36 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	render_obj(t_mrt *m, t_inter *i, int x, int y)
 {
 	t_tup	scaled;
-	t_rgb	final_color = (t_rgb){0,0,0};
+	t_rgb	final_color;
 
+	final_color = (t_rgb){0, 0, 0};
 	multi_tuple(scaled, m->ray.direction, i->t);
 	add_tuples(i->hit_point, m->ray.origin, scaled);
 	normal_at(i->normal, i->obj, i->hit_point);
@@ -65,7 +66,9 @@ void	normalize_vectors(t_mrt *m)
 	t_list	*cur;
 	t_obj	*obj;
 	t_tup	vec;
+	t_tup	origin;
 
+	init_point(origin, 0, 0, 0);
 	normalize(m->scene->camera.orientation_vector);
 	if (!m->obj)
 		return ;
@@ -77,8 +80,8 @@ void	normalize_vectors(t_mrt *m)
 		{
 			normalize(obj->pl.norm_vec);
 			if (0 < dot_prod(
-					*perpvec_to_plane(vec, &obj->pl, (double[4]){0, 0, 0, 1}),
-				obj->pl.norm_vec))
+					*perpvec_to_plane(vec, &obj->pl, origin),
+					obj->pl.norm_vec))
 				multi_tuple(obj->pl.norm_vec, obj->pl.norm_vec, -1);
 		}
 		cur = cur->next;
@@ -102,11 +105,25 @@ void	compute_intersections(t_inter **inter, t_mrt *m)
 			t = inter_plane(&obj->pl, &m->ray);
 		if (obj->typ == CONE)
 			t = inter_cone(obj->co, m->ray);
-			// if (obj->typ == CYLINDER)
+		// if (obj->typ == CYLINDER)
 		// 	t = inter_cylinder(obj->sp, m->ray);
 		if (0 < t)
 			insert_intersection(inter, malloc(sizeof(t_inter)), obj, t);
 		current = current->next;
+	}
+}
+
+void canvas_loop(t_mrt *m, uint32_t	x, uint32_t y, t_view view, t_inter **inter)
+{
+	calc_direction(&m->scene->camera, &view, x, y);
+	create_ray(&m->ray, m->scene->camera.position,
+		m->scene->camera.orientation_vector);
+	compute_intersections(inter, m);
+	if (*inter)
+	{	
+		render_obj(m, *inter, x, y);
+		free_list(*inter);
+		*inter = NULL;
 	}
 }
 
@@ -127,16 +144,8 @@ void	canvas(t_mrt *m)
 		x = 0;
 		while (x < m->image->width)
 		{
-			calc_direction(&m->scene->camera, &view, x, y);
-			create_ray(&m->ray, m->scene->camera.position,
-				m->scene->camera.orientation_vector);
 			inter = NULL;
-			compute_intersections(&inter, m);
-			if (inter)
-			{	
-				render_obj(m, inter, x, y);
-				free_list(inter);
-			}
+			canvas_loop(m, x, y, view, &inter);
 			x++;
 		}
 		y++;
