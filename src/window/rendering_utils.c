@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 21:10:10 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 21:28:04 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:47:42 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void	normalize_vectors(t_mrt *m)
 		}
 		else if (obj->typ == CYLINDER)
 			normalize(obj->cy.axis);
+		else if (obj->typ == CONE)
+		{
+			init_vector(obj->co.axis, 0, 1, 0);
+			normalize(obj->co.axis);
+		}
 		cur = cur->next;
 	}
 }
@@ -61,7 +66,7 @@ void	translate_objects(t_mrt *m)
 		else if (obj->typ == PLANE)
 			multi_mat_tuple(obj->pl.point, mat, obj->pl.point);
 		else if (obj->typ == CONE)
-			multi_mat_tuple(obj->co.pos, mat, obj->co.pos);
+			multi_mat_tuple(obj->co.apex, mat, obj->co.apex);
 		else if (obj->typ == CYLINDER)
 			multi_mat_tuple(obj->cy.pos, mat, obj->cy.pos);
 		node = node->next;
@@ -104,7 +109,7 @@ void	project_objects_subfcn(t_mrt *m, mat4 mat)
 				*multi_mat_tuple(tup, mat, obj->pl.norm_vec));
 		}
 		else if (obj->typ == CONE)
-			copy_tup(obj->co.pos, *multi_mat_tuple(tup, mat, obj->co.pos));
+			copy_tup(obj->co.apex, *multi_mat_tuple(tup, mat, obj->co.apex));
 		else if (obj->typ == CYLINDER)
 		{
 			copy_tup(obj->cy.pos, *multi_mat_tuple(tup, mat, obj->cy.pos));

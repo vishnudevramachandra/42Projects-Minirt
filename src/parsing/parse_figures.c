@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 19:13:26 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/27 13:40:55 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_obj	*parse_cone(char *line)
 	obj = malloc(sizeof(t_obj));
 	obj->typ = CONE;
 	i = 0 + len_spaces(line);
-	if (!set_tuple(obj->co.pos, line + i, &len, 1))
+	if (!set_tuple(obj->co.apex, line + i, &len, 1))
 		return (free(obj), NULL);
 	i = i + len + len_spaces(line + i + len);
 	if (!set_double(&obj->co.dia, line + i, &len))

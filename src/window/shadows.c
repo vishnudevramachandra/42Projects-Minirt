@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:19:12 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 20:09:11 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:51:58 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ double	inter_obj(t_obj *obj, t_ray *ray)
 	else if (obj->typ == CYLINDER)
 		t = inter_cylinder(&obj->cy, ray);
 	else if (obj->typ == CONE)
-		t = inter_cone(obj->co, *ray);
+		t = inter_cone(&obj->co, ray);
 	return (t);
 }
 

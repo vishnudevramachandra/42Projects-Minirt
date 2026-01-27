@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_rendering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 21:10:26 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:49:24 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	compute_intersections(t_inter **inter, t_mrt *m)
 		else if (obj->typ == PLANE)
 			t = inter_plane(&obj->pl, &m->ray);
 		if (obj->typ == CONE)
-			t = inter_cone(obj->co, m->ray);
+			t = inter_cone(&obj->co, &m->ray);
 		if (obj->typ == CYLINDER)
 			t = inter_cylinder(&obj->cy, &m->ray);
 		if (0 < t)

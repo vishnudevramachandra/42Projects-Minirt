@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 22:12:39 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:49:36 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ typedef struct s_cylinder
 typedef struct s_cone 
 {
 	t_material	mt;
-	t_tup		pos;
-	// t_tup		axis;
+	t_tup		apex;
+	t_tup		axis;
 	double		dia; //radious
 	double		height;
 }	t_cone;
@@ -251,7 +251,7 @@ t_rgb		*ring_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 int			create_node_and_add_to_list(void *content, t_list **lst);
 void		final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i);
-double		inter_cone(t_cone co, t_ray r);
+double		inter_cone(t_cone *co, t_ray *r);
 int			is_object(char *line);
 int			is_scene(char *line);
 bool		verify_id(char *line);

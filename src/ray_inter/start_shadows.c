@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   start_shadows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:59:40 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 18:05:49 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:08:54 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	normalize_cone(t_tup normal, t_tup point)
+void	normalize_cone(t_tup normal, t_cone *co, t_tup hit_point)
 {
+	t_tup	p;
+	double	k;
 	double	y;
 
-	y = sqrt(point[0] * point[0] + point[2] * point[2]);
-	if (point[1] > 0)
-		y = -y;
-	init_vector(normal, point[0], y, point[2]);
+	sub_tuples(p, hit_point, co->apex);
+	k = (co->dia / 2) / co->height;
+	y = -sqrt(p[0] * p[0] + p[2] * p[2]) / k;
+	init_vector(normal, p[0], (k * k) * p[1], p[2]);
 	normalize(normal);
 }
 
@@ -33,7 +35,7 @@ void	normal_at(t_tup normal, t_obj *obj, t_tup hit_point)
 	else if (obj->typ == PLANE)
 		copy_tup(normal, obj->pl.norm_vec);
 	else if (obj->typ == CONE)
-		normalize_cone(normal, hit_point);
+		normalize_cone(normal, &obj->co, hit_point);
 	else if (obj->typ == CYLINDER)
 		compute_cy_normal(normal, hit_point, &obj->cy);
 }
