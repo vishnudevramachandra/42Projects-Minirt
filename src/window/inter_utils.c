@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 20:35:54 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 20:36:04 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:08:44 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@ void	insert_intersection(t_inter **list, t_inter *new, t_obj *obj, double t)
 {
 	t_inter	*cur;
 
-	if (!new)
-	{
-		//has to be handled;
-	}
 	new->t = t;
 	new->obj = obj;
 	if (*list == NULL || new->t < (*list)->t)

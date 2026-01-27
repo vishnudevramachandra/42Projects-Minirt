@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   math_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:43:04 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 21:22:46 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:27:10 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minirt.h"
 
 // matrix-matrix multiplication carried out as combination of rows
-mat4	*multi_mat_mat(mat4 res, mat4 a, mat4 b)
+t_mat4	*multi_mat_mat(t_mat4 res, t_mat4 a, t_mat4 b)
 {
 	int	i;
 	int	j;
@@ -35,11 +35,11 @@ mat4	*multi_mat_mat(mat4 res, mat4 a, mat4 b)
 		}
 		i++;
 	}
-	return ((mat4 *)res);
+	return ((t_mat4 *)res);
 }
 
 // matrix-tuple multiplication carried out using dot-products
-t_tup	*multi_mat_tuple(t_tup res, mat4 m, t_tup t)
+t_tup	*multi_mat_tuple(t_tup res, t_mat4 m, t_tup t)
 {
 	int	i;
 
@@ -53,7 +53,7 @@ t_tup	*multi_mat_tuple(t_tup res, mat4 m, t_tup t)
 }
 
 // in-place transpose of matrix
-void	transpose_mat(mat4 m)
+void	transpose_mat(t_mat4 m)
 {
 	int		i;
 	int		j;
@@ -75,7 +75,7 @@ void	transpose_mat(mat4 m)
 }
 
 // matrix comparison using epsilon
-bool	is_equal_mat(mat4 a, mat4 b)
+bool	is_equal_mat(t_mat4 a, t_mat4 b)
 {
 	int	i;
 
@@ -89,7 +89,7 @@ bool	is_equal_mat(mat4 a, mat4 b)
 	return (1);
 }
 
-mat4	*copy_mat(mat4 new, mat4 old)
+t_mat4	*copy_mat(t_mat4 new, t_mat4 old)
 {
 	int	i;
 
@@ -99,5 +99,5 @@ mat4	*copy_mat(mat4 new, mat4 old)
 		*((double *)new + i) = *((double *)old + i);
 		i++;
 	}
-	return ((mat4 *)new);
+	return ((t_mat4 *)new);
 }

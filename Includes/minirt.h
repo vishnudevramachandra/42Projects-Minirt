@@ -6,13 +6,13 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/27 16:49:36 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:47:50 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 
-#define EPSILON 1e-4
+# define EPSILON 1e-4
 
 # define MINIRT_H
 # include <math.h>
@@ -57,19 +57,16 @@ typedef struct s_camera
 
 typedef struct s_light
 {
-	t_tup	position; //coordinates of the lightning point
+	t_tup	position;
 	double	bright_ratio;
 	t_rgb	color;
 }	t_light;
 
 typedef struct s_scene
 {
-	// mlx_t		mlx;
-	// mlx_image_t		*img; those two for the mlx window
 	t_amb_light	amb_light;
 	t_camera	camera;
 	t_list		*lights_list;
-	// t_light		light;
 }				t_scene;
 
 typedef t_rgb*(*t_pattern_fcn)(t_tup param, t_rgb *c1, t_rgb *c2,
@@ -92,8 +89,8 @@ typedef struct s_material
 typedef struct s_sphere
 {
 	t_material	mt;
-	t_tup		pos; //center
-	double		dia; //radious
+	t_tup		pos;
+	double		dia;
 }	t_sphere;
 
 typedef struct s_cylinder
@@ -105,12 +102,12 @@ typedef struct s_cylinder
 	double		height;
 }	t_cylinder;
 
-typedef struct s_cone 
+typedef struct s_cone
 {
 	t_material	mt;
 	t_tup		apex;
 	t_tup		axis;
-	double		dia; //radious
+	double		dia;
 	double		height;
 }	t_cone;
 
@@ -151,13 +148,13 @@ typedef struct s_inter
 	struct s_inter	*next;
 }	t_inter;
 
-typedef double	mat4[4][4];
+typedef double	t_mat4[4][4];
 
 typedef struct s_cam_inv
 {
-	mat4	trsl;
-	mat4	proj;
-	mat4	final;
+	t_mat4	trsl;
+	t_mat4	proj;
+	t_mat4	final;
 }	t_cam_inv;
 
 typedef struct s_mrt
@@ -169,9 +166,6 @@ typedef struct s_mrt
 	t_ray		ray;
 	t_inter		*i;
 	t_cam_inv	inv;
-	// t_ray		*ray;
-	// void			*mlx_ptr;
-	// void			*win_ptr;
 }	t_mrt;
 
 typedef struct s_view
@@ -204,17 +198,17 @@ double		dot_prod(t_tup a, t_tup b);
 double		magnitude(t_tup a);
 void		normalize(t_tup a);
 void		multi_and_accum_tuple(t_tup res, t_tup a, double val);
-mat4		*multi_mat_mat(mat4 res, mat4 a, mat4 b);
-t_tup		*multi_mat_tuple(t_tup res, mat4 m, t_tup t);
-void		transpose_mat(mat4 m);
+t_mat4		*multi_mat_mat(t_mat4 res, t_mat4 a, t_mat4 b);
+t_tup		*multi_mat_tuple(t_tup res, t_mat4 m, t_tup t);
+void		transpose_mat(t_mat4 m);
 bool		is_equal_tup(t_tup a, t_tup b);
-bool		is_equal_mat(mat4 a, mat4 b);
-mat4		*copy_mat(mat4 new, mat4 old);
-mat4		*identity_mat(mat4 m);
-mat4		*translation_mat(mat4 m, double d[3]);
-mat4		*scaling_mat(mat4 m, double d[3]);
-mat4		*rotation_mat(mat4 m, double angles[3]);
-mat4		*shearing_mat(mat4 m, double angles[6]);
+bool		is_equal_mat(t_mat4 a, t_mat4 b);
+t_mat4		*copy_mat(t_mat4 new, t_mat4 old);
+t_mat4		*identity_mat(t_mat4 m);
+t_mat4		*translation_mat(t_mat4 m, double d[3]);
+t_mat4		*scaling_mat(t_mat4 m, double d[3]);
+t_mat4		*rotation_mat(t_mat4 m, double angles[3]);
+t_mat4		*shearing_mat(t_mat4 m, double angles[6]);
 void		init_vector(t_tup vec, double x, double y, double z);
 void		init_point(t_tup vec, double x, double y, double z);
 void		copy_vector(t_tup new, t_tup old);
@@ -233,7 +227,8 @@ void		compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
 void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_obj *obj, t_tup hit_point);
-void		insert_intersection(t_inter **list, t_inter *new, t_obj *obj, double t);
+void		insert_intersection(t_inter **list, t_inter *new, t_obj *obj,
+				double t);
 void		free_list(t_inter *i);
 void		canvas(t_mrt *m);
 void		mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar);
@@ -246,9 +241,11 @@ void		calc_direction(t_camera *cam, t_view *view, int x, int y);
 void		setup_viewport(t_view *view, t_mrt *m);
 void		add_colors(t_rgb *new_c, t_rgb *c1, t_rgb *c2);
 void		add_to_color(t_rgb *new_c, t_rgb *c1, double comp);
-t_rgb		*stripped_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
+t_rgb		*stripped_pattern(t_tup param, t_rgb *c1, t_rgb *c2,
+				t_tup hit_point);
 t_rgb		*ring_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
-t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
+t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2,
+				t_tup hit_point);
 int			create_node_and_add_to_list(void *content, t_list **lst);
 void		final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i);
 double		inter_cone(t_cone *co, t_ray *r);
@@ -258,8 +255,8 @@ bool		verify_id(char *line);
 char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
 void		find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
-int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec, t_light *light);
+int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
+				t_light *light);
 void		erro_clean(t_mrt *mrt, char *str, int v);
-
 
 #endif

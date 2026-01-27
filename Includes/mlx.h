@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:13:17 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 14:37:11 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:22:25 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,5 @@
 // ================================= mlx ===================================
 # define HEIGHT 800
 # define WIDTH 800
-# define MLX_ALPHA true
-
-
-//scene struct
 
 #endif

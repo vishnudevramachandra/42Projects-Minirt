@@ -61,5 +61,5 @@ double	inter_cone(t_cone *co, t_ray *r)
 		return (-1);
 	get_hitpoints(t, a, b_half, sqrt(delta(a, b_half,
 				l[0] * l[0] + l[2] * l[2] - k * l[1] * l[1])));
-	return (resolve_hitpoint(t, co, r));  
+	return (resolve_hitpoint(t, co, r));
 }

@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 21:10:10 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/27 14:47:42 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:40:12 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ void	normalize_vectors(t_mrt *m)
 		else if (obj->typ == CYLINDER)
 			normalize(obj->cy.axis);
 		else if (obj->typ == CONE)
-		{
-			init_vector(obj->co.axis, 0, 1, 0);
 			normalize(obj->co.axis);
-		}
 		cur = cur->next;
 	}
 }
@@ -51,7 +48,7 @@ void	translate_objects(t_mrt *m)
 {
 	t_list	*node;
 	t_obj	*obj;
-	mat4	mat;
+	t_mat4	mat;
 	t_tup	n_pos;
 
 	multi_tuple(n_pos, m->scene->camera.position, -1);
@@ -74,7 +71,7 @@ void	translate_objects(t_mrt *m)
 	multi_mat_tuple(m->scene->camera.position, mat, m->scene->camera.position);
 }
 
-void	adjust_lights_to_view(t_scene *scene, mat4 mat)
+void	adjust_lights_to_view(t_scene *scene, t_mat4 mat)
 {
 	t_list	*node;
 	t_light	*light;
@@ -90,7 +87,7 @@ void	adjust_lights_to_view(t_scene *scene, mat4 mat)
 	}
 }
 
-void	project_objects_subfcn(t_mrt *m, mat4 mat)
+void	project_objects_subfcn(t_mrt *m, t_mat4 mat)
 {
 	t_list	*node;
 	t_obj	*obj;
@@ -123,7 +120,7 @@ void	project_objects_subfcn(t_mrt *m, mat4 mat)
 // same direction as camera's orientation vector are now in front of the camera.
 void	project_objects(t_mrt *m)
 {
-	mat4	mat;
+	t_mat4	mat;
 
 	identity_mat(mat);
 	if (__DBL_EPSILON__ < (dot_prod(m->scene->camera.orientation_vector,

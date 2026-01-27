@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   math_transf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:15:52 by vramacha          #+#    #+#             */
-/*   Updated: 2025/11/19 16:10:33 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:27:28 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minirt.h"
 
 // setup 4D identity matrix
-mat4	*identity_mat(mat4 m)
+t_mat4	*identity_mat(t_mat4 m)
 {
 	int	i;
 	int	j;
@@ -32,11 +32,11 @@ mat4	*identity_mat(mat4 m)
 		}
 		i++;
 	}
-	return ((mat4 *)m);
+	return ((t_mat4 *)m);
 }
 
 // setup translation matrix using the input parameter
-mat4	*translation_mat(mat4 m, double d[3])
+t_mat4	*translation_mat(t_mat4 m, double d[3])
 {
 	int	i;
 
@@ -47,11 +47,11 @@ mat4	*translation_mat(mat4 m, double d[3])
 		m[i][3] = d[i];
 		i++;
 	}
-	return ((mat4 *)m);
+	return ((t_mat4 *)m);
 }
 
 // setup scaling matrix using the input parameter
-mat4	*scaling_mat(mat4 m, double d[3])
+t_mat4	*scaling_mat(t_mat4 m, double d[3])
 {
 	int	i;
 
@@ -62,11 +62,11 @@ mat4	*scaling_mat(mat4 m, double d[3])
 		m[i][i] = d[i];
 		i++;
 	}
-	return ((mat4 *)m);
+	return ((t_mat4 *)m);
 }
 
 // setup rotation matrix using the input parameter
-mat4	*rotation_mat(mat4 m, double angles[3])
+t_mat4	*rotation_mat(t_mat4 m, double angles[3])
 {
 	m[0][0] = cos(angles[0]) * cos(angles[1]);
 	m[0][1] = (cos(angles[0]) * sin(angles[1]) * sin(angles[2])) \
@@ -88,11 +88,11 @@ mat4	*rotation_mat(mat4 m, double angles[3])
 	m[3][1] = 0;
 	m[3][2] = 0;
 	m[3][3] = 1;
-	return ((mat4 *)m);
+	return ((t_mat4 *)m);
 }
 
 // setup shearing matrix using the input parameter
-mat4	*shearing_mat(mat4 m, double angles[6])
+t_mat4	*shearing_mat(t_mat4 m, double angles[6])
 {
 	int	i;
 	int	j;
@@ -115,5 +115,5 @@ mat4	*shearing_mat(mat4 m, double angles[6])
 		}
 		i++;
 	}
-	return ((mat4 *)m);
+	return ((t_mat4 *)m);
 }
