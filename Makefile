@@ -6,7 +6,7 @@
 #    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/28 12:50:25 by vramacha         ###   ########.fr        #
+#    Updated: 2026/01/28 21:14:32 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRCFILES	=	main.c \
 				window/shadows.c \
 				window/start_rendering.c \
 				window/rendering_utils.c \
-				window/inter_utils.c \
+				window/insert_utils.c \
 				window/camera.c \
 				window/pattern.c \
 				ray_inter/create_rays.c \

@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 18:22:47 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/28 15:37:22 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/28 21:08:08 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,5 @@ void	inter_sphere(double *t, t_sphere *sp, t_ray *r)
 			dot_prod(r->direction, r->direction),
 			dot_prod(r->direction, l),
 			sqrt(dlt));
-		// if (t[1] < 0)
-		// 	return (-1);
-		// if (0 < t[0])
-		// 	return (t[0]);
-		// else
-		// 	return (t[1]);
 	}
 }

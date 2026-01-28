@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_shadows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:59:40 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/27 17:08:54 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/28 21:09:27 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ void	normalize_cone(t_tup normal, t_cone *co, t_tup hit_point)
 {
 	t_tup	p;
 	double	k;
-	double	y;
 
 	sub_tuples(p, hit_point, co->apex);
 	k = (co->dia / 2) / co->height;
-	y = -sqrt(p[0] * p[0] + p[2] * p[2]) / k;
 	init_vector(normal, p[0], (k * k) * p[1], p[2]);
 	normalize(normal);
 }

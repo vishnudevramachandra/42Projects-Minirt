@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 18:24:38 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/28 17:09:51 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/28 23:20:16 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,10 @@ double	proj_len(double t, t_cylinder *cy, t_ray *r)
 
 static void	resolve_hitpoint(double *t, t_cylinder *cy, t_ray *r)
 {
-	if (0 < t[0])
-		if ((cy->height / 2) < proj_len(t[0], cy, r))
-			t[0] = -INFINITY;
-	if (0 < t[1])
-		if ((cy->height / 2) < proj_len(t[1], cy, r))
-			t[1] = -INFINITY;
-	// if (t[1] < 0)
-	// 	return (-1);
-	// if (0 < t[0])
-	// 	if (proj_len(t[0], cy, r) <= (cy->height / 2))
-	// 		return (t[0]);
-	// if (proj_len(t[1], cy, r) <= (cy->height / 2))
-	// 	return (t[1]);
-	// else
-	// 	return (-1);
+	if ((0 < t[0]) && ((cy->height / 2) < proj_len(t[0], cy, r)))
+		t[0] = -INFINITY;
+	if ((0 < t[1]) && ((cy->height / 2) < proj_len(t[1], cy, r)))
+		t[1] = -INFINITY;
 }
 
 void	inter_cylinder(double *t, t_cylinder *cy, t_ray *r)

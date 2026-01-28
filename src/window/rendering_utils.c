@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 21:10:10 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/27 14:47:42 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/28 20:56:45 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ void	normalize_vectors(t_mrt *m)
 	}
 }
 
-void	translate_objects(t_mrt *m)
+void	translate_objects_and_lights(t_mrt *m)
 {
 	t_list	*node;
 	t_obj	*obj;
+	t_light	*light;
 	mat4	mat;
 	t_tup	n_pos;
 
@@ -71,16 +72,21 @@ void	translate_objects(t_mrt *m)
 			multi_mat_tuple(obj->cy.pos, mat, obj->cy.pos);
 		node = node->next;
 	}
+	node = m->scene->lights_list;
+	while (node)
+	{
+		light = node->content;
+		multi_mat_tuple(light->position, mat, light->position);
+		node = node->next;
+	}
 	multi_mat_tuple(m->scene->camera.position, mat, m->scene->camera.position);
 }
 
-void	adjust_lights_to_view(t_scene *scene, mat4 mat)
+static void	project_lights(t_list *node, mat4 mat)
 {
-	t_list	*node;
 	t_light	*light;
 	t_tup	tmp;
 
-	node = scene->lights_list;
 	while (node)
 	{
 		light = node->content;
@@ -90,13 +96,11 @@ void	adjust_lights_to_view(t_scene *scene, mat4 mat)
 	}
 }
 
-void	project_objects_subfcn(t_mrt *m, mat4 mat)
+static void	project_objects(t_list *node, mat4 mat)
 {
-	t_list	*node;
 	t_obj	*obj;
 	t_tup	tup;
 
-	node = m->obj;
 	while (node)
 	{
 		obj = node->content;
@@ -121,7 +125,7 @@ void	project_objects_subfcn(t_mrt *m, mat4 mat)
 
 // project objects on to camera's axes. This is done so that the objects in the
 // same direction as camera's orientation vector are now in front of the camera.
-void	project_objects(t_mrt *m)
+void	project_objects_and_lights(t_mrt *m)
 {
 	mat4	mat;
 
@@ -142,7 +146,7 @@ void	project_objects(t_mrt *m)
 	cross_prod(mat[1], mat[2], mat[0]);
 	transpose_mat(*copy_mat(m->inv.proj, mat));
 	multi_mat_mat(m->inv.final, m->inv.trsl, m->inv.proj);
-	project_objects_subfcn(m, mat);
-	adjust_lights_to_view(m->scene, mat);
+	project_objects(m->obj, mat);
+	project_lights(m->scene->lights_list, mat);
 	copy_vector(m->scene->camera.orientation_vector, (t_tup){0, 0, 1});
 }

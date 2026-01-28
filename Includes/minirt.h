@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/28 16:43:10 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/28 20:19:34 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,8 +257,8 @@ void		mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar);
 void		multi_colors(t_rgb	*c_new, t_rgb *c1, t_rgb *c2);
 void		reflect(t_tup out, t_tup in, t_tup normal);
 void		normalize_vectors(t_mrt *m);
-void		translate_objects(t_mrt *m);
-void		project_objects(t_mrt *m);
+void		translate_objects_and_lights(t_mrt *m);
+void		project_objects_and_lights(t_mrt *m);
 void		calc_direction(t_camera *cam, t_view *view, int x, int y);
 void		setup_viewport(t_view *view, t_mrt *m);
 void		add_colors(t_rgb *new_c, t_rgb *c1, t_rgb *c2);

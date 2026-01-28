@@ -6,13 +6,13 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 20:35:54 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/28 16:48:17 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/28 21:11:54 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/minirt.h"
 
-static int compare_t(double t1, double t2)
+static int	compare_t(double t1, double t2)
 {
 	if (t1 < t2)
 		return (1);
@@ -20,22 +20,20 @@ static int compare_t(double t1, double t2)
 		return (0);
 }
 
+static int	is_lesser_helper(t_inter *a, double n)
+{
+	if (0 < a->t0)
+		return (compare_t(a->t0, n));
+	else
+		return (compare_t(a->t1, n));
+}
+
 static int	is_lesser(t_inter *a, t_inter *b)
 {
 	if (0 < b->t0)
-	{
-		if (0 < a->t0)
-			return (compare_t(a->t0, b->t0));
-		else
-			return (compare_t(a->t1, b->t0));
-	}
+		return (is_lesser_helper(a, b->t0));
 	else
-	{
-		if (0 < a->t0)
-			return (compare_t(a->t0, b->t1));
-		else
-			return (compare_t(a->t1, b->t1));
-	}
+		return (is_lesser_helper(a, b->t1));
 }
 
 void	insert_intersection(t_inter **list, t_inter *new, t_obj *obj, double *t)
