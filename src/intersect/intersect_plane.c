@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 18:23:43 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 18:02:33 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/28 15:28:52 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,19 @@ t_tup	*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin)
 	return ((t_tup *)vec);
 }
 
-double	inter_plane(t_plane *pl, t_ray *r)
+void	inter_plane(double *t, t_plane *pl, t_ray *r)
 {
 	t_tup	perp_vec;
 
 	perpvec_to_plane(perp_vec, pl, r->origin);
 	if (fabs(dot_prod(r->direction, perp_vec)) < __DBL_EPSILON__)
-		return (-INFINITY);
-	return (dot_prod(perp_vec, perp_vec) / dot_prod(r->direction, perp_vec));
+	{
+		t[0] = -INFINITY;
+		t[1] = -INFINITY;
+	}
+	else
+	{
+		t[0] = dot_prod(perp_vec, perp_vec) / dot_prod(r->direction, perp_vec);
+		t[1] = t[0];
+	}
 }

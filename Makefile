@@ -6,7 +6,7 @@
 #    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/26 21:12:21 by vramacha         ###   ########.fr        #
+#    Updated: 2026/01/28 12:50:25 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ PARSINGFILES =	parsing.c \
 				parsing_utils.c \
 				parse_scene.c \
 				parse_figures.c \
+				parse_texture.c \
 				parse_patterns.c \
 				atod.c
 

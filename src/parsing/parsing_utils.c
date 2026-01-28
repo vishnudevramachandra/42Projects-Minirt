@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/22 18:56:59 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/28 14:02:29 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	ft_strspn(const char *s, t_dataype dtype)
 {
 	int			i;
 	int			tmp;
-	const char	charset[] = "0123456789";
 
 	if (dtype == INT)
 	{
@@ -25,7 +24,7 @@ static int	ft_strspn(const char *s, t_dataype dtype)
 		if (s[i] && s[i + 1])
 			while (s[i])
 			{
-				if (!ft_strchr(charset, s[i]))
+				if (s[i] < '0' || s[i] > '9')
 					break ;
 				i++;
 			}
