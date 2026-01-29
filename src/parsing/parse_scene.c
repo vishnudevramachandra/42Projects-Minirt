@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 20:55:34 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/29 01:44:09 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ t_amb_light	amb_light(char *line, t_amb_light a)
 	int		i;
 	int		len;
 
+	if (a.ratio != -1)
+		a.ratio = -1;
 	i = 0 + len_spaces(line);
 	if (line[i] == '.')
 		a.ratio = -1;
 	if (!set_double(&a.ratio, line + i, &len))
 		a.ratio = -1;
+	if (a.ratio < 0.05)
+		a.ratio = 0.05;
 	i = i + len + len_spaces(line + i + len);
 	if (!set_color(&a.color, line + i, &len))
 		a.ratio = -1;
@@ -40,6 +44,8 @@ t_camera	camera(char *line, t_camera c)
 
 	flag = 0;
 	i = 0 + len_spaces(line);
+	if (c.horizontal_field != -1)
+		flag = -1;
 	if (!set_tuple(c.position, line + i, &len, 1))
 		flag = -1;
 	i = i + len + len_spaces(line + i + len);

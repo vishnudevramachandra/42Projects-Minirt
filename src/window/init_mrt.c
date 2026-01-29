@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:08:17 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/27 20:04:12 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/29 01:11:55 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_mrt(t_mrt *m)
 		mlx_close_window(m->mlx);
 		erro_clean(m, "Error", 2);
 	}
+	canvas(m);
 	mlx_loop_hook(m->mlx, ft_hook, m);
 	mlx_loop(m->mlx);
 	mlx_terminate(m->mlx);
