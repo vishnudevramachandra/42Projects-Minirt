@@ -6,7 +6,7 @@
 #    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/28 21:14:32 by vramacha         ###   ########.fr        #
+#    Updated: 2026/01/29 11:46:55 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,11 +40,14 @@ SRCFILES	=	main.c \
 				window/color_arith.c \
 				window/lights.c \
 				window/shadows.c \
-				window/start_rendering.c \
-				window/rendering_utils.c \
 				window/insert_utils.c \
 				window/camera.c \
 				window/pattern.c \
+				window/texture.c \
+				rendering/start_rendering.c \
+				rendering/normalization.c \
+				rendering/translation.c \
+				rendering/projection.c \
 				ray_inter/create_rays.c \
 				ray_inter/start_shadows.c \
 				intersect/intersect_sphere.c \

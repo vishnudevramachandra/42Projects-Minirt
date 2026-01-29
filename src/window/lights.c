@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/29 09:46:14 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/29 15:28:32 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	add_direct_component(t_rgb *final_col, t_rgb *obj_col, t_light *light,
 	add_colors(final_col, final_col, &direct_color);
 }
 
-double	get_specular_factor(t_mrt *m, t_inter *i, t_tup light_unit_vec)
+double	cos_fac(t_mrt *m, t_inter *i, t_tup light_unit_vec)
 {
 	t_tup	view_unit_vec;
 	t_tup	neg_vec;
@@ -65,12 +65,19 @@ void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 	t_tup	light_uv;
 	t_list	*node;
 	t_light	*lt;
+	double	shininess;
 
 	node = m->scene->lights_list;
 	if (i->obj->typ != TEXTURE)
+	{
 		find_obj_color(&obj_c, m, i);
+		shininess = i->obj->sp.mt.shininess;
+	}
 	else
-		obj_c = &i->obj->tx.sp.mt.pattern.color1;
+	{
+		find_tex_color(&obj_c, m, i);
+		shininess = i->obj->tx.sub_obj->sp.mt.shininess;
+	}
 	add_ambient_component(final_c, obj_c, m);
 	while (node)
 	{
@@ -82,8 +89,7 @@ void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 			continue ;
 		}
 		add_direct_component(final_c, obj_c, lt, dot_prod(i->normal, light_uv));
-		add_specular_component(final_c, lt, i->obj->sp.mt.shininess,
-			get_specular_factor(m, i, light_uv));
+		add_specular_component(final_c, lt, shininess, cos_fac(m, i, light_uv));
 		node = node->next;
 	}
 	color_range(final_c);

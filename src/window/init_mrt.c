@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mrt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:08:17 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 19:56:12 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:56:48 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
