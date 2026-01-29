@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:59:40 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/28 21:09:27 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/29 09:32:51 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	normal_at(t_tup normal, t_obj *obj, t_tup hit_point)
 		normalize_cone(normal, &obj->co, hit_point);
 	else if (obj->typ == CYLINDER)
 		compute_cy_normal(normal, hit_point, &obj->cy);
+	else if (obj->typ == TEXTURE)
+		normal_at(normal, obj->tx.sp, hit_point);
 }
 
 void	reflect(t_tup out, t_tup in, t_tup normal)

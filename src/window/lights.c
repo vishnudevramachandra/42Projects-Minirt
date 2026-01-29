@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 22:27:34 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/29 09:46:14 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	add_specular_component(
 	add_colors(final_col, final_col, &spec_color);
 }
 
-void	final_obj_light(t_rgb *final_c, t_mrt *m, t_inter *i)
+void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 {
 	t_rgb	*obj_c;
 	t_tup	light_uv;
@@ -67,7 +67,10 @@ void	final_obj_light(t_rgb *final_c, t_mrt *m, t_inter *i)
 	t_light	*lt;
 
 	node = m->scene->lights_list;
-	find_obj_color(&obj_c, m, i);
+	if (i->obj->typ != TEXTURE)
+		find_obj_color(&obj_c, m, i);
+	else
+		obj_c = &i->obj->tx.sp.mt.pattern.color1;
 	add_ambient_component(final_c, obj_c, m);
 	while (node)
 	{

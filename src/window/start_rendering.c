@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/28 22:34:04 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/29 09:26:24 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	render_obj(t_mrt *m, t_inter *i, int x, int y)
 		multi_tuple(scaled, m->ray.direction, i->t1);
 	add_tuples(i->hit_point, m->ray.origin, scaled);
 	normal_at(i->normal, i->obj, i->hit_point);
-	final_obj_light(&final_color, m, i);
+	final_obj_color(&final_color, m, i);
 	mlx_put_pixel(m->image, x, y, get_rgba(&final_color, 1));
 }
 

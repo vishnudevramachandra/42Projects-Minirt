@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 21:10:10 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/28 20:56:45 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/29 09:20:40 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	translate_objects_and_lights(t_mrt *m)
 			multi_mat_tuple(obj->co.apex, mat, obj->co.apex);
 		else if (obj->typ == CYLINDER)
 			multi_mat_tuple(obj->cy.pos, mat, obj->cy.pos);
+		else if (obj->typ == TEXTURE)
+			multi_mat_tuple(obj->tx.sp->sp.pos, mat, obj->tx.sp->sp.pos);
 		node = node->next;
 	}
 	node = m->scene->lights_list;
@@ -119,6 +121,9 @@ static void	project_objects(t_list *node, mat4 mat)
 			copy_tup(obj->cy.pos, *multi_mat_tuple(tup, mat, obj->cy.pos));
 			copy_tup(obj->cy.axis, *multi_mat_tuple(tup, mat, obj->cy.axis));
 		}
+		else if (obj->typ == TEXTURE)
+			copy_tup(obj->tx.sp->sp.pos,
+				*multi_mat_tuple(tup, mat, obj->tx.sp->sp.pos));
 		node = node->next;
 	}
 }

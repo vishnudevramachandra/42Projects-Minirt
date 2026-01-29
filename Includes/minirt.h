@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/28 20:19:34 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/29 09:25:31 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ t_rgb		*stripped_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 t_rgb		*ring_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 int			create_node_and_add_to_list(void *content, t_list **lst);
-void		final_obj_light(t_rgb *final_col, t_mrt *m, t_inter *i);
+void		final_obj_color(t_rgb *final_col, t_mrt *m, t_inter *i);
 int			is_object(char *line);
 int			is_scene(char *line);
 bool		verify_id(char *line);

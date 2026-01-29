@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 18:21:52 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/28 21:01:36 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/29 09:28:54 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	inter_obj(double *t, t_obj *obj, t_ray *ray)
 		inter_cylinder(t, &obj->cy, ray);
 	else if (obj->typ == CONE)
 		inter_cone(t, &obj->co, ray);
+	else if (obj->typ == TEXTURE)
+		inter_sphere(t, &obj->tx.sp, ray);
 }
