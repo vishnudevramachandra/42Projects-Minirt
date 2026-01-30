@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 11:30:49 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 15:05:02 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/30 18:37:21 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	get_uv(double *uv, t_tup pt)
 	uv[1] = atan2(pt[2], pt[0]);
 }
 
-void scale_uv(double *uv)
+void	scale_u_v(int *u, int *v, double *uv, t_inter *i)
 {
-	uv[0] = uv[0] / M_PI;
-	uv[1] = ((uv[1] / (2 * M_PI)) + 0.5);
+	*u = round((uv[0] / M_PI) * (i->obj->tx.mlx_tex->height - 1));
+	*v = round(((uv[1] / (2 * M_PI)) + 0.5) * (i->obj->tx.mlx_tex->width - 1));
 }
 
 static void	pattern_at(t_rgb **obj_col, double *uv, t_tup pt, t_inter *i)
@@ -30,11 +30,8 @@ static void	pattern_at(t_rgb **obj_col, double *uv, t_tup pt, t_inter *i)
 	int		v;
 
 	get_uv(uv, pt);
-	scale_uv(uv);
-	u = round(uv[0] * (i->obj->tx.mlx_tex->height - 1));
-	v = round(uv[1] * (i->obj->tx.mlx_tex->width - 1));
-	*obj_col = &i->obj->tx.sub_obj->sp.mt.pattern.color1;
-	// *obj_col = &i->obj->tx.img[u * i->obj->tx.mlx_tex->width + v];
+	scale_u_v(&u, &v, uv, i);
+	*obj_col = &i->obj->tx.img[u * i->obj->tx.mlx_tex->width + v];
 }
 
 void	find_tex_color(t_rgb **obj_col, t_mrt *m, t_inter *i)
