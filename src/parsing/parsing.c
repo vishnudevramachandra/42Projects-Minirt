@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/29 01:40:09 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/30 23:04:36 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	fill_scene(t_scene *scene, char *line)
 		parse_lights(line, &scene->lights_list);
 }
 
-int	validate_line(char *line, t_scene *scene, t_list **objs)
+int	parse_line(char *line, t_scene *scene, t_list **objs)
 {
 	if (*line == '\n')
 		return (1);
@@ -64,13 +64,13 @@ int	read_from_fd(char *file_name, t_scene *scene, t_list **objs)
 	while (line != NULL)
 	{
 		i = 0 + len_spaces(line);
-		if (!validate_line(line + i, scene, objs))
+		if (!parse_line(line + i, scene, objs))
 		{
+			free(line);
 			close(fd);
 			return (0);
 		}
-		if (line)
-			free(line);
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);

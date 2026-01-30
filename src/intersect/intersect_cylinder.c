@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 18:24:38 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 15:49:30 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/28 23:20:16 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,20 @@ double	proj_len(double t, t_cylinder *cy, t_ray *r)
 	return (fabs(dot_prod(l, cy->axis)));
 }
 
-double	resolve_hitpoint(double *t, t_cylinder *cy, t_ray *r)
+static void	resolve_hitpoint(double *t, t_cylinder *cy, t_ray *r)
 {
-	if (t[1] < 0)
-		return (-1);
-	if (0 < t[0])
-		if (proj_len(t[0], cy, r) <= (cy->height / 2))
-			return (t[0]);
-	if (proj_len(t[1], cy, r) <= (cy->height / 2))
-		return (t[1]);
-	else
-		return (-1);
+	if ((0 < t[0]) && ((cy->height / 2) < proj_len(t[0], cy, r)))
+		t[0] = -INFINITY;
+	if ((0 < t[1]) && ((cy->height / 2) < proj_len(t[1], cy, r)))
+		t[1] = -INFINITY;
 }
 
-double	inter_cylinder(t_cylinder *cy, t_ray *r)
+void	inter_cylinder(double *t, t_cylinder *cy, t_ray *r)
 {
 	t_tup	l;
 	t_tup	p_v;
 	t_tup	q_v;
 	double	dlt;
-	double	t[2];
 
 	sub_tuples(l, r->origin, cy->pos);
 	compute_pv(p_v, r->direction, cy->axis);
@@ -67,13 +61,14 @@ double	inter_cylinder(t_cylinder *cy, t_ray *r)
 	dlt = delta(dot_prod(p_v, p_v),
 			dot_prod(p_v, q_v),
 			dot_prod(q_v, q_v) - ((cy->dia * cy->dia) * 0.25));
-	if (dlt < 0)
-		return (-1);
-	else if (dot_prod(p_v, p_v) == 0)
-		return (-1);
+	if (dlt < 0 || dot_prod(p_v, p_v) == 0)
+	{
+		t[0] = -INFINITY;
+		t[1] = -INFINITY;
+	}
 	else
 	{
 		get_hitpoints(t, dot_prod(p_v, p_v), dot_prod(p_v, q_v), sqrt(dlt));
-		return (resolve_hitpoint(t, cy, r));
+		resolve_hitpoint(t, cy, r);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:20:27 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 18:04:10 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:53:19 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ bool	verify_id(char *line)
 		|| ft_strcmp(id, "sp") == 0
 		|| ft_strcmp(id, "pl") == 0
 		|| ft_strcmp(id, "co") == 0
-		|| ft_strcmp(id, "cy") == 0)
+		|| ft_strcmp(id, "cy") == 0
+		|| ft_strcmp(id, "tx") == 0
+		|| ft_strcmp(id, "tb") == 0)
 		valid = true;
 	free(id);
 	return (valid);
@@ -88,7 +90,9 @@ int	is_object(char *line)
 	if ((line[0] == 's' && line[1] == 'p' && line[2] == ' ')
 		|| (line[0] == 'c' && line[1] == 'y' && line[2] == ' ')
 		|| (line[0] == 'p' && line[1] == 'l' && line[2] == ' ')
-		|| (line[0] == 'c' && line[1] == 'o' && line[2] == ' '))
+		|| (line[0] == 'c' && line[1] == 'o' && line[2] == ' ')
+		|| (line[0] == 't' && line[1] == 'x' && line[2] == ' ')
+		|| (line[0] == 't' && line[1] == 'b' && line[2] == ' '))
 		return (1);
 	return (0);
 }

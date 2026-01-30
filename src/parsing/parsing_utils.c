@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/27 17:49:16 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/30 23:02:31 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	ft_strspn(const char *s, t_dataype dtype)
 {
 	int			i;
 	int			tmp;
-	const char	charset[] = "0123456789";
 
 	if (dtype == INT)
 	{
@@ -26,7 +25,7 @@ static int	ft_strspn(const char *s, t_dataype dtype)
 		{	
 			while (s[i])
 			{
-				if (!ft_strchr(charset, s[i]))
+				if (s[i] < '0' || s[i] > '9')
 					break ;
 				i++;
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_shadows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 19:59:40 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/27 17:08:54 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/29 11:04:51 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ void	normalize_cone(t_tup normal, t_cone *co, t_tup hit_point)
 {
 	t_tup	p;
 	double	k;
-	double	y;
 
 	sub_tuples(p, hit_point, co->apex);
 	k = (co->dia / 2) / co->height;
-	y = -sqrt(p[0] * p[0] + p[2] * p[2]) / k;
 	init_vector(normal, p[0], (k * k) * p[1], p[2]);
 	normalize(normal);
 }
@@ -38,6 +36,8 @@ void	normal_at(t_tup normal, t_obj *obj, t_tup hit_point)
 		normalize_cone(normal, &obj->co, hit_point);
 	else if (obj->typ == CYLINDER)
 		compute_cy_normal(normal, hit_point, &obj->cy);
+	else if (obj->typ == TEXTURE)
+		normal_at(normal, obj->tx.sub_obj, hit_point);
 }
 
 void	reflect(t_tup out, t_tup in, t_tup normal)

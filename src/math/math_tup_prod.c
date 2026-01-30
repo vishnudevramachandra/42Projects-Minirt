@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 15:01:54 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 18:05:07 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/30 14:50:42 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	cross_prod(t_tup res, t_tup a, t_tup b)
 	res[0] = a[1] * b[2] - a[2] * b[1];
 	res[1] = a[2] * b[0] - a[0] * b[2];
 	res[2] = a[0] * b[1] - a[1] * b[0];
+	res[3] = 0;
 }
 
 double	magnitude(t_tup a)
