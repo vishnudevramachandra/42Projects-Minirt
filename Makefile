@@ -6,7 +6,7 @@
 #    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/29 11:46:55 by vramacha         ###   ########.fr        #
+#    Updated: 2026/01/30 13:47:55 by vramacha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCFILES	=	main.c \
 				window/camera.c \
 				window/pattern.c \
 				window/texture.c \
+				window/texture_helper.c \
 				rendering/start_rendering.c \
 				rendering/normalization.c \
 				rendering/translation.c \
