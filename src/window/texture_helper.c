@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:03:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 18:37:06 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/30 22:38:34 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,21 @@ static void	compute_dp_du(t_tup dp_du, double *uv, double radius)
 
 static void	compute_df_uv(double *df_uv, double *uv, t_inter *i)
 {
-	int	u0;
-	int	u1;
-	int	v0;
-	int	v1;
+	int			u0;
+	int			u1;
+	int			v0;
+	int			v1;
+	uint32_t	height_width[2];
 
-	scale_u_v(&u0, &v0, uv, i);
-	u1 = (u0 + 1) % i->obj->tx.mlx_tex_b->height;
-	v1 = (v0 + 1) % i->obj->tx.mlx_tex_b->width;
-	df_uv[0] = (double)(i->obj->tx.img[
-			u1 * i->obj->tx.mlx_tex_b->width + v0].r
-			- i->obj->tx.img[
-			u0 * i->obj->tx.mlx_tex_b->width + v0].r) / 20;
-	df_uv[1] = (double)(i->obj->tx.img[
-			u0 * i->obj->tx.mlx_tex_b->width + v1].r
-			- i->obj->tx.img[
-			u0 * i->obj->tx.mlx_tex_b->width + v0].r) / 20;
+	height_width[0] = i->obj->tx.mlx_tex_b->height;
+	height_width[1] = i->obj->tx.mlx_tex_b->width;
+	scale_u_v(&u0, &v0, uv, height_width);
+	u1 = (u0 + 1) % height_width[0];
+	v1 = (v0 + 1) % height_width[1];
+	df_uv[0] = (double)(i->obj->tx.img[u1 * height_width[1] + v0].r
+			- i->obj->tx.img[u0 * height_width[1] + v0].r) / 20;
+	df_uv[1] = (double)(i->obj->tx.img[u0 * height_width[1] + v1].r
+			- i->obj->tx.img[u0 * height_width[1] + v0].r) / 20;
 }
 
 static void	compute_n_tilt(

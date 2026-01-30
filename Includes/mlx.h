@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:13:17 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/30 18:04:26 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/30 19:30:06 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "minirt.h"
 
 // ================================= mlx ===================================
-# define HEIGHT 1200
-# define WIDTH 1200
+# define HEIGHT 800
+# define WIDTH 800
 # define MLX_ALPHA true
 
 

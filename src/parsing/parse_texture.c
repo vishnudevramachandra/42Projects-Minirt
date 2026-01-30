@@ -6,29 +6,12 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 12:22:56 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 14:28:48 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/30 22:25:23 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "minirt.h"
-
-static char	*read_filename(char *line, int *i)
-{
-	int		len;
-	char	*filename;
-
-	len = 0;
-	while (line[*i + len] && !ft_isspace(line[*i + len]))
-		len++;
-	filename = malloc(len + 1);
-	if (!filename)
-		return (NULL);
-	ft_strlcpy(filename, line + *i, len + 1);
-	filename[len] = '\0';
-	*i = *i + len;
-	return (filename);
-}
 
 static void	assign_pix_val(t_rgb *img, uint32_t i, uint8_t *pixels, uint8_t *b)
 {
@@ -67,8 +50,10 @@ static t_rgb	*texture_to_image(mlx_texture_t *mlx_tex)
 	return (img);
 }
 
-static void	free_mem(t_obj	*obj)
+void	free_tx(t_obj	*obj)
 {
+	if (obj->tx.bump_img)
+		free(obj->tx.bump_img);
 	if (obj->tx.img)
 		free(obj->tx.img);
 	if (obj->tx.sub_obj)
@@ -80,42 +65,46 @@ static void	free_mem(t_obj	*obj)
 	free(obj);
 }
 
+static int	load_mlx_texture(mlx_texture_t **tex, char *line, int *i)
+{
+	char	*filename;
+
+	*i += len_spaces(line + *i);
+	filename = read_filename(line, i);
+	if (!filename)
+		return (0);
+	*tex = mlx_load_png(filename);
+	free(filename);
+	if (!*tex)
+		return (0);
+	return (1);
+}
+
 t_obj	*parse_texture(char *line, t_tex_type typ)
 {
 	int		i;
 	t_obj	*obj;
 
-	obj = malloc(sizeof(t_obj));
+	obj = create_and_init_tex_obj(typ);
 	if (!obj)
 		return (NULL);
-	obj->typ = TEXTURE;
-	obj->tx.typ = typ;
-	i = 0 + len_spaces(line);
-	obj->tx.mlx_tex = mlx_load_png(read_filename(line, &i));
-	if (!obj->tx.mlx_tex)
-		return (free_mem(obj), NULL);
-	if (typ != BUMP)
-		obj->tx.mlx_tex_b = NULL;
-	else
-	{
-		i += len_spaces(line + i);
-		obj->tx.mlx_tex_b = mlx_load_png(read_filename(line, &i));
-		if (!obj->tx.mlx_tex_b)
-			return (free_mem(obj), NULL);
-	}
+	i = 0;
+	if (!load_mlx_texture(&obj->tx.mlx_tex, line, &i))
+		return (free_tx(obj), NULL);
+	if (typ == BUMP)
+		if (!load_mlx_texture(&obj->tx.mlx_tex_b, line, &i))
+			return (free_tx(obj), NULL);
 	obj->tx.sub_obj = parse_sphere(line + i);
 	if (!obj->tx.sub_obj)
-		return (free_mem(obj), NULL);
+		return (free_tx(obj), NULL);
 	obj->tx.img = texture_to_image(obj->tx.mlx_tex);
 	if (!obj->tx.img)
-		return (free_mem(obj), NULL);
-	if (typ != BUMP)
-		obj->tx.bump_img = NULL;
-	else
+		return (free_tx(obj), NULL);
+	if (typ == BUMP)
 	{
 		obj->tx.bump_img = texture_to_image(obj->tx.mlx_tex_b);
 		if (!obj->tx.bump_img)
-			return (free_mem(obj), NULL);
+			return (free_tx(obj), NULL);
 	}
 	return (obj);
 }

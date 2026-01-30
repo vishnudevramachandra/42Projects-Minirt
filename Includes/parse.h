@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 09:20:31 by vishnudevra       #+#    #+#             */
-/*   Updated: 2026/01/28 12:32:33 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/30 22:22:38 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ t_obj	*parse_texture(char *line, t_tex_type typ);
 t_list	*parse_obj(char *line, t_list **objs);
 void	print_obj(t_list *objs);
 int		set_pattern(t_material *mt, char *line, int *len);
+char	*read_filename(char *line, int *i);
+t_obj	*create_and_init_tex_obj(t_tex_type typ);
+void	free_tx(t_obj	*obj);
 
 #endif

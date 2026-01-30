@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 19:56:32 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/30 22:24:40 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "parse.h"
 #include "minirt.h"
 
 void	erro_clean(t_mrt *mrt, char *str, int v)
@@ -24,10 +25,21 @@ void	erro_clean(t_mrt *mrt, char *str, int v)
 	exit (v);
 }
 
+void	free_obj(void *content)
+{
+	t_obj	*obj;
+
+	obj = content;
+	if (obj->typ != TEXTURE)
+		free(obj);
+	else
+		free_tx(obj);
+}
+
 void	clean_up(t_mrt *mrt)
 {
 	ft_lstclear(&mrt->scene->lights_list, free);
-	ft_lstclear(&mrt->obj, free);
+	ft_lstclear(&mrt->obj, free_obj);
 	free(mrt->scene);
 	free(mrt);
 }
