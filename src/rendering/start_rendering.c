@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 16:31:36 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/30 23:07:48 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/30 23:37:36 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	compute_intersections(t_inter **inter, t_mrt *m)
 {
 	t_list	*current;
 	t_obj	*obj;
-	// t_obj		*obj;
-	// t_inter		*new;
+	t_inter	*new;
 	double	t[2];
 
 	current = m->obj;
@@ -42,7 +41,12 @@ void	compute_intersections(t_inter **inter, t_mrt *m)
 		obj = current->content;
 		inter_obj(t, obj, &m->ray);
 		if (0 < t[0] || 0 < t[1])
-			insert_intersection(inter, malloc(sizeof(t_inter)), obj, t);
+		{
+			new = malloc(sizeof(t_inter));
+			if (!new)
+				return ;
+			insert_intersection(inter, new, obj, t);
+		}
 		current = current->next;
 	}
 }

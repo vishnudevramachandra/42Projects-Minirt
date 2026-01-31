@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 23:01:19 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 00:55:10 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,45 @@ t_obj	*parse_sphere(char *line)
 	return (obj);
 }
 
-static t_obj	*parse_cylinder(char *line)
+static int	parse_cylinder_data(t_obj *obj, char *line)
 {
 	int		i;
 	int		len;
+
+	i = 0 + len_spaces(line);
+	if (!set_tuple(obj->cy.pos, line + i, &len, 1))
+		return (0);
+	i = i + len + len_spaces(line + i + len);
+	if (!set_tuple(obj->cy.axis, line + i, &len, 0))
+		return (0);
+	i = i + len + len_spaces(line + i + len);
+	if (!set_double(&obj->cy.dia, line + i, &len))
+		return (0);
+	i = i + len + len_spaces(line + i + len);
+	if (!set_double(&obj->cy.height, line + i, &len))
+		return (0);
+	i = i + len + len_spaces(line + i + len);
+	if (!set_color(&obj->cy.mt.pattern.color1, line + i, &len))
+		return (0);
+	if (!set_pattern(&obj->cy.mt, line + i, &len))
+		obj->cy.mt.pattern.fcn = NULL;
+	return (1);
+}
+
+t_obj	*parse_cylinder(char *line)
+{
 	t_obj	*obj;
 
 	obj = malloc(sizeof(t_obj));
 	if (!obj)
 		return (NULL);
 	obj->typ = CYLINDER;
-	i = 0 + len_spaces(line);
-	if (!set_tuple(obj->cy.pos, line + i, &len, 1))
+	if (!parse_cylinder_data(obj, line))
 		return (free(obj), NULL);
-	i = i + len + len_spaces(line + i + len);
-	if (!set_tuple(obj->cy.axis, line + i, &len, 0))
-		return (free(obj), NULL);
-	i = i + len + len_spaces(line + i + len);
-	if (!set_double(&obj->cy.dia, line + i, &len))
-		return (free(obj), NULL);
-	i = i + len + len_spaces(line + i + len);
-	if (!set_double(&obj->cy.height, line + i, &len))
-		return (free(obj), NULL);
-	i = i + len + len_spaces(line + i + len);
-	if (!set_color(&obj->cy.mt.pattern.color1, line + i, &len))
-		return (free(obj), NULL);
-	i = i + len + len_spaces(line + i + len);
-	if (!set_pattern(&obj->cy.mt, line + i, &len))
-		obj->cy.mt.pattern.fcn = NULL;
 	return (obj);
 }
 
-static t_obj	*parse_plane(char *line)
+t_obj	*parse_plane(char *line)
 {
 	int		i;
 	int		len;
@@ -94,7 +101,7 @@ static t_obj	*parse_plane(char *line)
 	return (obj);
 }
 
-static t_obj	*parse_cone(char *line)
+t_obj	*parse_cone(char *line)
 {
 	int		i;
 	int		len;
@@ -121,27 +128,4 @@ static t_obj	*parse_cone(char *line)
 		obj->co.mt.pattern.fcn = NULL;
 	init_vector(obj->co.axis, 0, 1, 0);
 	return (obj);
-}
-
-t_list	*parse_obj(char *line, t_list **objs)
-{
-	t_obj	*obj;
-
-	if (line[0] == 's' && line[1] == 'p')
-		obj = parse_sphere(line + 2);
-	else if (line[0] == 'c' && line[1] == 'y')
-		obj = parse_cylinder(line + 2);
-	else if (line[0] == 'c' && line[1] == 'o')
-		obj = parse_cone(line + 2);
-	else if (line[0] == 'p' && line[1] == 'l')
-		obj = parse_plane(line + 2);
-	else if (line[0] == 't' && line[1] == 'x')
-		obj = parse_texture(line + 2, REGULAR);
-	else
-		obj = parse_texture(line + 2, BUMP);
-	if (!obj)
-		return (ft_lstclear(objs, free), NULL);
-	if (!create_node_and_add_to_list(obj, objs))
-		return (free(obj), ft_lstclear(objs, free), NULL);
-	return (*objs);
 }

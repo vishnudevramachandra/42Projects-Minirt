@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lights.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/29 15:28:32 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/30 23:45:18 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,8 @@ void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 	double	shininess;
 
 	node = m->scene->lights_list;
-	if (i->obj->typ != TEXTURE)
-	{
-		find_obj_color(&obj_c, m, i);
-		shininess = i->obj->sp.mt.shininess;
-	}
-	else
-	{
-		find_tex_color(&obj_c, m, i);
-		shininess = i->obj->tx.sub_obj->sp.mt.shininess;
-	}
+	obj_c = NULL;
+	check_for_texture(&obj_c, &shininess, m, i);
 	add_ambient_component(final_c, obj_c, m);
 	while (node)
 	{

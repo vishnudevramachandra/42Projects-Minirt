@@ -6,12 +6,35 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/30 23:04:36 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 00:49:35 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parse.h"
+
+t_list	*parse_obj(char *line, t_list **objs)
+{
+	t_obj	*obj;
+
+	if (line[0] == 's' && line[1] == 'p')
+		obj = parse_sphere(line + 2);
+	else if (line[0] == 'c' && line[1] == 'y')
+		obj = parse_cylinder(line + 2);
+	else if (line[0] == 'c' && line[1] == 'o')
+		obj = parse_cone(line + 2);
+	else if (line[0] == 'p' && line[1] == 'l')
+		obj = parse_plane(line + 2);
+	else if (line[0] == 't' && line[1] == 'x')
+		obj = parse_texture(line + 2, REGULAR);
+	else
+		obj = parse_texture(line + 2, BUMP);
+	if (!obj)
+		return (ft_lstclear(objs, free), NULL);
+	if (!create_node_and_add_to_list(obj, objs))
+		return (free(obj), ft_lstclear(objs, free), NULL);
+	return (*objs);
+}
 
 t_list	*parse_lights(char *line, t_list **lights)
 {

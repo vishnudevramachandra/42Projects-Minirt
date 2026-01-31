@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/30 21:30:49 by vramacha         ###   ########.fr        #
+#    Updated: 2026/01/31 00:33:23 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ PARSINGFILES =	parsing.c \
 				utils.c \
 				scene_validation.c \
 				parsing_utils.c \
+				parsing_utils2.c \
 				parse_scene.c \
 				parse_figures.c \
 				parse_texture.c \

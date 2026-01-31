@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 21:10:10 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 23:06:27 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 00:48:29 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ void	normalize_vectors(t_mrt *m)
 		}
 		else if (obj->typ == CYLINDER)
 			normalize(obj->cy.axis);
-		else if (obj->typ == CONE)
-			normalize(obj->co.axis);
 		cur = cur->next;
 	}
 }
+
+// else if (obj->typ == CONE)
+// normalize(obj->co.axis);
 
 void	translate_objects(t_mrt *m)
 {

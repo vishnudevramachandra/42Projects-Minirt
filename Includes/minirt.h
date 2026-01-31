@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/30 23:08:39 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 01:07:33 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # include "../get_next_line/get_next_line.h"
 # include "mlx.h"
 
+typedef struct s_obj	t_obj;
+typedef double			t_mat4[4][4];
+typedef double			t_tup[4];
 typedef struct s_rgb
 {
 	int	r;
@@ -34,13 +37,14 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
+typedef t_rgb			*(*t_pattern_fcn)(t_tup param, t_rgb *c1, t_rgb *c2,
+	t_tup hit_point);
+
 typedef struct s_amb_light
 {
 	double	ratio;
 	t_rgb	color;
 }	t_amb_light;
-
-typedef double	t_tup[4];
 
 typedef struct s_ray
 {
@@ -68,9 +72,6 @@ typedef struct s_scene
 	t_camera	camera;
 	t_list		*lights_list;
 }	t_scene;
-
-typedef t_rgb*(*t_pattern_fcn)(t_tup param, t_rgb *c1, t_rgb *c2,
-	t_tup hit_point);
 
 typedef struct s_pattern
 {
@@ -124,8 +125,6 @@ typedef enum e_tex_type
 	BUMP,
 }	t_tex_type;
 
-typedef struct s_obj t_obj;
-
 typedef struct s_texture
 {
 	t_tex_type		typ;
@@ -168,8 +167,6 @@ typedef struct s_inter
 	t_tup			normal;	
 	struct s_inter	*next;
 }	t_inter;
-
-typedef double	t_mat4[4][4];
 
 typedef struct s_cam_inv
 {
@@ -250,8 +247,9 @@ void		compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
 void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_obj *obj, t_tup hit_point);
-void		insert_intersection(t_inter **list, t_inter *new, t_obj *obj, double *t);
-void	compute_intersections(t_inter **inter, t_mrt *m);
+void		insert_intersection(t_inter **list, t_inter *new,
+				t_obj *obj, double *t);
+void		compute_intersections(t_inter **inter, t_mrt *m);
 void		free_list(t_inter *i);
 void		canvas(t_mrt *m);
 void		mult_scalar_colors(t_rgb *new_c, t_rgb *old_c, double scalar);
@@ -278,7 +276,8 @@ char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
 void		find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
 void		find_tex_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
-int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec, t_light *light);
+int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
+				t_light *light);
 void		scale_u_v(int *u, int *v, double *uv, uint32_t *height_width);
 void		bump_the_normal(t_inter *i, double *uv);
 void		erro_clean(t_mrt *mrt, char *str, int v);

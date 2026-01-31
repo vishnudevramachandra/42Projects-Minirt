@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 09:20:31 by vishnudevra       #+#    #+#             */
-/*   Updated: 2026/01/30 22:22:38 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 00:50:36 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ int		set_int(int *i, const char *s, int *len);
 t_obj	*parse_sphere(char *line);
 t_obj	*parse_texture(char *line, t_tex_type typ);
 t_list	*parse_obj(char *line, t_list **objs);
-void	print_obj(t_list *objs);
 int		set_pattern(t_material *mt, char *line, int *len);
 char	*read_filename(char *line, int *i);
 t_obj	*create_and_init_tex_obj(t_tex_type typ);
 void	free_tx(t_obj	*obj);
+t_obj	*parse_sphere(char *line);
+t_obj	*parse_cylinder(char *line);
+t_obj	*parse_plane(char *line);
+t_obj	*parse_cone(char *line);
 
 #endif

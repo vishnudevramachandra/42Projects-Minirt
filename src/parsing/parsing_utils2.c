@@ -1,61 +1,71 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parsing_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 00:34:20 by majkijew         ###   ########.fr       */
+/*   Created: 2026/01/31 00:31:55 by majkijew          #+#    #+#             */
+/*   Updated: 2026/01/31 00:34:55 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "minirt.h"
 
-int	get_double_len(const char *s)
+static int	ft_strspn(const char *s, t_dataype dtype)
 {
 	int	i;
+	int	tmp;
 
 	i = 0;
-	if (s[i] == '.')
-		return (0);
-	if (s[i] == '-')
-		i++;
-	while (s[i] >= '0' && s[i] <= '9')
-		i++;
-	if (s[i] == '.')
+	if (dtype == INT)
 	{
-		if (!(s[i + 1] >= '0' && s[i + 1] <= '9'))
-			return (0);
-		i++;
 		while (s[i] >= '0' && s[i] <= '9')
 			i++;
+		return (i);
 	}
-	if (i == 0 || (i == 1 && s[0] == '-'))
+	i = ft_strspn(s, INT);
+	if (i == 0 || s[i] != '.')
 		return (0);
-	return (i);
+	tmp = ft_strspn(s + i + 1, INT);
+	if (tmp == 0)
+		return (0);
+	return (i + 1 + tmp);
 }
 
-int	set_double(double *d, const char *s, int *len)
+int	set_int(int *i, const char *s, int *len)
 {
-	*len = get_double_len(s);
-	if (len <= 0)
-		return (0);
-	*d = atod(s);
+	if (s[0] == '-')
+	{
+		*len = 1 + ft_strspn(s + 1, INT);
+		if (*len < 2)
+			return (0);
+	}
+	else
+	{
+		*len = ft_strspn(s, INT);
+		if (*len < 1)
+			return (0);
+	}
+	*i = ft_atoi(s);
 	return (*len);
 }
 
-int	set_tuple(t_tup v, const char *s, int *len, double w)
+int	set_color(t_rgb *c, const char *s, int *len)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
+	int	*ptrs[3];
 
+	ptrs[0] = &c->r;
+	ptrs[1] = &c->g;
+	ptrs[2] = &c->b;
 	i = 0;
 	j = 0;
 	while (j < 3 && s[i] && s[i] != '\n')
 	{
-		set_double(&v[j], s + i, len);
+		set_int(ptrs[j], s + i, len);
 		if (!*len || (j < 2 && s[i + *len] != ','))
 			return (0);
 		i += *len + 1;
@@ -63,7 +73,6 @@ int	set_tuple(t_tup v, const char *s, int *len, double w)
 	}
 	if (j != 3)
 		return (0);
-	v[j] = w;
 	*len = i - 1;
 	return (*len);
 }

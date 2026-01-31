@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 11:30:49 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 22:38:04 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/30 23:45:41 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	check_for_texture(t_rgb	**obj_c, double	*shininess,
+			t_mrt *m, t_inter *i)
+{
+	if (i->obj->typ != TEXTURE)
+	{
+		find_obj_color(obj_c, m, i);
+		*shininess = i->obj->sp.mt.shininess;
+	}
+	else
+	{
+		find_tex_color(obj_c, m, i);
+		*shininess = i->obj->tx.sub_obj->sp.mt.shininess;
+	}
+}
 
 static void	get_uv(double *uv, t_tup pt)
 {
@@ -26,8 +41,8 @@ void	scale_u_v(int *u, int *v, double *uv, uint32_t *height_width)
 
 static void	pattern_at(t_rgb **obj_col, double *uv, t_tup pt, t_inter *i)
 {
-	int		u;
-	int		v;
+	int			u;
+	int			v;
 	uint32_t	height_width[2];
 
 	get_uv(uv, pt);
