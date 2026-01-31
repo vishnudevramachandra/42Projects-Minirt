@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 00:31:55 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 00:34:55 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 19:16:11 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,20 @@ int	set_int(int *i, const char *s, int *len)
 	return (*len);
 }
 
+int	correct_color_range(int *ptrs)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (ptrs[i] > 255)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	set_color(t_rgb *c, const char *s, int *len)
 {
 	int	i;
@@ -74,5 +88,7 @@ int	set_color(t_rgb *c, const char *s, int *len)
 	if (j != 3)
 		return (0);
 	*len = i - 1;
+	if (!correct_color_range(*ptrs))
+		return (0);
 	return (*len);
 }

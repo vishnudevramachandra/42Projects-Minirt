@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 18:04:50 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 19:23:52 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	fill_scene(t_scene *scene, char *line)
 			return (0);
 	}
 	return (1);
-
 }
 
 int	parse_line(char *line, t_scene *scene, t_list **objs)

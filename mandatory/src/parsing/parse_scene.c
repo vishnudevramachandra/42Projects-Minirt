@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 17:06:29 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 19:29:24 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ t_light	*light_f(char *line, t_light *l)
 	int		i;
 	int		len;
 
-	l->count++;
 	i = 0 + len_spaces(line);
 	if (!set_tuple(l->position, line + i, &len, 1))
 		return (NULL);
