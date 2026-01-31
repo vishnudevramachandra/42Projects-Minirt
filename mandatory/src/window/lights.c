@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 15:51:44 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/02/01 00:18:15 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ double	cos_fac(t_mrt *m, t_inter *i, t_tup light_unit_vec)
 	return (dot_prod(reflected_light_vec, view_unit_vec));
 }
 
-void	add_specular_component(
+void	add_specular_comp(
 	t_rgb *final_col, t_light *light, double shininess, double cos_theta)
 {
 	t_rgb	spec_color;
@@ -65,6 +65,7 @@ void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 	t_tup	light_uv;
 	t_list	*node;
 	t_light	*lt;
+	double	light_dist;
 
 	node = m->scene->lights_list;
 	find_obj_color(&obj_c, i);
@@ -72,7 +73,8 @@ void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 	while (node)
 	{
 		lt = node->content;
-		if (is_in_shadow(m, i, light_uv, lt)
+		compute_light_unit_vec(light_uv, &light_dist, lt, i);
+		if (is_in_shadow(m, i, light_uv, light_dist)
 			|| dot_prod(i->normal, light_uv) <= 0)
 		{
 			node = node->next;
@@ -80,8 +82,7 @@ void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 		}
 		add_direct_component(final_c, &obj_c, lt,
 			dot_prod(i->normal, light_uv));
-		add_specular_component(final_c, lt, (double)150,
-			cos_fac(m, i, light_uv));
+		add_specular_comp(final_c, lt, (double)150, cos_fac(m, i, light_uv));
 		node = node->next;
 	}
 	color_range(final_c);

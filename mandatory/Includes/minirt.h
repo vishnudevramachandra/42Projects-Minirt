@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 19:28:13 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/02/01 00:18:08 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,12 +247,14 @@ char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
 void		find_obj_color(t_rgb *obj_c, t_inter *i);
 void		find_tex_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
-int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
-				t_light *light);
+int			is_in_shadow(t_mrt *m, t_inter *hit,
+				t_tup light_unit_vec, double light_dist);
 void		scale_u_v(int *u, int *v, double *uv, uint32_t *height_width);
 void		bump_the_normal(t_inter *i, double *uv);
 void		erro_clean(t_mrt *mrt, char *str, int v);
 void		check_for_texture(t_rgb	**obj_c, double	*shininess,
 				t_mrt *m, t_inter *i);
+void		compute_light_unit_vec(t_tup light_unit_vec, double *light_dist,
+				t_light *light, t_inter *hit);
 
 #endif

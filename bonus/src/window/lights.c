@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 15:23:51 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/02/01 00:26:05 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,22 @@ void	add_specular_component(
 	add_colors(final_col, final_col, &spec_color);
 }
 
-void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
+void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i, t_rgb *obj_c)
 {
-	t_rgb	*obj_c;
 	t_tup	light_uv;
 	t_list	*node;
 	t_light	*lt;
 	double	shininess;
+	double	light_dist;
 
 	node = m->scene->lights_list;
-	obj_c = NULL;
 	check_for_texture(&obj_c, &shininess, m, i);
 	add_ambient_component(final_c, obj_c, m);
 	while (node)
 	{
 		lt = node->content;
-		if (is_in_shadow(m, i, light_uv, lt)
+		compute_light_unit_vec(light_uv, &light_dist, lt, i);
+		if (is_in_shadow(m, i, light_uv, light_dist)
 			|| dot_prod(i->normal, light_uv) <= 0)
 		{
 			node = node->next;

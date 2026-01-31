@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 16:33:10 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/02/01 00:26:00 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,7 @@ t_rgb		*ring_pattern(t_tup param, t_rgb *c1, t_rgb *c2, t_tup hit_point);
 t_rgb		*checker_pattern(t_tup param, t_rgb *c1, t_rgb *c2,
 				t_tup hit_point);
 int			create_node_and_add_to_list(void *content, t_list **lst);
-void		final_obj_color(t_rgb *final_col, t_mrt *m, t_inter *i);
+void		final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i, t_rgb *obj_c);
 int			is_object(char *line);
 int			is_scene(char *line);
 bool		verify_id(char *line);
@@ -278,12 +278,15 @@ char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
 void		find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
 void		find_tex_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
+// int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
+// 				t_light *light);
 int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
-				t_light *light);
+				double light_dist);
 void		scale_u_v(int *u, int *v, double *uv, uint32_t *height_width);
 void		bump_the_normal(t_inter *i, double *uv);
 void		erro_clean(t_mrt *mrt, char *str, int v);
 void		check_for_texture(t_rgb	**obj_c, double	*shininess,
 				t_mrt *m, t_inter *i);
-
+void		compute_light_unit_vec(t_tup light_unit_vec, double *light_dist,
+				t_light *light, t_inter *hit);
 #endif
