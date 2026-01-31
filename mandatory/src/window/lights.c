@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 03:53:08 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 14:32:21 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,26 @@ void	add_specular_component(
 	add_colors(final_col, final_col, &spec_color);
 }
 
+void	find_obj_color(t_rgb *obj_c, t_inter *i)
+{
+	if (i->obj->typ == CYLINDER)
+		*obj_c = i->obj->cy.mt.pattern.color1;
+	if (i->obj->typ == SPHERE)
+		*obj_c = i->obj->sp.mt.pattern.color1;
+	if (i->obj->typ == PLANE)
+		*obj_c = i->obj->pl.mt.pattern.color1;
+}
+
 void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 {
-	t_rgb	*obj_c;
+	t_rgb	obj_c;
 	t_tup	light_uv;
 	t_list	*node;
 	t_light	*lt;
 
 	node = m->scene->lights_list;
-	obj_c = find_obj_color(m->obj, m, i);
+	find_obj_color(&obj_c, i);
 	add_ambient_component(final_c, &obj_c, m);
-	printf("heyyy kochanie \n");
 	while (node)
 	{
 		lt = node->content;
@@ -80,7 +89,8 @@ void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 			node = node->next;
 			continue ;
 		}
-		add_direct_component(final_c, &obj_c, lt, dot_prod(i->normal, light_uv));
+		add_direct_component(final_c, &obj_c, lt,
+			dot_prod(i->normal, light_uv));
 		add_specular_component(final_c, lt, (double)150,
 			cos_fac(m, i, light_uv));
 		node = node->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pattern.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:55 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 22:11:50 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 14:15:35 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

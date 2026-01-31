@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 03:29:54 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 14:28:35 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,8 +273,7 @@ int			is_scene(char *line);
 bool		verify_id(char *line);
 char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
-void		find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
-void		find_tex_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
+// void		find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
 int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
 				t_light *light);
 void		scale_u_v(int *u, int *v, double *uv, uint32_t *height_width);

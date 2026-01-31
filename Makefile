@@ -48,9 +48,6 @@ MANDATORY_SRCFILES = 	main.c \
 						window/shadows.c \
 						window/insert_utils.c \
 						window/camera.c \
-						window/pattern.c \
-						window/texture.c \
-						window/texture_helper.c \
 						rendering/start_rendering.c \
 						rendering/normalization.c \
 						rendering/translation.c \
