@@ -6,11 +6,26 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 11:30:49 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/31 02:20:32 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 03:54:24 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	check_for_texture(t_rgb	**obj_c, double	*shininess,
+			t_mrt *m, t_inter *i)
+{
+	if (i->obj->typ != TEXTURE)
+	{
+		find_obj_color(obj_c, m, i);
+		*shininess = i->obj->sp.mt.shininess;
+	}
+	else
+	{
+		find_tex_color(obj_c, m, i);
+		*shininess = i->obj->tx.sub_obj->sp.mt.shininess;
+	}
+}
 
 static void	get_uv(double *uv, t_tup pt)
 {

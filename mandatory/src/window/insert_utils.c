@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 20:35:54 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 23:46:34 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 03:30:07 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ void	insert_intersection(t_inter **list, t_inter *new, t_obj *obj, double *t)
 	new->t0 = t[0];
 	new->t1 = t[1];
 	new->obj = obj;
+	printf("halo kasia babis!!!\n");
 	if (*list == NULL || is_lesser(new, *list))
 	{
 		new->next = *list;
 		*list = new;
+		printf("lady g..!!!\n");
 		return ;
 	}
 	cur = *list;

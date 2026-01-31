@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 02:23:57 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 03:53:08 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	add_ambient_component(t_rgb *final_col, t_rgb *obj_col, t_mrt *m)
 	mult_scalar_colors(&ambient_illumination, &m->scene->amb_light.color,
 		m->scene->amb_light.ratio);
 	multi_colors(final_col, obj_col, &ambient_illumination);
+
 }
 
 void	add_direct_component(t_rgb *final_col, t_rgb *obj_col, t_light *light,
@@ -67,8 +68,9 @@ void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 	t_light	*lt;
 
 	node = m->scene->lights_list;
-	obj_c = NULL;
-	add_ambient_component(final_c, obj_c, m);
+	obj_c = find_obj_color(m->obj, m, i);
+	add_ambient_component(final_c, &obj_c, m);
+	printf("heyyy kochanie \n");
 	while (node)
 	{
 		lt = node->content;
@@ -78,8 +80,8 @@ void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)
 			node = node->next;
 			continue ;
 		}
-		add_direct_component(final_c, obj_c, lt, dot_prod(i->normal, light_uv));
-		add_specular_component(final_c, lt, i->obj->tx.sub_obj->sp.mt.shininess,
+		add_direct_component(final_c, &obj_c, lt, dot_prod(i->normal, light_uv));
+		add_specular_component(final_c, lt, (double)150,
 			cos_fac(m, i, light_uv));
 		node = node->next;
 	}

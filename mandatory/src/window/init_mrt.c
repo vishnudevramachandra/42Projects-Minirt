@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:08:17 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 02:36:43 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 03:20:47 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ void	ft_hook(void *param)
 		mlx_close_window(m->mlx);
 		erro_clean(m, "esc", 0);
 	}
-	if (mlx_is_key_down(m->mlx, MLX_KEY_UP))
-		m->image->instances[0].y -= 5;
-	if (mlx_is_key_down(m->mlx, MLX_KEY_DOWN))
-		m->image->instances[0].y += 5;
-	if (mlx_is_key_down(m->mlx, MLX_KEY_RIGHT))
-		m->image->instances[0].x += 5;
-	if (mlx_is_key_down(m->mlx, MLX_KEY_LEFT))
-		m->image->instances[0].x -= 5;
 }
 
 void	init_mrt(t_mrt *m)

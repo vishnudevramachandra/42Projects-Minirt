@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 01:54:48 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 03:29:54 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,9 +245,8 @@ void		get_hitpoints(double *t, double a, double b_h, double sqrt_dlt);
 void		project_point_on_vector(t_tup res, t_tup center_to_hit, t_tup vec);
 void		compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
-void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_obj *obj, t_tup hit_point);
-void		insert_intersection(t_inter **list, t_inter *new,
+void			insert_intersection(t_inter **list, t_inter *new,
 				t_obj *obj, double *t);
 void		compute_intersections(t_inter **inter, t_mrt *m);
 void		free_list(t_inter *i);
@@ -282,6 +281,6 @@ void		scale_u_v(int *u, int *v, double *uv, uint32_t *height_width);
 void		bump_the_normal(t_inter *i, double *uv);
 void		erro_clean(t_mrt *mrt, char *str, int v);
 void		check_for_texture(t_rgb	**obj_c, double	*shininess,
-			t_mrt *m, t_inter *i);
+				t_mrt *m, t_inter *i);
 
 #endif

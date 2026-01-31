@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 02:33:41 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 03:17:04 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	erro_clean(t_mrt *mrt, char *str, int v)
 	free(mrt);
 	exit (v);
 }
-
 
 void	clean_up(t_mrt *mrt)
 {

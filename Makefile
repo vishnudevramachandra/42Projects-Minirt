@@ -69,8 +69,6 @@ MANDATORY_PARSINGFILES = 	parsing/parsing.c \
 							parsing/parsing_utils2.c \
 							parsing/parse_scene.c \
 							parsing/parse_figures.c \
-							parsing/parse_texture.c \
-							parsing/parse_texture_utils.c \
 							parsing/atod.c
 
 MANDATORY_MATHFILES = math/init_vec_pos.c math/math_matrix.c math/math_transf.c \
