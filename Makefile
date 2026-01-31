@@ -1,99 +1,95 @@
 # **************************************************************************** #
-#                                                                              #
+#	                                                                          #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 14:49:49 by majkijew          #+#    #+#              #
-#    Updated: 2026/01/31 00:33:23 by majkijew         ###   ########.fr        #
+#    Updated: 2026/01/31 01:36:58 by majkijew         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Colors
-GREEN := \033[0;32m
+GREEN  := \033[0;32m
 YELLOW := \033[0;33m
-RED := \033[0;31m
-NC := \033[0m # No Color
+RED    := \033[0;31m
+NC     := \033[0m
 
-CC 			= 	cc
-CFLAGS		= 	-Wall -Wextra -Werror -IIncludes -Ilibft -IMLX42/include
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror -IIncludes -Ilibft -IMLX42/include
 
-NAME		= 	miniRT
-INCD		=	Includes
+NAME    = miniRT
+INCD    = Includes
 
-LIBFT_DIR 	= 	libft
-LIBFT 		= 	$(LIBFT_DIR)/libft.a
+LIBFT_DIR = libft
+LIBFT     = $(LIBFT_DIR)/libft.a
 
-MLX_DIR		=	MLX42
-MLX_BUILD	= 	$(MLX_DIR)/build
-MLX_LIB		= 	$(MLX_BUILD)/libmlx42.a
+MLX_DIR   = MLX42
+MLX_BUILD = $(MLX_DIR)/build
+MLX_LIB   = $(MLX_BUILD)/libmlx42.a
 
-LINKER		= 	-L$(LIBFT_DIR) -lft \
-				-L$(MLX_BUILD) -lmlx42 \
-				-lglfw -ldl -lm -pthread
+LINKER    = -L$(LIBFT_DIR) -lft \
+            -L$(MLX_BUILD) -lmlx42 \
+            -lglfw -ldl -lm -pthread
 
-SRCFILES	=	main.c \
-				utils_error.c \
-				window/init_mrt.c \
-				window/colors.c \
-				window/color_arith.c \
-				window/lights.c \
-				window/shadows.c \
-				window/insert_utils.c \
-				window/camera.c \
-				window/pattern.c \
-				window/texture.c \
-				window/texture_helper.c \
-				rendering/start_rendering.c \
-				rendering/normalization.c \
-				rendering/translation.c \
-				rendering/projection.c \
-				ray_inter/create_rays.c \
-				ray_inter/start_shadows.c \
-				intersect/intersect_sphere.c \
-				intersect/intersect_plane.c \
-				intersect/intersect_cylinder.c \
-				intersect/intersect_cone.c \
-				intersect/intersect_utils.c
-				
-PARSINGFILES =	parsing.c \
-				utils.c \
-				scene_validation.c \
-				parsing_utils.c \
-				parsing_utils2.c \
-				parse_scene.c \
-				parse_figures.c \
-				parse_texture.c \
-				parse_texture_utils.c \
-				parse_patterns.c \
-				atod.c
+OBJDIR = obj
 
-MATHFILES	=	init_vec_pos.c \
-				math_matrix.c \
-				math_transf.c \
-				math_tup_arith.c \
-				math_tup_prod.c \
+# ==========================
+# MANDATORY SOURCE FILES
+# ==========================
 
-GNLFILES	=	get_next_line.c \
-				get_next_line_utils.c
+MANDATORY_SRCFILES = main.c utils_error.c \
+	window/init_mrt.c window/colors.c window/color_arith.c \
+	window/lights.c window/shadows.c window/insert_utils.c \
+	window/camera.c window/pattern.c window/texture.c \
+	window/texture_helper.c \
+	rendering/start_rendering.c rendering/normalization.c \
+	rendering/translation.c rendering/projection.c \
+	ray_inter/create_rays.c ray_inter/start_shadows.c \
+	intersect/intersect_sphere.c intersect/intersect_plane.c \
+	intersect/intersect_cylinder.c intersect/intersect_cone.c \
+	intersect/intersect_utils.c
 
-SRCS	=	$(addprefix src/,$(SRCFILES)) \
-			$(addprefix src/parsing/,$(PARSINGFILES)) \
-			$(addprefix src/math/,$(MATHFILES)) \
-			$(addprefix get_next_line/,$(GNLFILES))
+MANDATORY_PARSINGFILES = parsing/parsing.c parsing/utils.c parsing/scene_validation.c \
+	parsing/parsing_utils.c parsing/parsing_utils2.c parsing/parse_scene.c \
+	parsing/parse_figures.c parsing/parse_texture.c parsing/parse_texture_utils.c \
+	parsing/parse_patterns.c parsing/atod.c
 
-OBJDIR	=	obj
-OBJS	=	$(SRCS:%.c=$(OBJDIR)/%.o)
+MANDATORY_MATHFILES = math/init_vec_pos.c math/math_matrix.c math/math_transf.c \
+	math/math_tup_arith.c math/math_tup_prod.c
 
-all: $(NAME)
+MANDATORY_GNLFILES  = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) $(LINKER) -o $(NAME)
-	@echo "$(GREEN)[miniRT]: $(NAME) compiled successfully!$(NC)"
+MANDATORY_SRCS = $(addprefix mandatory/src/,$(MANDATORY_SRCFILES)) \
+				 $(addprefix mandatory/src/,$(MANDATORY_PARSINGFILES)) \
+				 $(addprefix mandatory/src/,$(MANDATORY_MATHFILES)) \
+				 $(addprefix ,$(MANDATORY_GNLFILES))
+
+MANDATORY_OBJS = $(MANDATORY_SRCS:%.c=$(OBJDIR)/%.o)
+
+# ==========================
+# BONUS SOURCE FILES
+# ==========================
+
+BONUS_SRCS = $(addprefix bonus/src/,$(BONUS_SRCFILES)) \
+			 $(addprefix bonus/src/,$(BONUS_PARSINGFILES)) \
+			 $(addprefix bonus/src/,$(BONUS_MATHFILES)) \
+			 $(addprefix ,$(BONUS_GNLFILES))
+
+BONUS_OBJS = $(BONUS_SRCS:%.c=$(OBJDIR)/%.o)
+
+all: mandatory
+
+mandatory: $(MANDATORY_OBJS) $(LIBFT) $(MLX_LIB)
+	$(CC) $(CFLAGS) $(MANDATORY_OBJS) $(LINKER) -o $(NAME)
+	@echo "$(GREEN)[miniRT]: mandatory compiled successfully!$(NC)"
+
+bonus: $(BONUS_OBJS) $(LIBFT) $(MLX_LIB)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) $(LINKER) -o $(NAME)
+	@echo "$(GREEN)[miniRT]: bonus compiled successfully!$(NC)"
 
 $(LIBFT):
-	@printf "$(YELLOW)Building libft library...$(NC)\n"
+	@echo "$(YELLOW)Building libft...$(NC)"
 	@make -C $(LIBFT_DIR)
 
 $(MLX_LIB):
@@ -103,32 +99,25 @@ $(MLX_LIB):
 	fi
 	@mkdir -p $(MLX_BUILD)
 	@cd $(MLX_BUILD) && cmake .. && make -j4
-	@echo "MLX42 built successfully!"
+	@echo "$(GREEN)MLX42 built successfully!$(NC)"
 
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -I$(INCD) -I$(LIBFT_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
-	
+
 clean:
 	@make -C $(LIBFT_DIR) clean
-	rm -rf $(OBJS)
 	rm -rf $(OBJDIR)
-	@echo "$(RED)[miniRT]: objects cleaned successfully!$(NC)"
+	@echo "$(RED)[miniRT]: objects cleaned$(NC)"
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
-	rm -rf $(NAME)
-	@echo "$(RED)[miniRT]: $(NAME) cleaned successfully!$(NC)"
+	rm -f $(NAME)
+	@echo "$(RED)[miniRT]: binary cleaned$(NC)"
 
 re: fclean all
 
-build_mlx: 
-	git clone git@github.com:codam-coding-college/MLX42.git MLX42
-
-clean_mlx: 
-	rm -rf MLX42
-
-.PHONY: all clean fclean re build_mlx clean_mlx
+.PHONY: all mandatory bonus clean fclean re

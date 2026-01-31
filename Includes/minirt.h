@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 01:07:33 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 01:20:49 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,5 +281,7 @@ int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
 void		scale_u_v(int *u, int *v, double *uv, uint32_t *height_width);
 void		bump_the_normal(t_inter *i, double *uv);
 void		erro_clean(t_mrt *mrt, char *str, int v);
+void		check_for_texture(t_rgb	**obj_c, double	*shininess,
+			t_mrt *m, t_inter *i);
 
 #endif
