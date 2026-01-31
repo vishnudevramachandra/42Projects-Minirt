@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:19:12 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/28 23:09:06 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:51:02 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ static void	compute_light_unit_vec(t_tup light_unit_vec, double *light_dist,
 	sub_tuples(light_unit_vec, light->position, hit->hit_point);
 	*light_dist = magnitude(light_unit_vec);
 	normalize(light_unit_vec);
+}
+
+void	find_obj_color(t_rgb *obj_c, t_inter *i)
+{
+	if (i->obj->typ == CYLINDER)
+		*obj_c = i->obj->cy.mt.pattern.color1;
+	if (i->obj->typ == SPHERE)
+		*obj_c = i->obj->sp.mt.pattern.color1;
+	if (i->obj->typ == PLANE)
+		*obj_c = i->obj->pl.mt.pattern.color1;
 }
 
 int	is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec, t_light *light)

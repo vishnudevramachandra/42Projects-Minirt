@@ -6,60 +6,60 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:29:06 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/29 01:44:09 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 16:33:44 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "minirt.h"
+#include "minirt_bonus.h"
 
-t_amb_light	amb_light(char *line, t_amb_light a)
+int	amb_light(char *line, t_amb_light *a)
 {
 	int		i;
 	int		len;
 
-	if (a.ratio != -1)
-		a.ratio = -1;
+	a->count++;
+	if (a->count > 1)
+		return (0);
 	i = 0 + len_spaces(line);
 	if (line[i] == '.')
-		a.ratio = -1;
-	if (!set_double(&a.ratio, line + i, &len))
-		a.ratio = -1;
-	if (a.ratio < 0.05)
-		a.ratio = 0.05;
+		return (0);
+	if (!set_double(&a->ratio, line + i, &len))
+		return (0);
+	if (a->ratio < 0.05)
+		a->ratio = 0.05;
 	i = i + len + len_spaces(line + i + len);
-	if (!set_color(&a.color, line + i, &len))
-		a.ratio = -1;
+	if (!set_color(&a->color, line + i, &len))
+		return (0);
 	i = i + len + len_spaces(line + i + len);
-	if (line[i] != '\0' && line[i] != '\n')
-		a.ratio = -1;
-	return (a);
+	if ((line[i] != '\0' && line[i] != '\n'))
+		a->ratio = -1;
+	return (1);
 }
 
-t_camera	camera(char *line, t_camera c)
+int	camera(char *line, t_camera *c)
 {
 	int			i;
 	int			len;
-	int			flag;
 
-	flag = 0;
+	c->count++;
+	if (c->count > 1)
+		return (0);
 	i = 0 + len_spaces(line);
-	if (c.horizontal_field != -1)
-		flag = -1;
-	if (!set_tuple(c.position, line + i, &len, 1))
-		flag = -1;
+	if (!set_tuple(c->position, line + i, &len, 1))
+		return (0);
 	i = i + len + len_spaces(line + i + len);
-	if (!set_tuple(c.orientation_vector, line + i, &len, 0))
-		flag = -1;
+	if (!set_tuple(c->orientation_vector, line + i, &len, 0))
+		return (0);
 	i = i + len + len_spaces(line + i + len);
 	if (!is_numeric(line[i]))
-		flag = -1;
-	if (!set_double(&c.horizontal_field, line + i, &len))
-		flag = -1;
+		return (0);
+	if (!set_double(&c->horizontal_field, line + i, &len))
+		return (0);
 	i = i + len + len_spaces(line + i + len);
-	if ((line[i] != '\0' && line[i] != '\n') || flag == -1)
-		c.horizontal_field = -1;
-	return (c);
+	if (line[i] != '\0' && line[i] != '\n')
+		return (0);
+	return (1);
 }
 
 t_light	*light_f(char *line, t_light *l)

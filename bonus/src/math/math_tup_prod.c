@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   math_tup_prod.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 15:01:54 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/30 14:50:42 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:21:06 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 double	dot_prod(t_tup a, t_tup b)
 {

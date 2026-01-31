@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 21:10:10 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/31 00:48:29 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:24:09 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 // those vectors that are supposed to be normal vectors are normalized
 void	normalize_vectors(t_mrt *m)

@@ -6,12 +6,12 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:57:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/31 00:55:10 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:21:16 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 t_obj	*parse_sphere(char *line)
 {

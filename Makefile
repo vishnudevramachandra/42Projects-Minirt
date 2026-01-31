@@ -138,9 +138,10 @@ mandatory: $(MANDATORY_OBJS) $(LIBFT) $(MLX_LIB)
 	$(CC) $(CFLAGS) $(MANDATORY_OBJS) $(LINKER) -o $(NAME)
 	@echo "$(GREEN)[miniRT]: mandatory compiled successfully!$(NC)"
 
-bonus: $(BONUS_OBJS) $(LIBFT) $(MLX_LIB)
-	$(CC) $(CFLAGS_BONUS) $(BONUS_OBJS) $(LINKER) -o $(NAME)
-	@echo "$(GREEN)[miniRT]: bonus compiled successfully!$(NC)"
+bonus: CFLAGS = $(CFLAGS_BONUS)
+bonus:	$(BONUS_OBJS) $(LIBFT) $(MLX_LIB)
+		$(CC) $(CFLAGS_BONUS) $(BONUS_OBJS) $(LINKER) -o $(NAME)
+		@echo "$(GREEN)[miniRT]: bonus compiled successfully!$(NC)"
 
 $(LIBFT):
 	@echo "$(YELLOW)Building libft...$(NC)"

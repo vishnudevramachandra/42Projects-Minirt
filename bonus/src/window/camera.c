@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:48:39 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/26 21:11:42 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:23:30 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 // camera orientation vector is computed step-by-step to cover the field of view
 void	calc_direction(t_camera *cam, t_view *view, int x, int y)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:19:12 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/28 23:09:06 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:24:12 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 static void	invert_normal_if_inside_cy(t_inter *hit)
 {

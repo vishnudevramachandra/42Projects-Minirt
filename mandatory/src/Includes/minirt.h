@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 03:01:37 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:12:24 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef t_rgb			*(*t_pattern_fcn)(t_tup param, t_rgb *c1, t_rgb *c2,
 
 typedef struct s_amb_light
 {
+	int		count;
 	double	ratio;
 	t_rgb	color;
 }	t_amb_light;
@@ -54,6 +55,7 @@ typedef struct s_ray
 
 typedef struct s_camera
 {
+	int		count;
 	t_tup	position;
 	t_tup	orientation_vector;
 	double	horizontal_field;
@@ -61,6 +63,7 @@ typedef struct s_camera
 
 typedef struct s_light
 {
+	int		count;
 	t_tup	position;
 	double	bright_ratio;
 	t_rgb	color;
@@ -103,15 +106,6 @@ typedef struct s_cylinder
 	double		height;
 }	t_cylinder;
 
-typedef struct s_cone
-{
-	t_material	mt;
-	t_tup		apex;
-	t_tup		axis;
-	double		dia;
-	double		height;
-}	t_cone;
-
 typedef struct s_plane
 {
 	t_material	mt;
@@ -119,29 +113,11 @@ typedef struct s_plane
 	t_tup		norm_vec;
 }	t_plane;
 
-typedef enum e_tex_type
-{
-	REGULAR,
-	BUMP,
-}	t_tex_type;
-
-typedef struct s_texture
-{
-	t_tex_type		typ;
-	mlx_texture_t	*mlx_tex;
-	t_rgb			*img;
-	mlx_texture_t	*mlx_tex_b;
-	t_rgb			*bump_img;
-	t_obj			*sub_obj;
-}	t_texture;
-
 typedef enum e_obj_type
 {
 	SPHERE,
 	CYLINDER,
 	PLANE,
-	CONE,
-	TEXTURE,
 }	t_obj_type;
 
 typedef struct s_obj
@@ -152,8 +128,6 @@ typedef struct s_obj
 		t_cylinder	cy;
 		t_plane		pl;
 		t_sphere	sp;
-		t_cone		co;
-		t_texture	tx;
 	};
 }	t_obj;
 
@@ -201,8 +175,8 @@ int			ft_isspace(char c);
 int			len_spaces(char *str);
 double		atod(const char *s);
 int			is_numeric(char c);
-t_amb_light	amb_light(char *line, t_amb_light a);
-t_camera	camera(char *line, t_camera c);
+int			amb_light(char *line, t_amb_light *a);
+int			camera(char *line, t_camera *c);
 t_light		*light_f(char *line, t_light *l);
 int			ft_strcmp(char *s1, char *s2);
 int			get_rgba(t_rgb *c, double a);
@@ -245,7 +219,6 @@ void		get_hitpoints(double *t, double a, double b_h, double sqrt_dlt);
 void		project_point_on_vector(t_tup res, t_tup center_to_hit, t_tup vec);
 void		compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
-void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_obj *obj, t_tup hit_point);
 void		insert_intersection(t_inter **list, t_inter *new,
 				t_obj *obj, double *t);
@@ -274,7 +247,7 @@ int			is_scene(char *line);
 bool		verify_id(char *line);
 char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
-void		find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
+void		find_obj_color(t_rgb *obj_c, t_inter *i);
 void		find_tex_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
 int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
 				t_light *light);

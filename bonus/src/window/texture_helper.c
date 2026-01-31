@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   texture_helper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:03:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 22:38:34 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:24:15 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static void	compute_dp_dv(t_tup dp_dv, double *uv, double radius)
 {

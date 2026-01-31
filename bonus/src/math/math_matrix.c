@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:43:04 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/27 17:27:10 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:20:55 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 // matrix-matrix multiplication carried out as combination of rows
 t_mat4	*multi_mat_mat(t_mat4 res, t_mat4 a, t_mat4 b)

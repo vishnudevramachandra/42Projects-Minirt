@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 14:32:21 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:51:44 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	add_ambient_component(t_rgb *final_col, t_rgb *obj_col, t_mrt *m)
 	mult_scalar_colors(&ambient_illumination, &m->scene->amb_light.color,
 		m->scene->amb_light.ratio);
 	multi_colors(final_col, obj_col, &ambient_illumination);
-
 }
 
 void	add_direct_component(t_rgb *final_col, t_rgb *obj_col, t_light *light,
@@ -58,16 +57,6 @@ void	add_specular_component(
 		&light->color,
 		pow(cos_theta, shininess) * light->bright_ratio);
 	add_colors(final_col, final_col, &spec_color);
-}
-
-void	find_obj_color(t_rgb *obj_c, t_inter *i)
-{
-	if (i->obj->typ == CYLINDER)
-		*obj_c = i->obj->cy.mt.pattern.color1;
-	if (i->obj->typ == SPHERE)
-		*obj_c = i->obj->sp.mt.pattern.color1;
-	if (i->obj->typ == PLANE)
-		*obj_c = i->obj->pl.mt.pattern.color1;
 }
 
 void	final_obj_color(t_rgb *final_c, t_mrt *m, t_inter *i)

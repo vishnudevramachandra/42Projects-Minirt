@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   normalization.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 10:20:19 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/29 10:40:58 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:22:34 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 static void	normalize_helper(t_obj *obj)
 {

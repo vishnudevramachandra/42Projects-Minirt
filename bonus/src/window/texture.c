@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 11:30:49 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 23:45:41 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:52:04 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 void	check_for_texture(t_rgb	**obj_c, double	*shininess,
 			t_mrt *m, t_inter *i)

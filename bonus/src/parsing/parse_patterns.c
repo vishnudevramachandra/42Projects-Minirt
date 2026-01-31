@@ -6,14 +6,13 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 19:32:19 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/27 17:55:33 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:21:39 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "minirt.h"
+#include "minirt_bonus.h"
 
-// suggestion:?
 // sp 0,0,8      3   255,0,255 P [colors] [coordinates] [pattern type] 
 // sp 0,0,8      3   255,0,255 P 255,255,255 1.3,1.2,0 str
 

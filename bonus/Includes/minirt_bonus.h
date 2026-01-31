@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 03:16:31 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 16:33:10 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
+#ifndef MINIRT_BONUS_H
 
 # define EPSILON 1e-4
 
-# define MINIRT_H
+# define MINIRT_BONUS_H
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -42,6 +42,7 @@ typedef t_rgb			*(*t_pattern_fcn)(t_tup param, t_rgb *c1, t_rgb *c2,
 
 typedef struct s_amb_light
 {
+	int		count;
 	double	ratio;
 	t_rgb	color;
 }	t_amb_light;
@@ -54,6 +55,7 @@ typedef struct s_ray
 
 typedef struct s_camera
 {
+	int		count;
 	t_tup	position;
 	t_tup	orientation_vector;
 	double	horizontal_field;
@@ -201,8 +203,8 @@ int			ft_isspace(char c);
 int			len_spaces(char *str);
 double		atod(const char *s);
 int			is_numeric(char c);
-t_amb_light	amb_light(char *line, t_amb_light a);
-t_camera	camera(char *line, t_camera c);
+int			amb_light(char *line, t_amb_light *a);
+int			camera(char *line, t_camera *c);
 t_light		*light_f(char *line, t_light *l);
 int			ft_strcmp(char *s1, char *s2);
 int			get_rgba(t_rgb *c, double a);

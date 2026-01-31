@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:16:44 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 00:49:35 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 16:50:20 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 #include "parse.h"
 
 t_list	*parse_obj(char *line, t_list **objs)
@@ -50,14 +50,21 @@ t_list	*parse_lights(char *line, t_list **lights)
 	return (*lights);
 }
 
-void	fill_scene(t_scene *scene, char *line)
+int	fill_scene(t_scene *scene, char *line)
 {
 	if (line[0] == 'A')
-		scene->amb_light = amb_light(line + 1, scene->amb_light);
+	{
+		if (!amb_light(line + 1, &scene->amb_light))
+			return (0);
+	}
 	else if (line[0] == 'C')
-		scene->camera = camera(line + 1, scene->camera);
+	{
+		if (!camera(line + 1, &scene->camera))
+			return (0);
+	}
 	else if (line[0] == 'L')
 		parse_lights(line, &scene->lights_list);
+	return (1);
 }
 
 int	parse_line(char *line, t_scene *scene, t_list **objs)
@@ -67,7 +74,10 @@ int	parse_line(char *line, t_scene *scene, t_list **objs)
 	if (verify_id(line) == false)
 		return (0);
 	if (is_scene(line))
-		fill_scene(scene, line);
+	{
+		if (!fill_scene(scene, line))
+			return (0);
+	}
 	else if (!is_object(line) || !parse_obj(line, objs))
 		return (0);
 	return (1);

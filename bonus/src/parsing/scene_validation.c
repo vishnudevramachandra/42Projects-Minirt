@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   scene_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:20:27 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/28 13:53:19 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:22:16 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 bool	scene_range(t_amb_light a, t_camera c)
 {

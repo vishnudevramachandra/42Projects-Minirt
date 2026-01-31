@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:27:32 by majkijew          #+#    #+#             */
-/*   Updated: 2025/11/06 15:56:34 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:24:35 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 void	erro_msg(char *str, int v)
 {

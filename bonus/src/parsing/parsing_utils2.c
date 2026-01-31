@@ -6,12 +6,12 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 00:31:55 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 00:34:55 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:22:04 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static int	ft_strspn(const char *s, t_dataype dtype)
 {

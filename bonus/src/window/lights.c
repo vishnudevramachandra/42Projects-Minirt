@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:33:04 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 14:14:34 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:23:51 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 void	add_ambient_component(t_rgb *final_col, t_rgb *obj_col, t_mrt *m)
 {

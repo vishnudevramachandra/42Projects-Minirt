@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:03:30 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/25 18:59:08 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 16:35:05 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 int	create_node_and_add_to_list(void *content, t_list **lst)
 {
@@ -46,10 +46,12 @@ int	lstrncmp(char *str, char *str2, int c)
 //assign false values for the scene
 void	init_scene(t_scene *scene)
 {
+	scene->amb_light.count = 0;
 	scene->amb_light.ratio = -1;
 	scene->amb_light.color = (t_rgb){-1, -1, -1};
 	init_point(scene->camera.position, NAN, NAN, NAN);
 	init_vector(scene->camera.orientation_vector, -2, -2, -2);
+	scene->camera.count = 0;
 	scene->camera.horizontal_field = -1;
 	scene->lights_list = NULL;
 }

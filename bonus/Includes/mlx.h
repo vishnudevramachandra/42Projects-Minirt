@@ -6,14 +6,14 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:13:17 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/30 23:04:23 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:19:37 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_H
 # define MLX_H
 
-# include "minirt.h"
+# include "minirt_bonus.h"
 
 // ================================= mlx ===================================
 # define HEIGHT 800

@@ -6,14 +6,14 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 09:20:31 by vishnudevra       #+#    #+#             */
-/*   Updated: 2026/01/31 00:50:36 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:19:42 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "minirt.h"
+# include "minirt_bonus.h"
 
 typedef enum e_datatype
 {

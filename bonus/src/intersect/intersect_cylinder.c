@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 18:24:38 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/28 23:20:16 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:20:48 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 static void	compute_pv(t_tup p_v, t_tup dir, t_tup axis)
 {

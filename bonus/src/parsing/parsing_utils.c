@@ -6,12 +6,12 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:19:54 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 00:34:20 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:22:00 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 int	get_double_len(const char *s)
 {

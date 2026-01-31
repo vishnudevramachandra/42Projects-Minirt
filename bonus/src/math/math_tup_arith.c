@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   math_tup_arith.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 14:33:35 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/19 16:11:40 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:21:01 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 void	add_tuples(t_tup res, t_tup a, t_tup b)
 {

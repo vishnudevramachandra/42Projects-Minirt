@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_plane.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 18:23:43 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/28 15:28:52 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:20:44 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 // compute the perpendicular vector from the user-defined origin to the plane
 t_tup	*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin)

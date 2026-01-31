@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 12:22:56 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 22:25:23 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:21:55 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 static void	assign_pix_val(t_rgb *img, uint32_t i, uint8_t *pixels, uint8_t *b)
 {

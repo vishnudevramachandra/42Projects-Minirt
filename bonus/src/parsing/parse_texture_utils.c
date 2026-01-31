@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 21:20:30 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 21:39:56 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:21:51 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 char	*read_filename(char *line, int *i)
 {

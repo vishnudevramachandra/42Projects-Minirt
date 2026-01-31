@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:16:55 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/31 14:15:35 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:24:06 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 void	hadamard_prod(t_tup res, t_tup a, t_tup b)
 {

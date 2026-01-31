@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 10:38:45 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 23:09:10 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:23:15 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 static void	project_objects_helper(t_obj *obj, t_mat4 mat)
 {

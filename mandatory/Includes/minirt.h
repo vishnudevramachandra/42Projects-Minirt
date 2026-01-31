@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 14:28:35 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 16:55:03 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef t_rgb			*(*t_pattern_fcn)(t_tup param, t_rgb *c1, t_rgb *c2,
 
 typedef struct s_amb_light
 {
+	int		count;
 	double	ratio;
 	t_rgb	color;
 }	t_amb_light;
@@ -54,6 +55,7 @@ typedef struct s_ray
 
 typedef struct s_camera
 {
+	int		count;
 	t_tup	position;
 	t_tup	orientation_vector;
 	double	horizontal_field;
@@ -61,6 +63,7 @@ typedef struct s_camera
 
 typedef struct s_light
 {
+	int		count;
 	t_tup	position;
 	double	bright_ratio;
 	t_rgb	color;
@@ -201,8 +204,8 @@ int			ft_isspace(char c);
 int			len_spaces(char *str);
 double		atod(const char *s);
 int			is_numeric(char c);
-t_amb_light	amb_light(char *line, t_amb_light a);
-t_camera	camera(char *line, t_camera c);
+int			amb_light(char *line, t_amb_light *a);
+int			camera(char *line, t_camera *c);
 t_light		*light_f(char *line, t_light *l);
 int			ft_strcmp(char *s1, char *s2);
 int			get_rgba(t_rgb *c, double a);
@@ -246,7 +249,7 @@ void		project_point_on_vector(t_tup res, t_tup center_to_hit, t_tup vec);
 void		compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
 void		normal_at(t_tup normal, t_obj *obj, t_tup hit_point);
-void			insert_intersection(t_inter **list, t_inter *new,
+void		insert_intersection(t_inter **list, t_inter *new,
 				t_obj *obj, double *t);
 void		compute_intersections(t_inter **inter, t_mrt *m);
 void		free_list(t_inter *i);
@@ -273,7 +276,7 @@ int			is_scene(char *line);
 bool		verify_id(char *line);
 char		*get_identifier(char *line);
 bool		scene_range(t_amb_light a, t_camera c);
-// void		find_obj_color(t_rgb **obj_col, t_mrt *m, t_inter *i);
+void		find_obj_color(t_rgb *obj_c, t_inter *i);
 int			is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
 				t_light *light);
 void		scale_u_v(int *u, int *v, double *uv, uint32_t *height_width);

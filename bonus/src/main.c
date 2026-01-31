@@ -6,13 +6,12 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/30 23:03:28 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:24:28 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "parse.h"
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 void	erro_clean(t_mrt *mrt, char *str, int v)
 {

@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 20:35:54 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 23:46:34 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:23:47 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 static int	compare_t(double t1, double t2)
 {

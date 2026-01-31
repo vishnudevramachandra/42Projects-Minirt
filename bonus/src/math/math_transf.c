@@ -6,11 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:15:52 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/27 17:27:28 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:20:58 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 // setup 4D identity matrix
 t_mat4	*identity_mat(t_mat4 m)

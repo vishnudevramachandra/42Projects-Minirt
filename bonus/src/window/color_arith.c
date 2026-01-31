@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   color_arith.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:11:13 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/26 18:11:40 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/01/31 15:23:35 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/minirt.h"
+#include "minirt_bonus.h"
 
 //adding colors
 void	add_colors(t_rgb *new_c, t_rgb *c1, t_rgb *c2)
