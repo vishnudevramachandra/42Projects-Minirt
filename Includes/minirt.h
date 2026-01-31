@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 01:20:49 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 01:54:48 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include "../libft/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
-# include "../get_next_line/get_next_line.h"
+# include "../../MLX42/include/MLX42/MLX42.h"
+# include "../../get_next_line/get_next_line.h"
 # include "mlx.h"
 
 typedef struct s_obj	t_obj;

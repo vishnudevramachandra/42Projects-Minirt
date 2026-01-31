@@ -38,22 +38,38 @@ OBJDIR = obj
 # MANDATORY SOURCE FILES
 # ==========================
 
-MANDATORY_SRCFILES = main.c utils_error.c \
-	window/init_mrt.c window/colors.c window/color_arith.c \
-	window/lights.c window/shadows.c window/insert_utils.c \
-	window/camera.c window/pattern.c window/texture.c \
-	window/texture_helper.c \
-	rendering/start_rendering.c rendering/normalization.c \
-	rendering/translation.c rendering/projection.c \
-	ray_inter/create_rays.c ray_inter/start_shadows.c \
-	intersect/intersect_sphere.c intersect/intersect_plane.c \
-	intersect/intersect_cylinder.c intersect/intersect_cone.c \
-	intersect/intersect_utils.c
+MANDATORY_SRCFILES = 	main.c utils_error.c \
+						window/init_mrt.c \
+						window/colors.c \
+						window/color_arith.c \
+						window/lights.c \
+						window/shadows.c \
+						window/insert_utils.c \
+						window/camera.c \
+						window/pattern.c \
+						window/texture.c \
+						window/texture_helper.c \
+						rendering/start_rendering.c \
+						rendering/normalization.c \
+						rendering/translation.c \
+						rendering/projection.c \
+						ray_inter/create_rays.c \
+						ray_inter/start_shadows.c \
+						intersect/intersect_sphere.c \
+						intersect/intersect_plane.c \
+						intersect/intersect_cylinder.c \
+						intersect/intersect_utils.c
 
-MANDATORY_PARSINGFILES = parsing/parsing.c parsing/utils.c parsing/scene_validation.c \
-	parsing/parsing_utils.c parsing/parsing_utils2.c parsing/parse_scene.c \
-	parsing/parse_figures.c parsing/parse_texture.c parsing/parse_texture_utils.c \
-	parsing/parse_patterns.c parsing/atod.c
+MANDATORY_PARSINGFILES = 	parsing/parsing.c \
+							parsing/utils.c \
+							parsing/scene_validation.c \
+							parsing/parsing_utils.c \
+							parsing/parsing_utils2.c \
+							parsing/parse_scene.c \
+							parsing/parse_figures.c \
+							parsing/parse_texture.c \
+							parsing/parse_texture_utils.c \
+							parsing/atod.c
 
 MANDATORY_MATHFILES = math/init_vec_pos.c math/math_matrix.c math/math_transf.c \
 	math/math_tup_arith.c math/math_tup_prod.c
@@ -92,15 +108,6 @@ $(LIBFT):
 	@echo "$(YELLOW)Building libft...$(NC)"
 	@make -C $(LIBFT_DIR)
 
-$(MLX_LIB):
-	@if [ ! -d "$(MLX_DIR)" ]; then \
-		echo "Cloning MLX42..."; \
-		git clone https://github.com/codam-coding-college/MLX42 $(MLX_DIR); \
-	fi
-	@mkdir -p $(MLX_BUILD)
-	@cd $(MLX_BUILD) && cmake .. && make -j4
-	@echo "$(GREEN)MLX42 built successfully!$(NC)"
-
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -108,6 +115,17 @@ $(OBJDIR)/%.o: %.c | $(OBJDIR)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
+$(MLX_LIB): build_mlx
+	@echo "$(GREEN)MLX42 library ready$(NC)"
+
+build_mlx:
+	@if [ ! -d "$(MLX_DIR)" ]; then \
+		echo "Cloning MLX42..."; \
+		git clone https://github.com/codam-coding-college/MLX42 $(MLX_DIR); \
+	fi
+	@mkdir -p $(MLX_BUILD)
+	@cd $(MLX_BUILD) && cmake .. && make -j4
+	@echo "$(GREEN)MLX42 built successfully!$(NC)"
 clean:
 	@make -C $(LIBFT_DIR) clean
 	rm -rf $(OBJDIR)
