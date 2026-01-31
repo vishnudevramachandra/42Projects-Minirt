@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 02:22:00 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/31 02:33:41 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,11 @@ void	erro_clean(t_mrt *mrt, char *str, int v)
 	exit (v);
 }
 
-void	free_obj(void *content)
-{
-	t_obj	*obj;
-
-	obj = content;
-	if (obj->typ != TEXTURE)
-		free(obj);
-}
 
 void	clean_up(t_mrt *mrt)
 {
 	ft_lstclear(&mrt->scene->lights_list, free);
-	ft_lstclear(&mrt->obj, free_obj);
+	ft_lstclear(&mrt->obj, free);
 	free(mrt->scene);
 	free(mrt);
 }

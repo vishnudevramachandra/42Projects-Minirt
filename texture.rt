@@ -13,4 +13,4 @@ pl 0.0,-6.0,0.0 0.0,1.0,0.0 125,125,225  P 255,255,255 0,1.2,1.0 chr 150
 
 
 
-tb ./src/resources/earth.png ./src/resources/earth_bump.png 0,0,0      3   255,0,255
+tb ./bonus/src/resources/earth.png ./bonus/src/resources/earth_bump.png 0,0,0      3   255,0,255
