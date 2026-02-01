@@ -36,7 +36,7 @@ The following primitive objects:
 Instructions
 ----------------------------------------------------------------
 
-- make bulid_mlx
+- make bulid
 
 - make
 
