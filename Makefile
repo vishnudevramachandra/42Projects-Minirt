@@ -29,6 +29,7 @@ MLX_DIR   = MLX42
 MLX_BUILD = $(MLX_DIR)/build
 MLX_LIB   = $(MLX_BUILD)/libmlx42.a
 
+GNL_DIR	  = get_next_line
 LINKER    = -L$(LIBFT_DIR) -lft \
             -L$(MLX_BUILD) -lmlx42 \
             -lglfw -ldl -lm -pthread
@@ -154,10 +155,10 @@ $(OBJDIR)/%.o: %.c | $(OBJDIR)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-$(MLX_LIB): build_mlx
+$(MLX_LIB): build
 	@echo "$(GREEN)MLX42 library ready$(NC)"
 
-build_mlx:
+build:
 	@if [ ! -d "$(MLX_DIR)" ]; then \
 		echo "Cloning MLX42..."; \
 		git clone https://github.com/codam-coding-college/MLX42 $(MLX_DIR); \
@@ -165,6 +166,12 @@ build_mlx:
 	@mkdir -p $(MLX_BUILD)
 	@cd $(MLX_BUILD) && cmake .. && make -j4
 	@echo "$(GREEN)MLX42 built successfully!$(NC)"
+
+	@if [ ! -d "$(GNL_DIR)" ]; then \
+		echo "Cloning GNL..."; \
+		git clone git@github.com:vishnudevramachandra/42Projects-Get_next_line.git $(GNL_DIR); \
+	fi
+	@echo "$(GREEN)GNL cloned successfully!$(NC)"
 clean:
 	@make -C $(LIBFT_DIR) clean
 	rm -rf $(OBJDIR)
@@ -176,5 +183,7 @@ fclean: clean
 	@echo "$(RED)[miniRT]: binary cleaned$(NC)"
 
 re: fclean all
+
+rb: fclean bonus
 
 .PHONY: all mandatory bonus clean fclean re
