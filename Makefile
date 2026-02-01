@@ -40,7 +40,6 @@ OBJDIR = obj
 # ==========================
 
 MANDATORY_SRCFILES = 	main.c \
-						utils_error.c \
 						window/init_mrt.c \
 						window/colors.c \
 						window/color_arith.c \
@@ -61,6 +60,7 @@ MANDATORY_SRCFILES = 	main.c \
 
 MANDATORY_PARSINGFILES = 	parsing/parsing.c \
 							parsing/utils.c \
+							parsing/utils_error.c \
 							parsing/scene_validation.c \
 							parsing/parsing_utils.c \
 							parsing/parsing_utils2.c \
@@ -85,7 +85,6 @@ MANDATORY_OBJS = $(MANDATORY_SRCS:%.c=$(OBJDIR)/%.o)
 # ==========================
 
 BONUS_SRCFILES = main.c \
-					utils_error.c \
 					window/init_mrt.c \
 					window/colors.c \
 					window/color_arith.c \
@@ -110,6 +109,7 @@ BONUS_SRCFILES = main.c \
 
 BONUS_PARSINGFILES = parsing.c \
 						utils.c \
+						utils_error.c \
 						scene_validation.c \
 						parsing_utils.c \
 						parsing_utils2.c \

@@ -3,26 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:42:07 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/31 03:17:04 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/02/01 14:07:25 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/parse.h"
 #include "minirt.h"
-
-void	erro_clean(t_mrt *mrt, char *str, int v)
-{
-	ft_putstr_fd(str, v);
-	ft_putstr_fd("\n", v);
-	ft_lstclear(&mrt->scene->lights_list, free);
-	ft_lstclear(&mrt->obj, free);
-	free(mrt->scene);
-	free(mrt);
-	exit (v);
-}
 
 void	clean_up(t_mrt *mrt)
 {
@@ -30,6 +19,14 @@ void	clean_up(t_mrt *mrt)
 	ft_lstclear(&mrt->obj, free);
 	free(mrt->scene);
 	free(mrt);
+}
+
+void	erro_clean(t_mrt *mrt, char *str, int v)
+{
+	ft_putstr_fd(str, v);
+	ft_putstr_fd("\n", v);
+	clean_up(mrt);
+	exit (v);
 }
 
 int32_t	main(int ac, char **av)

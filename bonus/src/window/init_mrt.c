@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_mrt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
+/*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:08:17 by majkijew          #+#    #+#             */
-/*   Updated: 2026/02/01 07:15:40 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/02/01 16:49:42 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_bonus.h"
+#include "../../Includes/minirt_bonus.h"
 
 // void	ft_hook(void *param)
 // {
@@ -36,14 +36,14 @@
 // 		canvas(m);
 // 	}
 // }
-void	init_motion(t_motion *direct, t_camera *c)
-{
-	init_vector(direct->ver, 0, 1, 0);
-	sub_tuples(direct->forward, c->to, c->position);
-	normalize(direct->forward);
-	cross_prod(direct->hotizon, direct->forward, direct->ver);
-	normalize(direct->forward);
-}
+// void	init_motion(t_motion *direct, t_camera *c)
+// {
+// 	init_vector(direct->ver, 0, 1, 0);
+// 	sub_tuples(direct->forward, c->to, c->position);
+// 	normalize(direct->forward);
+// 	cross_prod(direct->hotizon, direct->forward, direct->ver);
+// 	normalize(direct->forward);
+// }
 // void move_camera(t_camera *c, int key)
 // {
 // 	t_tup dir;
@@ -108,19 +108,16 @@ void	init_motion(t_motion *direct, t_camera *c)
 
 void	move_camera(t_camera *c, int key)
 {
-	t_tup	forward;
 	t_tup	right;
 	t_tup	move_vec;
 
-	sub_tuples(forward, c->to, c->position);
-	normalize(forward);
-	cross_prod(right, forward, c->up);
+	copy_vector(c->orientation_vector, (t_tup){0, 0, 1});
+	cross_prod(right, (t_tup){0, 1, 0}, c->orientation_vector);
 	normalize(right);
-	init_vector(move_vec, 0, 0, 0);
 	if (key == MLX_KEY_UP)
-		multi_tuple(move_vec, forward, -SPEED);
+		multi_tuple(move_vec, c->orientation_vector, SPEED);
 	else if (key == MLX_KEY_DOWN)
-		multi_tuple(move_vec, forward, SPEED);
+		multi_tuple(move_vec, c->orientation_vector, -SPEED);
 	else if (key == MLX_KEY_RIGHT)
 		multi_tuple(move_vec, right, SPEED);
 	else if (key == MLX_KEY_LEFT)
@@ -130,9 +127,6 @@ void	move_camera(t_camera *c, int key)
 	else if (key == MLX_KEY_E)
 		init_vector(move_vec, 0, -SPEED, 0);
 	add_tuples(c->position, c->position, move_vec);
-	add_tuples(c->to, c->to, move_vec);
-	sub_tuples(c->orientation_vector, c->to, c->position);
-	normalize(c->orientation_vector);
 }
 
 void	key_hooks(mlx_key_data_t keydata, void *param)
@@ -150,8 +144,6 @@ void	key_hooks(mlx_key_data_t keydata, void *param)
 		else
 		{	
 			move_camera(&m->scene->camera, keydata.key);
-			setup_viewport(&m->view, m);
-			translate_objects_and_lights(m);
 			mlx_delete_image(m->mlx, m->image);
 			m->image = mlx_new_image(m->mlx, WIDTH, HEIGHT);
 			mlx_image_to_window(m->mlx, m->image, 0, 0);
@@ -176,6 +168,7 @@ void	init_mrt(t_mrt *m)
 		mlx_close_window(m->mlx);
 		erro_clean(m, "Error", 2);
 	}
+	identity_mat(m->inv.final);
 	canvas(m);
 	mlx_key_hook(m->mlx, &key_hooks, m);
 	mlx_loop(m->mlx);
