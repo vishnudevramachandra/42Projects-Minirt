@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:19:12 by vramacha          #+#    #+#             */
-/*   Updated: 2026/02/01 00:26:25 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/02/01 04:54:06 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	is_in_shadow(t_mrt *m, t_inter *hit, t_tup light_unit_vec,
 	cur = m->obj;
 	while (cur)
 	{
+		obj = cur->content;
 		if (obj == hit->obj)
 		{
 			cur = cur->next;

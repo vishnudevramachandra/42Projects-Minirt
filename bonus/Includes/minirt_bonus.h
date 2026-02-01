@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:55:21 by majkijew          #+#    #+#             */
-/*   Updated: 2026/02/01 00:26:00 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/02/01 05:45:04 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_camera
 	t_tup	position;
 	t_tup	orientation_vector;
 	double	horizontal_field;
+	t_tup	to;
+	t_tup	up;
 }	t_camera;
 
 typedef struct s_light
@@ -177,6 +179,20 @@ typedef struct s_cam_inv
 	t_mat4	final;
 }	t_cam_inv;
 
+typedef struct s_motion
+{
+	t_tup	move_vec;
+	t_tup	forward;
+	t_tup	hotizon;
+	t_tup	ver;
+}	t_motion;
+
+typedef struct s_view
+{
+	double	px_width;
+	double	h_start_pos;
+	double	v_start_pos;
+}	t_view;
 typedef struct s_mrt
 {
 	mlx_t		*mlx;
@@ -186,14 +202,8 @@ typedef struct s_mrt
 	t_ray		ray;
 	t_inter		*i;
 	t_cam_inv	inv;
+	t_view		view;
 }	t_mrt;
-
-typedef struct s_view
-{
-	double	px_width;
-	double	h_start_pos;
-	double	v_start_pos;
-}	t_view;
 
 void		check_arguments(int ac, char **av);
 void		init_scene(t_scene *scene);
@@ -247,7 +257,6 @@ void		get_hitpoints(double *t, double a, double b_h, double sqrt_dlt);
 void		project_point_on_vector(t_tup res, t_tup center_to_hit, t_tup vec);
 void		compute_cy_normal(t_tup normal, t_tup hit_point, t_cylinder *cy);
 t_tup		*perpvec_to_plane(t_tup vec, t_plane *pl, t_tup origin);
-void		print_tup(t_tup vec);
 void		normal_at(t_tup normal, t_obj *obj, t_tup hit_point);
 void		insert_intersection(t_inter **list, t_inter *new,
 				t_obj *obj, double *t);
@@ -289,4 +298,8 @@ void		check_for_texture(t_rgb	**obj_c, double	*shininess,
 				t_mrt *m, t_inter *i);
 void		compute_light_unit_vec(t_tup light_unit_vec, double *light_dist,
 				t_light *light, t_inter *hit);
+void		adjust_lights_to_view(t_scene *scene, t_mat4 mat);
+void		project_objects_subfcn(t_mrt *m, t_mat4 mat);
+void		project_objects(t_list *node, t_mat4 mat);
+
 #endif

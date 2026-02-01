@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 10:38:45 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/31 15:23:15 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/02/01 07:16:06 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	project_objects_helper(t_obj *obj, t_mat4 mat)
 		project_objects_helper(obj->tx.sub_obj, mat);
 }
 
-static void	project_objects(t_list *node, t_mat4 mat)
+void	project_objects(t_list *node, t_mat4 mat)
 {
 	t_obj	*obj;
 
@@ -71,8 +71,8 @@ void	project_objects_and_lights(t_mrt *m)
 	if (__DBL_EPSILON__ < (dot_prod(m->scene->camera.orientation_vector,
 				m->scene->camera.orientation_vector) - 1))
 		normalize(m->scene->camera.orientation_vector);
-	copy_vector(mat[2], m->scene->camera.orientation_vector);
-	cross_prod(mat[0], (t_tup){0, 1, 0}, mat[2]);
+	// copy_vector(mat[2], m->scene->camera.orientation_vector);
+	// cross_prod(mat[0], (t_tup){0, 1, 0}, mat[2]);
 	if (dot_prod(mat[0], mat[0]) == 0)
 	{
 		if (0 < mat[2][1])
