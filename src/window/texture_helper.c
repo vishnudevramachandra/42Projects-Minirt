@@ -6,7 +6,7 @@
 /*   By: vramacha <vramacha@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:03:51 by vramacha          #+#    #+#             */
-/*   Updated: 2026/01/30 22:38:34 by vramacha         ###   ########.fr       */
+/*   Updated: 2026/02/02 20:28:34 by vramacha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,15 @@ static void	compute_n_tilt(
 	t_tup	dp_du;
 	t_tup	dp_dv;
 	double	df_uv[2];
-	t_tup	l_cross_prod;
-	t_tup	r_cross_prod;
+	t_tup	l_prod;
+	t_tup	r_prod;
 
 	compute_dp_du(dp_du, uv, radius);
 	compute_dp_dv(dp_dv, uv, radius);
 	compute_df_uv(df_uv, uv, i);
-	cross_prod(l_cross_prod, i->normal, dp_dv);
-	cross_prod(r_cross_prod, i->normal, dp_du);
-	multi_tuple(l_cross_prod, l_cross_prod, df_uv[0]);
-	multi_tuple(r_cross_prod, r_cross_prod, df_uv[1]);
-	sub_tuples(n_tilt, l_cross_prod, r_cross_prod);
+	multi_tuple(l_prod, dp_du, df_uv[0]);
+	multi_tuple(r_prod, dp_dv, df_uv[1]);
+	add_tuples(n_tilt, l_prod, r_prod);
 	div_tuple(n_tilt, n_tilt, radius);
 }
 
@@ -72,6 +70,6 @@ void	bump_the_normal(t_inter *i, double *uv)
 	t_tup	n_tilt;
 
 	compute_n_tilt(n_tilt, i, uv, i->obj->tx.sub_obj->sp.dia / 2);
-	add_tuples(i->normal, i->normal, n_tilt);
+	sub_tuples(i->normal, i->normal, n_tilt);
 	normalize(i->normal);
 }
